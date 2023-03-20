@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const LoginWrapper = styled.main`
+
+export const StyledWrapper = styled.main`
 display: flex;
 justify-content: center;
 align-items: center;
@@ -14,6 +15,7 @@ color: #121212;
 margin-top: 40px;
 text-transform: uppercase;
 align-self: flex-start;
+margin-bottom: 2rem;
 `
 
 export const StyledForm = styled.form`
@@ -39,6 +41,8 @@ align-items: center;
 align-self: flex-end;
 `
 export const StyledButton = styled.button`
+display: flex;
+align-self: flex-end;
 font-size: 16px;
 border-radius: 18px;
 font-weight: 700;
@@ -70,4 +74,3 @@ font-weight: 700;
 export const StyledError = styled.p`
 color: red;
 font-size: 16px;`
-

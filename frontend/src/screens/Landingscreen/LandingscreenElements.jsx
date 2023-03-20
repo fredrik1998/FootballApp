@@ -1,9 +1,5 @@
-import { DetailedHTMLProps, ImgHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-interface StyledImageProps extends DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {
-    mobileSrc: string;
-  }
 export const StyledWrapper = styled.main`
 display: flex;
 justify-content: center;
@@ -30,7 +26,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 `
-export const StyledImage = styled.img<StyledImageProps>`
+export const StyledImage = styled.img`
 border-radius: 5%;
 width: 100%;
 max-width: 1200px;

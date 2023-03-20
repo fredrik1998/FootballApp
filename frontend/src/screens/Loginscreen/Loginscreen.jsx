@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { State, AppDispatch} from '../../store'
 import { login } from '../../actions/userActions';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
@@ -19,7 +18,7 @@ import {
 } from './LoginscreenElements';
 
 
-const Loginscreen: React.FC = () => {
+const Loginscreen = () => {
 const navigate = useNavigate();
 const dispatch = useDispatch();
 
@@ -32,16 +31,17 @@ const dispatch = useDispatch();
   })
 
   const [isDisabled, setIsDisabled] = useState(true)
+  const [message, setMessage] = useState('')
 
-  const userLogin = useSelector((state: State) => state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event) => {
     event.preventDefault();
     
-    const errors: typeof formErrors = { email: '', password: '' };
+    const errors = {};
     if(!email){
       errors.email = 'Email is required'
     }
@@ -71,6 +71,8 @@ const dispatch = useDispatch();
       <Header/>
       <LoginWrapper>
         <StyledForm onSubmit={submitHandler}>
+          {message && <StyledError>{message}</StyledError>}
+          {error && <StyledError>{error}</StyledError>}
         <StyledTitle>Sign in</StyledTitle>
           <StyledLabel>Useremail</StyledLabel>
           <StyledInput 

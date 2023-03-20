@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
+from .models import League
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
@@ -31,3 +32,9 @@ class UserSerializerWithToken(UserSerializer):
     def get_token(self, object):
         token = RefreshToken.for_user(object)
         return str(token.access_token)
+    
+
+class LeagueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = League
+        fields = '__all__'
