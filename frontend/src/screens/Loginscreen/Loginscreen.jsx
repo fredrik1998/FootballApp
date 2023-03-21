@@ -36,7 +36,7 @@ const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split('=')[1] : '/homescreen'
 
   const submitHandler = (event) => {
     event.preventDefault();

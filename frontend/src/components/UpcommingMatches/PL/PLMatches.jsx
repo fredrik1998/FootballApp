@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 const PLMatches = () => {
     const [upcommingMatches, setUpcommingMatches] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get('api/leagues/PL/nextmatches/')
         .then(response => {
             const upcommingMatchesData = response.data
             setUpcommingMatches(upcommingMatchesData)
+            setIsLoading(false);
         }).catch(console.error())
     },[])
   return (
     <>
-    
-    <table>
+    {isLoading ? (
+       <></>
+    ) : (
+        <div>
+         <h2>Upcomming matches</h2>
+        <table>
         <thead>
             <tr>
                 <th>Hometeam</th>
@@ -34,7 +40,9 @@ const PLMatches = () => {
             )})}
         </tbody>
     </table>
-
+    </div>
+    )}
+    
     </>
   )
 }

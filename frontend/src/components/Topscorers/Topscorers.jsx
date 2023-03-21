@@ -3,11 +3,13 @@ import axios from 'axios';
 
 const TopScorers = () => {
   const [topScorers, setTopScorers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     axios.get('/api/leagues/topscorer/')
       .then(response => {
         setTopScorers(response.data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.log(error);
@@ -16,7 +18,11 @@ const TopScorers = () => {
 
   return (
     <div>
-      <h2>Top Scorers</h2>
+      {isLoading ? (
+        <></>
+      ) : (
+        <>
+        <h2>Top Scorers</h2>
       <table>
         <thead>
           <tr>
@@ -35,6 +41,9 @@ const TopScorers = () => {
           ))}
         </tbody>
       </table>
+      </>
+      )}
+      
     </div>
   );
 }

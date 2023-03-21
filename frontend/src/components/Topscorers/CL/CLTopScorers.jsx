@@ -1,3 +1,4 @@
+import { Fab } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import GlobalStyle from '../../../GlobalStyles'
@@ -5,18 +6,25 @@ import Header from '../../Header/Header'
 
 const CLTopScorers = () => {
     const [topScorers, setTopScorers] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get('api/leagues/CL/topscorer/')
         .then(response => {
             const topScorersData = response.data
             setTopScorers(topScorersData)
+            setIsLoading(false)
         }).catch(console.error())
     }, [])
   return (
     <>
     <GlobalStyle/>
-    <table>
+    {isLoading ? (
+        <></>
+    ) : (
+        <div>
+        <h2>Top scorers</h2>
+        <table>
         <thead>
             <tr>
                 <td>Player</td>
@@ -35,6 +43,9 @@ const CLTopScorers = () => {
             )})}
         </tbody>
     </table>
+    </div>
+    )}
+   
     </>
   )
 }

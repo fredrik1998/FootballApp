@@ -1,21 +1,28 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import Loader from '../../Loader/Loader';
 
 const CLMatches = () => {
     const [upcommingMatches, setUpcommingMatches] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
     
     useEffect(() => {
         axios.get('api/leagues/CL/upcommingmatches/')
         .then(response => {
             const upcommingMatchesData = response.data
             setUpcommingMatches(upcommingMatchesData)
+            setIsLoading(false)
         }).catch(console.error())
     }, [])
-
     
   return (
     <>
-    <table>
+    {isLoading ? (
+        <Loader/>
+    ) : (
+        <div>
+        <h2>Upcomming matches</h2>
+        <table>
         <thead>
             <tr>
                 <td>Stage</td>
@@ -36,10 +43,11 @@ const CLMatches = () => {
         </tr>
     )
 })}
-
             </tbody>
         </thead>
     </table>
+    </div>
+    )}
     </>
   )
 }
