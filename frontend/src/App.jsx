@@ -4,6 +4,7 @@ import Loginscreen from './screens/Loginscreen/Loginscreen';
 import Landingscreen from './screens/Landingscreen/Landingscreen'
 import RegisterScreen from './screens/Registerscreen/Registerscreen'
 import Homescreen from './screens/Homescreen/Homescreen';
+import CL from './screens/CL/CL';
 const App =() => {
   return (
   <Routes>
@@ -11,6 +12,7 @@ const App =() => {
     <Route path='/login' element={<Loginscreen/>}/>
     <Route path='/register' element={<RegisterScreen/>}/>
     <Route path='/homescreen' element={<Homescreen/>}/>
+    <Route path='/CL' element={<CL/>}/>
   </Routes>
   )
 }

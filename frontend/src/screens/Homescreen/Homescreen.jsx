@@ -1,15 +1,16 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-
+import Header from '../../components/Header/Header'
+import TopScorers from '../../components/Topscorers/Topscorers'
+import PLMatches from '../../components/UpcommingMatches/PL/PLMatches'
+import GlobalStyle from '../../GlobalStyles'
+import { StyledWrapper} from './HomescreenElements'
 const Homescreen = () => {
     const [premierLeague, setPremierLeague] = useState([])
 
     useEffect(() => {
     
-    axios.get('/api/leagues/', {
-      headers: {
-        'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9' , 
-      },
+    axios.get('/api/leagues/PL/', {
     })
         .then(response => {
             const premierLeagueData = response.data
@@ -19,14 +20,18 @@ const Homescreen = () => {
     }, [])
   return (
     <>
-    <h1>Premier League Table</h1>
+    <GlobalStyle/>
+    <Header/>
+    <StyledWrapper>
     <table>
         <thead>
             <tr>
                 <th>Position</th>
                 <th>Team</th>
+                <th></th>
+                <th>MP</th>
                 <th>Won</th>
-                <th>Drawn</th>
+                <th>Draw</th>
                 <th>Lost</th>
                 <th>GF</th>
                 <th>GA</th>
@@ -35,7 +40,7 @@ const Homescreen = () => {
             </tr>
         </thead>
         <tbody>
-  {premierLeague.map((team, index) => {
+  {premierLeague.map((team) => {
     return (
       <tr key={team.position}>
         <td>{team.position}</td>
@@ -55,7 +60,9 @@ const Homescreen = () => {
 </tbody>
 
     </table>
-
+    <TopScorers/>
+    <PLMatches/>
+    </StyledWrapper>
     </>
   )
 }

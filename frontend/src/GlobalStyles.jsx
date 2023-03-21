@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components';
     box-sizing: border-box;
     margin:0;
     padding: 0.3rem;
+    background-color: #ccc;
     font-family: 'League Spartan', sans-serif;
 
     *::-webkit-scrollbar {
