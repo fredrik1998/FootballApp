@@ -7,12 +7,18 @@ const CLMatches = () => {
     const [isLoading, setIsLoading] = useState(true)
     
     useEffect(() => {
-        axios.get('api/leagues/CL/upcommingmatches/')
+        const cachedData = localStorage.getItem('CLUpcommingMatches')
+        if(cachedData){
+            upcommingMatches(JSON.parse('CLUpcommingMatches'))
+        } else {
+            axios.get('api/leagues/CL/upcommingmatches/')
         .then(response => {
             const upcommingMatchesData = response.data
             setUpcommingMatches(upcommingMatchesData)
             setIsLoading(false)
         }).catch(console.error())
+        }
+        
     }, [])
     
   return (

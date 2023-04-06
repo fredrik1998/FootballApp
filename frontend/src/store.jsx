@@ -1,22 +1,15 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "@redux-devtools/extension";
-import { userRegisterReducer, userLoginReducer } from "./reducers/userReducers";
-
-const reducer = combineReducers({
-    userLogin: userLoginReducer,
-    userRegister: userRegisterReducer,
-})
-
-const userInfoFromLocalStorage = localStorage.getItem('userInfo');
-const userInfo = userInfoFromLocalStorage
-  ? JSON.parse(userInfoFromLocalStorage)
-  : null;
-
-
-const initialState = { 
-}
-
-const middleware = [thunk]
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
-export default store
+import { configureStore } from '@reduxjs/toolkit';
+import { userSlice } from './slice/userSlice';
+import {premierLeagueSlice} from './slice/premierLeagueSlice';
+import { championsLeagueSlice } from './slice/championsLeageuSlice';
+import { CLTopScorerSlice } from './slice/CLTopScorerSlice';
+import { PLTopScorerSlice } from './slice/PLTopScorerSlice';
+export default configureStore({
+  reducer: {
+    user: userSlice.reducer,
+    premierLeague : premierLeagueSlice.reducer,
+    championsLeague: championsLeagueSlice.reducer,
+    CLTopScorer: CLTopScorerSlice.reducer,
+    PLTopScorer: PLTopScorerSlice.reducer,
+  },
+});

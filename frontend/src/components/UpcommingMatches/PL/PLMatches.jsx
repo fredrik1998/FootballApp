@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { StyledTable } from './PLMatchesElements'
 const PLMatches = () => {
     const [upcommingMatches, setUpcommingMatches] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        axios.get('api/leagues/PL/nextmatches/')
+        const cachedData = localStorage.getItem('PLUpcommingMatches')
+        if(cachedData){
+            upcommingMatches(JSON.parse('PLUpcommingMatches'))
+        } else {
+            axios.get('api/leagues/PL/nextmatches/')
         .then(response => {
             const upcommingMatchesData = response.data
             setUpcommingMatches(upcommingMatchesData)
             setIsLoading(false);
         }).catch(console.error())
+        }
+        
     },[])
   return (
     <>
@@ -19,7 +26,7 @@ const PLMatches = () => {
     ) : (
         <div>
          <h2>Upcomming matches</h2>
-        <table>
+        <StyledTable>
         <thead>
             <tr>
                 <th>Hometeam</th>
@@ -39,7 +46,7 @@ const PLMatches = () => {
                 </tr>
             )})}
         </tbody>
-    </table>
+    </StyledTable>
     </div>
     )}
     

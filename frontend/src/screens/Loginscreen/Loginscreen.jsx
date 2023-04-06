@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../actions/userActions';
+import {login} from '../../slice/userSlice'
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import GlobalStyle from '../../GlobalStyles';
@@ -33,8 +33,7 @@ const dispatch = useDispatch();
   const [isDisabled, setIsDisabled] = useState(true)
   const [message, setMessage] = useState('')
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { error, loading, userInfo } = userLogin;
+  const { userInfo, loading, error } = useSelector((state) => state.user)
 
   const redirect = location.search ? location.search.split('=')[1] : '/homescreen'
 

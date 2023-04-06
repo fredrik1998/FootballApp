@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header'
 import { StyledButton, StyledForm, StyledInput, StyledLabel, StyledTitle, StyledWrapper, StyledError, StyledLink} from './RegisterscreenElements'
 import { redirect, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux'
-import { register } from '../../actions/userActions'
+import { register } from '../../slice/userSlice'
 const RegisterScreen = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -53,8 +53,7 @@ const RegisterScreen = () => {
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
 
-      const userRegister = useSelector(state => state.userRegister)
-      const {error, loading, userInfo} = userRegister
+    const { userInfo, loading, error } = useSelector((state) => state.user)
 
     useEffect(() => {
         setIsDisabled(Object.keys(formErrors).length > 0)

@@ -5,26 +5,30 @@ import CLTopScorers from '../../components/Topscorers/CL/CLTopScorers'
 import CLMatches from '../../components/UpcommingMatches/CL/CLMatches'
 import GlobalStyle from '../../GlobalStyles'
 import { StyledWrapper, GridContainer, GridItem } from './CLElements'
-
+import { fetchChampionsLeague } from '../../slice/championsLeageuSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import Loader from '../../components/Loader/Loader'
 const CL = () => {
-  const [championsleague, setChampionsLeague] = useState({})
+  const dispatch = useDispatch()
+  const championsLeague = useSelector((state) => state.championsLeague.data)
+  const championsLeagueStatus = useSelector((state) => state.championsLeague.status)
+  const championsLeagueError = useSelector((state) => state.championsLeague.error)
 
   useEffect(() => {
-    axios.get('api/leagues/CL/', {
-    })
-    .then(response => {
-      const championsLeagueData = response.data
-      setChampionsLeague(championsLeagueData)
-    }).catch(console.error())
-  }, [])
-
+    if(championsLeagueStatus ==='idle'){
+      dispatch(fetchChampionsLeague())
+    }
+  }, [championsLeague, dispatch])
   return (
     <>
     <GlobalStyle/>
     <Header/>
     <StyledWrapper>
-      <GridContainer>
-        {Object.keys(championsleague).map((groupName, index) => (
+      {championsLeagueStatus === 'loading' ? (
+        <Loader/>
+      ): (
+        <GridContainer>
+        {Object.keys(championsLeague).map((groupName, index) => (
           <GridItem key={groupName}>
             <h2>{groupName}</h2>
             <table>
@@ -44,7 +48,7 @@ const CL = () => {
                 </tr>
               </thead>
               <tbody>
-                {championsleague[groupName].map((team) => (
+                {championsLeague[groupName].map((team) => (
                   <tr key={team.position}>
                     <td>{team.position}</td>
                     <td><img style={{width: '30px'}} src={team.team.crestUrl} alt={team.team.name} /></td>
@@ -64,6 +68,9 @@ const CL = () => {
           </GridItem>
         ))}
       </GridContainer>
+
+      )}
+     
       <CLTopScorers/>
       <CLMatches/>
     </StyledWrapper>

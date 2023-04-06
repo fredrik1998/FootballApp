@@ -1,12 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
  const GlobalStyle = createGlobalStyle`
-  * {
+  body {
     box-sizing: border-box;
-    margin:0;
-    padding: 0.3rem;
-    background-color: #ccc;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1c2237, #424b6e);
+    color: #fafafa;
     font-family: 'League Spartan', sans-serif;
+  }
 
     *::-webkit-scrollbar {
       width: 16px;
@@ -29,7 +31,7 @@ import { createGlobalStyle } from 'styled-components';
   *::-webkit-scrollbar-thumb:hover {
       background-color: #555;
   }
-  }
+
 `;
 
 export default GlobalStyle

@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTopScorerPL } from '../../slice/PLTopScorerSlice';
 
 const TopScorers = () => {
-  const [topScorers, setTopScorers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const dispatch = useDispatch()
+  const PLTopScorer = useSelector((state) => state.PLTopScorer.data)
+  const PLTopScorerStatus = useSelector((state) => state.PLTopScorer.status)
+  const PLTopScorerError = useSelector((state) => state.PLTopScorer.error)
 
   useEffect(() => {
-    axios.get('/api/leagues/topscorer/')
-      .then(response => {
-        setTopScorers(response.data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+    if(PLTopScorerStatus === 'idle'){
+      dispatch(fetchTopScorerPL())
+    }
+  }, [PLTopScorerStatus, dispatch])
 
   return (
     <div>
-      {isLoading ? (
+      {PLTopScorerStatus === 'loading' ? (
         <></>
       ) : (
         <>
@@ -32,7 +31,7 @@ const TopScorers = () => {
           </tr>
         </thead>
         <tbody>
-          {topScorers.map(player => (
+          {PLTopScorer.map(player => (
             <tr key={player.id}>
               <td>{player.name}</td>
               <td>{player.team}</td>

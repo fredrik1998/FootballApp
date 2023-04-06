@@ -10,7 +10,7 @@ padding-bottom: 2em;
 
 export const StyledTitle = styled.h1`
 font-size: 28px;
-color: #000;
+color: #fafafa;
 `
 
 export const StyledLink = styled(Link)`
