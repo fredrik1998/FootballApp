@@ -11,7 +11,7 @@ flex-direction: column;
 
 export const StyledTitle = styled.h1`
 font-size: 43px;
-color: #121212;
+color: #fafafa;
 margin-top: 40px;
 text-transform: uppercase;
 align-self: flex-start;
@@ -25,7 +25,7 @@ align-items: flex-start;
 flex-direction: column;
 width: 50%;
 @media screen and (max-width: 767px) {
-width: 100%;
+width: 80%;
 }
 `
 export const StyledLabel = styled.label`
@@ -44,14 +44,13 @@ export const StyledButton = styled.button`
 display: flex;
 align-self: flex-end;
 font-size: 16px;
-border-radius: 18px;
+border-radius: 5px;
 font-weight: 700;
-letter-spacing: 0.1rem;
 padding: 10px;
 border: none;
-color: #fafafa;
-padding: 20px;
-background-color: hsl(180, 29%, 50%);
+color: hsl(229, 24%, 87%);
+padding: 15px;
+background-color: hsl(213, 96%, 18%);
 cursor: pointer;
 `
 export const StyledInput = styled.input`
@@ -68,8 +67,9 @@ border: 1px solid hsl(229, 24%, 87%);
 export const StyledLink = styled(Link)`
 text-decoration: none;
 font-size: 16px;
-color: #121212;
+color: #fafafa;
 font-weight: 700;
+margin-top: -30px;
 `
 export const StyledError = styled.p`
 color: red;

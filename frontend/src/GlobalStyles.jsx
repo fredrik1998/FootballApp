@@ -5,7 +5,7 @@ import { createGlobalStyle } from 'styled-components';
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #1c2237, #424b6e);
+    background:#0F1B2D;
     color: #fafafa;
     font-family: 'League Spartan', sans-serif;
   }

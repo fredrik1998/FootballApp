@@ -14,7 +14,6 @@ import {
   StyledButton,
   StyledButtonContainer,
   StyledError,
-  
 } from './LoginscreenElements';
 
 
@@ -93,8 +92,8 @@ const dispatch = useDispatch();
           <StyledButtonContainer>
           <StyledButton type='submit'>Login</StyledButton>
           </StyledButtonContainer>
+          <StyledLink to='/register'>Dont have an account? click here</StyledLink>
         </StyledForm>
-        <StyledLink to='/register'>Dont have an account? click here</StyledLink>
       </LoginWrapper>
     </>
   );

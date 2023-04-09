@@ -13,7 +13,7 @@ flex-direction: column;
 `
 export const StyledTitle = styled.h1`
 font-size: 43px;
-color: #000;
+color: #fafafa;
 margin-top: 40px;
 `
 

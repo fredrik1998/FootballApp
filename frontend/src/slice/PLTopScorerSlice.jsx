@@ -30,7 +30,7 @@ export const PLTopScorerSlice = createSlice({
         })
         .addCase(fetchTopScorerPL.rejected, (state, action) => {
             state.status = 'failed'
-            state.data = action.error.message
+            state.error = action.error.message
         })
     }
 })

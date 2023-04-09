@@ -1,61 +1,111 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Loader from '../../Loader/Loader';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCLUpcommingMatches } from '../../../slice/CLUpcommingMatchesSlice';
+import { StyledTable, StyledWrapper, StyledDiv, StyledLink } from './CLMatchesElements'
 
 const CLMatches = () => {
-    const [upcommingMatches, setUpcommingMatches] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const dispatch = useDispatch()
+    const CLUpcommingMatches = useSelector((state) => state.CLUpcommingMatches.data)
+    const CLUpcommingMatchesStatus = useSelector((state) => state.CLUpcommingMatches.status)
+    const CLUpcommingMatchesError = useSelector((state) => state.CLUpcommingMatches.error)
+    const championsLeague = useSelector((state) => state.championsLeague.data)
     
     useEffect(() => {
-        const cachedData = localStorage.getItem('CLUpcommingMatches')
-        if(cachedData){
-            upcommingMatches(JSON.parse('CLUpcommingMatches'))
-        } else {
-            axios.get('api/leagues/CL/upcommingmatches/')
-        .then(response => {
-            const upcommingMatchesData = response.data
-            setUpcommingMatches(upcommingMatchesData)
-            setIsLoading(false)
-        }).catch(console.error())
+        if(CLUpcommingMatchesStatus === 'idle'){
+            dispatch(fetchCLUpcommingMatches())
         }
-        
-    }, [])
+    }, [CLUpcommingMatchesStatus, dispatch])
+
+    const formatMatchStage = (stage) => {
+        switch (stage) {  
+          case 'QUARTER_FINALS':
+            return 'QF';
+          case 'SEMI_FINALS':
+            return 'SF';
+          case 'FINAL':
+            return 'F';
+          default:
+            return stage;
+        }
+      };
+
+      const getTeamLogo = (teamName) => {
+        for (const group in championsLeague){
+          for (const team of championsLeague[group]){
+            if(team.team.name === teamName){
+              return team.team.crest
+            }
+          }
+        }
+        return ''
+      }
+
+     const getTeamId = (teamName) => {
+      for (const group in championsLeague){
+        for(const team of championsLeague[group]){
+          if(team.team.name === teamName){
+            return team.team.id
+          }
+        }
+      }
+      return ''
+     }
     
+      const matchesByDate = {};
+      for (const match of CLUpcommingMatches) {
+        console.log('Match object:', match);
+        console.log('Kickoff time:', match.utcDate);
+        const date = new Date(match.utcDate);
+        const formattedDate = date.toLocaleDateString('en-GB', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+        if (!matchesByDate[formattedDate]) {
+          matchesByDate[formattedDate] = [];
+        }
+        matchesByDate[formattedDate].push(match);
+      }
+      
   return (
     <>
-    {isLoading ? (
+    {CLUpcommingMatchesStatus === 'loading' ? (
         <Loader/>
     ) : (
-        <div>
-        <h2>Upcomming matches</h2>
-        <table>
+        <StyledWrapper>
+           {Object.keys(matchesByDate).map((date) => (
+    <StyledDiv key={date}>
+      <h3>{date}</h3>
+      <StyledTable>
         <thead>
-            <tr>
-                <td>Stage</td>
-                <td>Hometeam</td>
-                <td>Awayteam</td>
-                <td>Date</td>
-            </tr>
-            <tbody>
-            {upcommingMatches.map((match, index) => {
-                  const date = new Date(match.utcDate);
-                  const formattedDate = date.toLocaleDateString('en-GB', { year: '2-digit', month: '2-digit', day: '2-digit' });
-    return(
-        <tr key={index}>
-        <td>{match.stage}</td>
-        <td>{match.homeTeam.name}</td> 
-        <td>{match.awayTeam.name}</td> 
-        <td>{formattedDate}</td>
-        </tr>
-    )
-})}
-            </tbody>
+          <tr>
+            <th>Stage</th>
+            <th>Hometeam</th>
+            <th>Awayteam</th>
+          </tr>
         </thead>
-    </table>
-    </div>
-    )}
-    </>
-  )
-}
+        <tbody>
+          {matchesByDate[date].map((match, index) => {
+            return (
+              <tr key={index}>
+                <td>{formatMatchStage(match.stage)}</td>
+                <td>
+                  <img src={getTeamLogo(match.homeTeam.name)} alt={`${match.homeTeam.name} logo`} width="30" height="30" />
+                  <StyledLink to={`/team/${getTeamId(match.homeTeam.name)}`}>{match.homeTeam.name}</StyledLink>
+                </td>
+                <td>
+                  <img src={getTeamLogo(match.awayTeam.name)} alt={`${match.awayTeam.name} logo`} width="30" height="30" />
+                  <StyledLink to={`/team/${getTeamId(match.awayTeam.name)}`}>{match.awayTeam.name}</StyledLink>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </StyledTable>
+    </StyledDiv>
+  ))}
+</StyledWrapper>
+)}
+</>
+);
+};
 
 export default CLMatches

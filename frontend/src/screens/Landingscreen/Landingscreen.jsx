@@ -10,7 +10,7 @@ const Landingscreen = () => {
         <Header/>
         <StyledWrapper>
             <StyledTitle>Follow your favourite teams.</StyledTitle>
-            <StyledDesc>Football Dashboard: The Ultimate Football Dashboard App</StyledDesc>
+            <StyledDesc>FootyFrenzy: The Ultimate Football Dashboard App</StyledDesc>
         <StyledImage src={img} mobileSrc={img} ></StyledImage>
         </StyledWrapper>
         </>

@@ -30,7 +30,7 @@ export const CLTopScorerSlice = createSlice({
         })
         .addCase(fetchTopScorerCL.rejected, (state, action) => {
             state.status = 'failed';
-            state.data = action.error.message;
+            state.error = action.error.message;
         })
     }
 })

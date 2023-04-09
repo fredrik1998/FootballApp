@@ -5,7 +5,7 @@ const Header = () => {
     const [location, setLocation] = useState(window.location.pathname)
   return (
     <StyledHeader>
-        <StyledTitle>Football Dashboard</StyledTitle>
+        <StyledTitle>FootyFrenzy</StyledTitle>
        {location === '/' ? <StyledLink to='/login'>Sign in</StyledLink> : null} 
     </StyledHeader>
   )
