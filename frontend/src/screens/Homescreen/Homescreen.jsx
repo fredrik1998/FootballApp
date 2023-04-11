@@ -4,18 +4,21 @@ import TopScorers from '../../components/Topscorers/PL/Topscorers';
 import PLMatches from '../../components/UpcommingMatches/PL/PLMatches';
 import PLTopAssists from '../../components/Topassists/PL/PLTopAssists';
 import GlobalStyle from '../../GlobalStyles';
-import { StyledWrapper, StyledDiv, StyledTable, StyledLink } from './HomescreenElements';
+import { StyledWrapper, StyledDiv, StyledTable, StyledLink, ContentWrapper} from './HomescreenElements';
 import Loader from '../../components/Loader/Loader';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPremierLeague } from '../../slice/premierLeagueSlice';
-import {Tabs, Tab,} from '@mui/material'
-const Homescreen = () => {
+import {Tabs, Tab, Fab,} from '@mui/material'
+import Sidebar from '../../components/Sidebar/Sidebar';
+
+const Homescreen = ({hamburgerMenuRef}) => {
   const dispatch = useDispatch();
   const premierLeague = useSelector((state) => state.premierLeague.data);
   const premierLeagueStatus = useSelector((state) => state.premierLeague.status);
   const premierLeagueError = useSelector((state) => state.premierLeague.error);
   const [selectedView, setSelectedView] = useState('table')
+  const [isSidebarOpen, setIsSideBarOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     if (premierLeagueStatus === 'idle') {
@@ -32,10 +35,16 @@ const Homescreen = () => {
     return ''
   }
 
+  const toggleSidebar = () => {
+    setIsSideBarOpen(!isSidebarOpen)
+  }
+
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <Header toggleSidebar={toggleSidebar} isMobile={isMobile} />
+      <ContentWrapper>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
       <StyledWrapper>
         {premierLeagueStatus === 'loading' ? (
           <Loader />
@@ -101,6 +110,7 @@ const Homescreen = () => {
           {selectedView === 'upcommingMatches' && <PLMatches />}
           {selectedView === 'topassists' && <PLTopAssists/>}
       </StyledWrapper>
+      </ContentWrapper>
     </>
   );
 };

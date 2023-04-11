@@ -9,6 +9,7 @@ import { PLUpcommingMatchesSlice } from './slice/PLUpcommingMatchesSlice';
 import { PLTopAssistSlice } from './slice/PLTopAssistsSlice';
 import { CLTopAssistsSlice } from './slice/CLTopAssistsSlice';
 import { TeamSquadSlice } from './slice/TeamSquadSlice';
+import { LeaguesSlice } from './slice/LeaguesSlice';
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
@@ -20,6 +21,7 @@ export default configureStore({
     PLUpcommingMatches: PLUpcommingMatchesSlice.reducer,
     PLTopAssists: PLTopAssistSlice.reducer,
     CLTopAssists: CLTopAssistsSlice.reducer,
-    TeamSquad: TeamSquadSlice.reducer
+    TeamSquad: TeamSquadSlice.reducer,
+    Leagues: LeaguesSlice.reducer,
   },
 });

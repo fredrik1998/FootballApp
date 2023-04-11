@@ -8,5 +8,9 @@ urlpatterns = [
     path('leagues/CL/', views.league_CL, name='CL'),
     path('leagues/topscorer/', views.top_scores, name='league-topscorer'),
     path('leagues/CL/topscorer/', views.top_scores_CL, name='CL-topscorer'),
-    path('leagues/CL/upcommingmatches/', views.league_CL_upcoming_matches, name='CL-upcomming-matches')
+    path('leagues/CL/upcommingmatches/', views.league_CL_upcoming_matches, name='CL-upcomming-matches'),
+    path('leageus/CL/topassits/', views.top_assists_CL, name='CL-topassists'),
+    path('leagues/PL/topassits/', views.top_assists_PL, name='PL-topassists'),
+    path('team/<int:team_id>/', views.get_team_squad, name='get_team_squad'),
+    path('leagues/', views.get_all_leagues, name='get_all_leagues'),
 ]

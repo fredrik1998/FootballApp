@@ -24,3 +24,6 @@ text-decoration: none;
 export const StyledSeperator = styled.div`
 border: 1px solid #ccc;
 `
+export const StyledButton = styled.button`
+background: none;
+`
