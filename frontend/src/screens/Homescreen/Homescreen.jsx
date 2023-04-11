@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Header from '../../components/Header/Header';
 import TopScorers from '../../components/Topscorers/PL/Topscorers';
 import PLMatches from '../../components/UpcommingMatches/PL/PLMatches';
@@ -11,7 +11,7 @@ import { fetchPremierLeague } from '../../slice/premierLeagueSlice';
 import {Tabs, Tab, Fab,} from '@mui/material'
 import Sidebar from '../../components/Sidebar/Sidebar';
 
-const Homescreen = ({hamburgerMenuRef}) => {
+const Homescreen = () => {
   const dispatch = useDispatch();
   const premierLeague = useSelector((state) => state.premierLeague.data);
   const premierLeagueStatus = useSelector((state) => state.premierLeague.status);
@@ -19,6 +19,7 @@ const Homescreen = ({hamburgerMenuRef}) => {
   const [selectedView, setSelectedView] = useState('table')
   const [isSidebarOpen, setIsSideBarOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const hamburgerMenuRef = useRef()
 
   useEffect(() => {
     if (premierLeagueStatus === 'idle') {
@@ -35,14 +36,16 @@ const Homescreen = ({hamburgerMenuRef}) => {
     return ''
   }
 
-  const toggleSidebar = () => {
-    setIsSideBarOpen(!isSidebarOpen)
-  }
+  const toggleSidebar = (event) => {
+    if (event) event.stopPropagation();
+    setIsSideBarOpen(!isSidebarOpen);
+  };
+  
 
   return (
     <>
       <GlobalStyle />
-      <Header toggleSidebar={toggleSidebar} isMobile={isMobile} />
+      <Header toggleSidebar={toggleSidebar} isMobile={isMobile}  />
       <ContentWrapper>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
       <StyledWrapper>
@@ -53,7 +56,6 @@ const Homescreen = ({hamburgerMenuRef}) => {
             <Tabs
             value={selectedView}
             onChange={(event, newValue) => setSelectedView(newValue)}
-            centered
             >
             <Tab label="Table" value='table'></Tab>
             <Tab label="Top scorers" value='topscorers'></Tab>

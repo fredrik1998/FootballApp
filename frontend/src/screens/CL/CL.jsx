@@ -74,7 +74,7 @@ const CL = () => {
                      <tr key={team.position}>
                        <td>{team.position}</td>
                        <td><img style={{width: '30px'}} src={team.team.crest} alt={team.team.name}/></td>
-                       <td><StyledLink to={`/team/${team.team.id}`}>{team.team.name}</StyledLink></td>
+                       <td><StyledLink to={`/team/${team.team.id}`}>{team.team.shortName}</StyledLink></td>
                        <td>{team.playedGames}</td>
                        <td>{team.won}</td>
                        <td>{team.draw}</td>
