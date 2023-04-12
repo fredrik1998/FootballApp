@@ -1,24 +1,29 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const StyledWrapper = styled.main`
+export const ContentWrapper = styled.main`
+display: flex;
+`
+export const StyedWrapper = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-margin-top: 2rem;
-height: 100%;
-width: 100%;
+gap: 40px;
+flex-grow: 1;
+overflow-x: auto;
 `
+
 export const StyledTable = styled.table`
-width: 80%;
+width: 70%;
 border-collapse: collapse;
-th,td{
+th,td {
     text-align: left;
-    padding: 8px;
+  
 }
 `
 export const StyledLink = styled(Link)`
 text-decoration: none;
-color: #fafafa;
 cursor: pointer;
+color: #fafafa;
+
 `

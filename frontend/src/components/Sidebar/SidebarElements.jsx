@@ -10,7 +10,7 @@ justify-content: flex-start;
 align-items: flex-start;
 height: 100vh;
 padding-left: 20px;
-padding-top: 100px;
+margin-top: 2rem;
 gap: 50px;
 }
 &.expanded {

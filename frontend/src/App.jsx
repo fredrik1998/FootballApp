@@ -6,8 +6,8 @@ import RegisterScreen from './screens/Registerscreen/Registerscreen'
 import Homescreen from './screens/Homescreen/Homescreen';
 import CL from './screens/CL/CL';
 import Team from './screens/Team/Team';
+import SerieA from './screens/SerieA/SerieA';
 const App =() => {
-  const [crestUrls, setCrestUrls] = useState()
   return (
   <Routes>
     <Route path='/' element={<Landingscreen/>}/>
@@ -16,6 +16,7 @@ const App =() => {
     <Route path='/homescreen' element={<Homescreen/>}/>
     <Route path='/CL' element={<CL/>}/>
     <Route path='/team/:team_id' element={<Team/>}></Route>
+    <Route path='/SA' element={<SerieA/>}/>
   </Routes>
   )
 }

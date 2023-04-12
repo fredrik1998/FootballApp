@@ -33,6 +33,14 @@ def league_PL(request):
     return Response(standings)
 
 @api_view(['GET'])
+def league_SA(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/SA/standings'
+    response = requests.get(url, headers=headers)
+    standings = response.json()['standings'][0]['table']
+    return Response(standings)
+
+@api_view(['GET'])
 def team_logo(request, team_id):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
     url = f'https://api.football-data.org/v4/teams/{team_id}'
@@ -71,6 +79,7 @@ def league_CL(request):
         standings[group['group']] = group['table']
     return Response(standings)
 
+
 @api_view(['GET'])
 def league_CL_upcoming_matches(request):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
@@ -80,6 +89,14 @@ def league_CL_upcoming_matches(request):
     matches = data['matches'][:8]
     return Response(matches)
 
+@api_view(['GET'])
+def league_SA_upcomming_matches(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competetitions/CL/matches?status=SCHEDULED'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    matches = data['matches'][:20]
+    return Response(matches)
 
 @api_view(['GET'])
 def top_scores(request):
@@ -100,6 +117,26 @@ def top_scores(request):
         except KeyError as e:
             print(f"Error processing scorer data: {scorer}, KeyError: {e}")
     return Response(top_scores)
+
+@api_view(['GET'])
+def top_scores_SA(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/SA/scorers'
+    response = requests.get(url, headers=headers)
+    scorers = response.json()['scorers'][:10]
+    top_scorers = []
+    for scorer in scorers:
+        try:
+            top_scorers.append({
+                'name': scorer['player']['name'],
+                'team': scorer['team']['name'],
+                'goals': scorer['goals'],
+                'nationality': scorer['player']['nationality'],
+                'position': scorer['player']['position'],
+            })
+        except KeyError as e:
+            print(f"Error fetching data scorer data: {scorer}, KeyError: {e}")
+    return Response(top_scorers)           
 
 @api_view(['GET'])
 def top_scores_CL(request):
@@ -142,7 +179,28 @@ def top_assists_PL(request):
             print(f"Error processing assister data: {assister}, KeyError: {e}")
     return Response(top_assists)
 
+@api_view(['GET'])
+def get_top_assists_SA(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/SA/scorers?sort=assists'
+    response = requests.get(url, headers=headers)
+    assisters = response.json()['scorers'][:10]
+    sorted_assisters = sorted(assisters, key=lambda x: x['assists'], reverse=True)[:10]
+    top_assists = []
+    for assister in sorted_assisters:
+        try:
+            top_assists.append({
+                'name' : assister['player']['name'],
+                'team' : assister['team']['name'],
+                'assists': assister['assists'],
+                'nationality' : assister['player']['nationality'],
+                'position': assister['player']['position']   
+            })
+        except KeyError as e:
+            print(f"Error processing assister data: {assister}, KeyError: {e}")
+    return Response(top_assists)        
 
+   
 @api_view(['GET'])
 def top_assists_CL(request):
     headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}

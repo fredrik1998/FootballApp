@@ -12,7 +12,6 @@ import { createGlobalStyle } from 'styled-components';
 
     *::-webkit-scrollbar {
       width: 16px;
-      
   }
   
   *::-webkit-scrollbar-track {

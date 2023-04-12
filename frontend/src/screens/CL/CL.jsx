@@ -1,16 +1,17 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../components/Header/Header'
 import CLTopScorers from '../../components/Topscorers/CL/CLTopScorers'
 import CLMatches from '../../components/UpcommingMatches/CL/CLMatches'
 import GlobalStyle from '../../GlobalStyles'
-import { StyledWrapper, GridContainer, GridItem, StyledLink } from './CLElements'
+import { StyledWrapper, GridContainer, GridItem, StyledLink, ContentWrapper } from './CLElements'
 import { fetchChampionsLeague } from '../../slice/championsLeageuSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../../components/Loader/Loader'
 import {Tab, Tabs} from '@mui/material'
 import styled from 'styled-components'
 import CLTopAssists from '../../components/Topassists/CL/CLTopAssists'
+import Sidebar from '../../components/Sidebar/Sidebar'
 
 const StyledTab = styled(Tab)`
 color: #fafafa;
@@ -22,6 +23,9 @@ const CL = () => {
   const championsLeagueStatus = useSelector((state) => state.championsLeague.status)
   const championsLeagueError = useSelector((state) => state.championsLeague.error)
   const [selectedView, setSelectedView] = useState('table')
+  const [IsSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const hamburgerMenuRef = useRef()
 
   useEffect(() => {
     if(championsLeagueStatus ==='idle'){
@@ -29,10 +33,17 @@ const CL = () => {
     }
   }, [championsLeague, dispatch])
 
+  const toggleSidebar = (event) => {
+    if(event) event.stopPropagation();
+    setIsSidebarOpen(!setIsSidebarOpen)
+  }
+
   return (
     <>
     <GlobalStyle/>
-    <Header/>
+    <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
+    <ContentWrapper>
+    <Sidebar isOpen={IsSidebarOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
     <StyledWrapper>
       {championsLeagueStatus === 'loading' ? (
         <Loader/>
@@ -99,6 +110,7 @@ const CL = () => {
       {selectedView === 'upcommingMatches' && <CLMatches/>}
       {selectedView === 'topAssists' && <CLTopAssists/>}
     </StyledWrapper>
+    </ContentWrapper>
     </>
   )
 }

@@ -10,6 +10,8 @@ import { PLTopAssistSlice } from './slice/PLTopAssistsSlice';
 import { CLTopAssistsSlice } from './slice/CLTopAssistsSlice';
 import { TeamSquadSlice } from './slice/TeamSquadSlice';
 import { LeaguesSlice } from './slice/LeaguesSlice';
+import { SerieASlice } from './slice/SerieASlice';
+import { SerieATopscorersSlice } from './slice/SerieATopScorersSlice';
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
@@ -23,5 +25,7 @@ export default configureStore({
     CLTopAssists: CLTopAssistsSlice.reducer,
     TeamSquad: TeamSquadSlice.reducer,
     Leagues: LeaguesSlice.reducer,
+    SerieA: SerieASlice.reducer,
+    SerieATopScorer: SerieATopscorersSlice.reducer,
   },
 });

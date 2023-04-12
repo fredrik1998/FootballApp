@@ -79,9 +79,9 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
   return (
     <StyledNav className={isOpen || window.innerWidth >= 768 ? 'expanded' : ''} ref={sidebarRef}>
       <h1>Leagues</h1>
-      <StyledLink><StyledImage src={getPremierLeagueEmblem()}></StyledImage>Premier League</StyledLink>
+      <StyledLink to='/homescreen'><StyledImage src={getPremierLeagueEmblem()}></StyledImage>Premier League</StyledLink>
       <StyledLink to='/CL'><StyledImage src={getChampionsLeagueEmblem()} ></StyledImage>Champions League</StyledLink>
-      <StyledLink><StyledImage src={getSerieAEmblem()}></StyledImage>Serie A</StyledLink>
+      <StyledLink to='/SA'><StyledImage src={getSerieAEmblem()}></StyledImage>Serie A</StyledLink>
       <StyledLink><StyledImage src={getBundesligaEmblem()} ></StyledImage>Bundesliga</StyledLink>
       <StyledLink><StyledImage src={getLigue1Emblem()}></StyledImage>Ligue 1</StyledLink>
       <StyledLink><StyledImage src={getLaLigaEmblem()}></StyledImage>La Liga</StyledLink>
