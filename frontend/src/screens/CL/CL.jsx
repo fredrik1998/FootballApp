@@ -23,7 +23,7 @@ const CL = () => {
   const championsLeagueStatus = useSelector((state) => state.championsLeague.status)
   const championsLeagueError = useSelector((state) => state.championsLeague.error)
   const [selectedView, setSelectedView] = useState('table')
-  const [IsSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const hamburgerMenuRef = useRef()
 
@@ -33,9 +33,8 @@ const CL = () => {
     }
   }, [championsLeague, dispatch])
 
-  const toggleSidebar = (event) => {
-    if(event) event.stopPropagation();
-    setIsSidebarOpen(!setIsSidebarOpen)
+  const toggleSidebar = (open) => {
+    setIsOpen(open)
   }
 
   return (
@@ -43,7 +42,7 @@ const CL = () => {
     <GlobalStyle/>
     <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
     <ContentWrapper>
-    <Sidebar isOpen={IsSidebarOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
+    <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
     <StyledWrapper>
       {championsLeagueStatus === 'loading' ? (
         <Loader/>

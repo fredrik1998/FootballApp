@@ -31,6 +31,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
+        isOpen && // Only close the sidebar if it's open
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
         (!hamburgerMenuRef.current || !hamburgerMenuRef.current.contains(event.target)) &&
@@ -44,7 +45,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [toggleSidebar, hamburgerMenuRef]);
+  }, [toggleSidebar, hamburgerMenuRef, isOpen]);
 
   const getChampionsLeagueEmblem = () => {
     const championsLeague = Leagues.find(league => league.name === 'UEFA Champions League');

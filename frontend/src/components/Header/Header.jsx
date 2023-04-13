@@ -6,6 +6,8 @@ import { StyledButton } from '../Sidebar/SidebarElements';
 const Header = ({toggleSidebar, isMobile}) => {
     const [location, setLocation] = useState(window.location.pathname)
     const hamburgerMenuRef = useRef()
+
+
   return (
     <StyledHeader>
         <StyledTitle>FootyFrenzy</StyledTitle>

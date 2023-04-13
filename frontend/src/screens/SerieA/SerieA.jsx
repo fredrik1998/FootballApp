@@ -8,13 +8,15 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import Loader from '../../components/Loader/Loader'
 import Header from '../../components/Header/Header'
 import Topscorers from '../../components/Topscorers/SerieA/Topscorers'
+import SerieAMatches from '../../components/UpcommingMatches/SerieA/SerieAMatches'
+import SerieALatestMatches from '../../components/LatestMatches/SerieA/SerieALatestMatches'
 const SerieA = () => {
     const dispatch = useDispatch()
     const SerieA = useSelector((state) => state.SerieA.data)
     const SerieAStatus = useSelector((state) => state.SerieA.status)
     const SerieAError = useSelector((state) => state.SerieA.error)
     const [selectedView, setSelectedView] = useState('table')
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
     const hamburgerMenuRef = useRef()
 
@@ -24,9 +26,8 @@ const SerieA = () => {
         }
     }, [SerieAStatus, dispatch])
 
-    const toggleSidebar = (event) => {
-        if(event) event.stopPropogation();
-        setIsSidebarOpen(!isSidebarOpen)
+    const toggleSidebar = (open) => {
+      setIsOpen(open)
     }
 
     const getTeamId = (teamName) => {
@@ -43,7 +44,7 @@ const SerieA = () => {
     <GlobalStyle/>
     <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
     <ContentWrapper>
-     <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef}/>   
+     <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef}/>   
     <StyedWrapper>
      {SerieAStatus === 'loading' ? (
         <Loader/>
@@ -55,6 +56,8 @@ const SerieA = () => {
 >
   <Tab label='Table' value='table'></Tab>
   <Tab label='Top scorers' value='topscorers'></Tab>
+  <Tab label='Upcomming Matches' value='upcommingmatches'></Tab>
+  <Tab label='Latest Matches' value='latestmatches'></Tab>
 </Tabs>
         {selectedView === 'table' && <StyledTable>
             <thead>
@@ -102,7 +105,9 @@ const SerieA = () => {
 }
 </>
         )}
-     {selectedView === 'topscorers' && <Topscorers/>}   
+     {selectedView === 'topscorers' && <Topscorers/>}
+     {selectedView === 'upcommingmatches' && <SerieAMatches/>}
+     {selectedView === 'latestmatches' && <SerieALatestMatches/>}  
     </StyedWrapper>
     </ContentWrapper>
     </>

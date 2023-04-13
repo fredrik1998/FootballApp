@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPremierLeague } from '../../slice/premierLeagueSlice';
 import {Tabs, Tab, Fab,} from '@mui/material'
 import Sidebar from '../../components/Sidebar/Sidebar';
+import PLLatestMatches from '../../components/LatestMatches/PL/PLLatestMatches';
 
 const Homescreen = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ const Homescreen = () => {
   const premierLeagueStatus = useSelector((state) => state.premierLeague.status);
   const premierLeagueError = useSelector((state) => state.premierLeague.error);
   const [selectedView, setSelectedView] = useState('table')
-  const [isSidebarOpen, setIsSideBarOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const hamburgerMenuRef = useRef()
 
   useEffect(() => {
@@ -36,18 +37,16 @@ const Homescreen = () => {
     return ''
   }
 
-  const toggleSidebar = (event) => {
-    if (event) event.stopPropagation();
-    setIsSideBarOpen(!isSidebarOpen);
+  const toggleSidebar = (open) => {
+    setIsOpen(open);
   };
   
-
   return (
     <>
       <GlobalStyle />
       <Header toggleSidebar={toggleSidebar} isMobile={isMobile}  />
       <ContentWrapper>
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
+      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
       <StyledWrapper>
         {premierLeagueStatus === 'loading' ? (
           <Loader />
@@ -61,6 +60,7 @@ const Homescreen = () => {
             <Tab label="Top scorers" value='topscorers'></Tab>
             <Tab label="Upcomming matches" value='upcommingMatches'></Tab>  
             <Tab label="Top assists" value='topassists'></Tab>
+            <Tab label="Latest matches" value='latestmatches'></Tab>
             </Tabs>
             {selectedView === 'table' && <StyledTable>
               <thead>
@@ -111,6 +111,7 @@ const Homescreen = () => {
           {selectedView === 'topscorers' && <TopScorers/>}
           {selectedView === 'upcommingMatches' && <PLMatches />}
           {selectedView === 'topassists' && <PLTopAssists/>}
+          {selectedView === 'latestmatches' && <PLLatestMatches/>}
       </StyledWrapper>
       </ContentWrapper>
     </>
