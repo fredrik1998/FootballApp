@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header'
 import CLTopScorers from '../../components/Topscorers/CL/CLTopScorers'
 import CLMatches from '../../components/UpcommingMatches/CL/CLMatches'
 import GlobalStyle from '../../GlobalStyles'
-import { StyledWrapper, GridContainer, GridItem, StyledLink, ContentWrapper } from './CLElements'
+import { StyledWrapper, GridContainer, GridItem, StyledLink, ContentWrapper, StyledTable } from './CLElements'
 import { fetchChampionsLeague } from '../../slice/championsLeageuSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../../components/Loader/Loader'
@@ -12,7 +12,7 @@ import {Tab, Tabs} from '@mui/material'
 import styled from 'styled-components'
 import CLTopAssists from '../../components/Topassists/CL/CLTopAssists'
 import Sidebar from '../../components/Sidebar/Sidebar'
-
+import CLLatestMatches from '../../components/LatestMatches/CL/CLLatestMatches'
 const StyledTab = styled(Tab)`
 color: #fafafa;
 `
@@ -57,13 +57,14 @@ const CL = () => {
         <StyledTab label="Top Scorers" value="topScorers" />
         <StyledTab label="Upcoming Matches" value="upcommingMatches" />
         <StyledTab label="Top Assists" value="topAssists"></StyledTab>
+        <StyledTab label="Latest Matches" value="latestmatches"></StyledTab>
         </Tabs>
         {selectedView === 'table' && (
            <GridContainer>
            {Object.keys(championsLeague).map((groupName, index) => (
              <GridItem key={groupName}>
                <h2>{groupName}</h2>
-               <table>
+               <StyledTable>
                  <thead>
                    <tr>
                      <th></th>
@@ -96,7 +97,7 @@ const CL = () => {
                      </tr>
                    ))}
                  </tbody>
-               </table>
+               </StyledTable>
              </GridItem>
            ))}
          </GridContainer>
@@ -108,6 +109,7 @@ const CL = () => {
       {selectedView==='topScorers' && <CLTopScorers/>}
       {selectedView === 'upcommingMatches' && <CLMatches/>}
       {selectedView === 'topAssists' && <CLTopAssists/>}
+      {selectedView === "latestmatches" && <CLLatestMatches/>}
     </StyledWrapper>
     </ContentWrapper>
     </>

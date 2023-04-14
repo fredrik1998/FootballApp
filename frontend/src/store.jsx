@@ -15,6 +15,9 @@ import { SerieATopscorersSlice } from './slice/SerieATopScorersSlice';
 import { SerieAUpcommingMatchesSlice } from './slice/SerieAUpcommingMatchesSlice';
 import { SerieALatestMatchesSlice } from './slice/SerieALatestMatchesSlice';
 import { PLLatestMatchesSlice } from './slice/PLLatestMatchesSlice';
+import { CLLatestMatchesSlice } from './slice/CLLatestMatchesSlice';
+import { BundesligaSlice } from './slice/BundesligaSlice';
+
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
@@ -33,5 +36,7 @@ export default configureStore({
     SerieAUpcommingMatches: SerieAUpcommingMatchesSlice.reducer,
     SerieALatestMatches: SerieALatestMatchesSlice.reducer,
     PLLatestMatches: PLLatestMatchesSlice.reducer,
+    CLLatestMatches: CLLatestMatchesSlice.reducer,
+    Bundesliga: BundesligaSlice.reducer,
   },
 });

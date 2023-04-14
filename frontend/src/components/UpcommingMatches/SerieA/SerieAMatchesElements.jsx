@@ -12,7 +12,7 @@ width: 100%;
 margin: 1rem auto;
 `
 export const StyledTable = styled.table`
-width: 80%;
+width: 100%;
 border-collapse: collapse;
 th, td{
 text-align: left;

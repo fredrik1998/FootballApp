@@ -18,7 +18,7 @@ const SerieAMatches = () => {
 
     const getTeamLogo = (teamName) => {
         for(const team of SerieA){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.crest;
             }
         }
@@ -27,7 +27,7 @@ const SerieAMatches = () => {
 
     const getTeamId = (teamName) => {
         for(const team of SerieA){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.id
             }
         }

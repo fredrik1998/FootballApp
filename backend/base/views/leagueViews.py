@@ -41,6 +41,14 @@ def league_SA(request):
     return Response(standings)
 
 @api_view(['GET'])
+def league_BL(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/BL1/standings'
+    response = requests.get(url, headers=headers)
+    standings = response.json()['standings'][0]['table']
+    return Response(standings)
+
+@api_view(['GET'])
 def team_logo(request, team_id):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
     url = f'https://api.football-data.org/v4/teams/{team_id}'
@@ -98,8 +106,8 @@ def league_SA_upcomming_matches(request):
     matches = []
     for match in data['matches']:
         matches.append({
-            'home_team': match['homeTeam']['name'],
-            'away_team': match['awayTeam']['name'],
+            'home_team': match['homeTeam']['shortName'],
+            'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
             'status': match['status']
         })
@@ -117,8 +125,8 @@ def league_SA_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
-            'home_team': match['homeTeam']['name'],
-            'away_team': match['awayTeam']['name'],
+            'home_team': match['homeTeam']['shortName'],
+            'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
             'status': match['status'],
             'home_team_score': home_goals,
@@ -145,8 +153,29 @@ def league_PL_latest_matches(request):
             'home_team_score': home_goals,
             'away_team_score': away_goals,
         })
-    matches = matches[:20]
-    return Response(matches)  
+    matches = matches[-20:]
+    return Response(matches)
+
+@api_view(['GET'])
+def league_CL_latest_matches(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'} 
+    url = 'https://api.football-data.org/v4/competitions/CL/matches?=status=FINISHED'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    matches = []
+    for match in data['matches']:
+        home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
+        away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
+        matches.append({
+            'home_team': match['homeTeam']['shortName'],
+            'away_team': match['awayTeam']['shortName'],
+            'kickoff_time': match['utcDate'],
+            'status': match['status'],
+            'home_team_score': home_goals,
+            'away_team_score': away_goals,
+        })
+    matches = matches[-20:]
+    return Response(matches)    
 
 @api_view(['GET'])
 def top_scores(request):

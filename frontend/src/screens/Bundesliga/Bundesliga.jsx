@@ -1,0 +1,109 @@
+import React, { useEffect, useState, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchBundesliga } from '../../slice/BundesligaSlice'
+import Loader from '../../components/Loader/Loader'
+import { ContentWrapper, StyledLink, StyledTable, StyledWrapper } from './BundesligaElements'
+import GlobalStyle from '../../GlobalStyles'
+import Header from '../../components/Header/Header'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import { Tabs, Tab } from '@mui/material'
+const Bundesliga = () => {
+    const dispatch = useDispatch();
+    const Bundesliga = useSelector((state) => state.Bundesliga.data);
+    const BundesligaStatus = useSelector((state) => state.Bundesliga.status);
+    const BundesligaError = useSelector((state) => state.Bundesliga.error);
+    const [selectedView, setSelectedView] = useState('table')
+    const [isOpen, setIsOpen] = useState(false)
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+    const hamburgerMenuRef = useRef()
+
+    useEffect(() => {
+        if(BundesligaStatus === 'idle'){
+            dispatch(fetchBundesliga())
+        }
+    }, [BundesligaStatus, dispatch])
+
+    const getTeamId = (teamName) => {
+        for(const team of Bundesliga){
+            if(team.team.name === teamName){
+                return team.team.id
+            }
+        }
+        return ''
+    }
+
+    const toggleSidebar = (open) => {
+        setIsOpen(open)
+    }
+
+    return (
+        <>
+          <GlobalStyle />
+          <Header toggleSidebar={toggleSidebar} isMobile={isMobile}  />
+          <ContentWrapper>
+          <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
+          <StyledWrapper>
+            {BundesligaStatus === 'loading' ? (
+              <Loader />
+            ) : (
+              <>
+                <Tabs
+                value={selectedView}
+                onChange={(event, newValue) => setSelectedView(newValue)}
+                >
+                <Tab label="Table" value='table'></Tab>
+                </Tabs>
+                {selectedView === 'table' && <StyledTable>
+                  <thead>
+                    <tr>
+                      <th style={{padding: '5px'}}></th>
+                      <th>Team</th>
+                      <th></th>
+                      <th>MP</th>
+                      <th>W</th>
+                      <th>D</th>
+                      <th>L</th>
+                      <th>GF</th>
+                      <th>GA</th>
+                      <th>GD</th>
+                      <th>P</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Bundesliga.map((team) => {
+                        console.log(Bundesliga)
+                      return (
+                        <tr key={team.position}>
+                          <th>{team.position}</th>
+    
+                          <img
+                            style={{ width: '30px', marginTop: '12px' }}
+                            src={team.team.crest}
+                            alt={team.team.name}
+                          />
+                          <td>
+      <StyledLink to={`/team/${getTeamId(team.team.name)}`}>{team.team.name}</StyledLink>
+    </td>
+                        <td>{team.playedGames}</td>
+                        <td>{team.won}</td>
+                        <td>{team.draw}</td>
+                        <td>{team.lost}</td>
+                        <td>{team.goalsFor}</td>
+                        <td>{team.goalsAgainst}</td>
+                        <td>{team.goalDifference}</td>
+                        <td>{team.points}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </StyledTable>
+    }
+              </>
+            )}
+          </StyledWrapper>
+          </ContentWrapper>
+        </>
+      );
+    };
+
+export default Bundesliga

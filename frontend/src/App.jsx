@@ -7,6 +7,7 @@ import Homescreen from './screens/Homescreen/Homescreen';
 import CL from './screens/CL/CL';
 import Team from './screens/Team/Team';
 import SerieA from './screens/SerieA/SerieA';
+import Bundesliga from './screens/Bundesliga/Bundesliga';
 const App =() => {
   return (
   <Routes>
@@ -17,6 +18,7 @@ const App =() => {
     <Route path='/CL' element={<CL/>}/>
     <Route path='/team/:team_id' element={<Team/>}></Route>
     <Route path='/SA' element={<SerieA/>}/>
+    <Route path='/BL' element={<Bundesliga/>}/>
   </Routes>
   )
 }

@@ -28,7 +28,7 @@ export const StyledTable = styled.table`
 
   td:nth-child(1),
   td:nth-child(4) {
-    width: 40%;
+    width: 35%;
   }
 
   td:nth-child(2),
