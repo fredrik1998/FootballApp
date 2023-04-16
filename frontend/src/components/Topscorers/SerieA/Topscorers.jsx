@@ -36,7 +36,6 @@ const Topscorers = () => {
         return ''
     }
 
-
   return (
     <>
     {SerieATopScorerStatus === 'loading' ? (

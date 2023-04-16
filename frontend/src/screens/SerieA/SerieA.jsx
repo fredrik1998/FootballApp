@@ -10,6 +10,7 @@ import Header from '../../components/Header/Header'
 import Topscorers from '../../components/Topscorers/SerieA/Topscorers'
 import SerieAMatches from '../../components/UpcommingMatches/SerieA/SerieAMatches'
 import SerieALatestMatches from '../../components/LatestMatches/SerieA/SerieALatestMatches'
+import SerieATopAssists from '../../components/Topassists/SerieA/SerieATopAssists'
 const SerieA = () => {
     const dispatch = useDispatch()
     const SerieA = useSelector((state) => state.SerieA.data)
@@ -56,6 +57,7 @@ const SerieA = () => {
 >
   <Tab label='Table' value='table'></Tab>
   <Tab label='Top scorers' value='topscorers'></Tab>
+  <Tab label='Top assists' value='topassists'></Tab>
   <Tab label='Upcomming Matches' value='upcommingmatches'></Tab>
   <Tab label='Latest Matches' value='latestmatches'></Tab>
 </Tabs>
@@ -106,6 +108,7 @@ const SerieA = () => {
 </>
         )}
      {selectedView === 'topscorers' && <Topscorers/>}
+     {selectedView === 'topassists' && <SerieATopAssists/>}
      {selectedView === 'upcommingmatches' && <SerieAMatches/>}
      {selectedView === 'latestmatches' && <SerieALatestMatches/>}  
     </StyedWrapper>

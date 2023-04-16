@@ -1,35 +1,24 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
 export const StyledWrapper = styled.main`
 display: flex;
-justify-content: center;
-align-items: center;
 flex-direction: column;
+align-items: center;
+margin-top: 2rem;
+height: 100%;
 width: 100%;
 `
 export const StyledTable = styled.table`
 width: 80%;
 border-collapse: collapse;
-th, td {
+th,td{
     text-align: left;
     padding: 8px;
-  }
-
-  th:nth-child(1), td:nth-child(1) {
-    width: 40%;
-  }
-
-  th:nth-child(2), td:nth-child(2) {
-    width: 40%;
-  }
-
-  th:nth-child(3), td:nth-child(3) {
-    width: 20%;
-  }
-`;
-
+}
+`
 export const StyledLink = styled(Link)`
 text-decoration: none;
-cursor: pointer;
 color: #fafafa;
+cursor: pointer;
 `

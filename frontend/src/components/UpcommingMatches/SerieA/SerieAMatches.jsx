@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSerieAUpcommingMatches } from '../../../slice/SerieAUpcommingMatchesSlice'
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieAMatchesElements'
 import Loader from '../../Loader/Loader'
+import CLLatestMatches from '../../LatestMatches/CL/CLLatestMatches'
 const SerieAMatches = () => {
     const dispatch = useDispatch()
     const SerieAUpcommingMatches = useSelector((state) => state.SerieAUpcommingMatches.data)
@@ -33,22 +34,25 @@ const SerieAMatches = () => {
         }
         return ''
     }
-
-    const matchesByDate = {}
-    for(const match of SerieAUpcommingMatches){
+    
+    const matchesByDate = useMemo(() => {
+        const matches = {}
+        for (const match of SerieAUpcommingMatches){
         const date = new Date(match.kickoff_time)
         const formattedDate = date.toLocaleDateString('en-GB', {weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'})
-        if(!matchesByDate[formattedDate]){
-            matchesByDate[formattedDate] = []
+        if(!matches[formattedDate]){
+            matches[formattedDate] = []
         }
-        matchesByDate[formattedDate].push(match)
+        matches[formattedDate].push(match)
     }
+    return matches
+}, [SerieAUpcommingMatches])
+
+if(SerieAUpcommingMatchesStatus === 'loading'){
+    return <Loader/>;
+}
 
   return (
-    <>
-    {SerieAUpcommingMatchesStatus === 'loading' ? (
-        <Loader/>
-    ): (
         <StyledWrapper>
             {Object.keys(matchesByDate).map((date) => (
                 <StyledDiv key={date}>
@@ -81,9 +85,6 @@ const SerieAMatches = () => {
             )
             )}
         </StyledWrapper>
-    )}
-
-    </>
   )
 }
 

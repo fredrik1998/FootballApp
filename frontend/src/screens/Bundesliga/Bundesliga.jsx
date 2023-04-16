@@ -7,6 +7,10 @@ import GlobalStyle from '../../GlobalStyles'
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import { Tabs, Tab } from '@mui/material'
+import BundesligaTopScorer from '../../components/Topscorers/Bundesliga/BundesligaTopScorer'
+import BundesligaTopAssists from '../../components/Topassists/Bundesliga/BundesligaTopAssists'
+import BundesligaUpcommingMatches from '../../components/UpcommingMatches/Bundesliga/BundesligaUpcommingMatches'
+import BundesligaLatestMatches from '../../components/LatestMatches/Bundesliga/BundesligaLatestMatches'
 const Bundesliga = () => {
     const dispatch = useDispatch();
     const Bundesliga = useSelector((state) => state.Bundesliga.data);
@@ -52,6 +56,10 @@ const Bundesliga = () => {
                 onChange={(event, newValue) => setSelectedView(newValue)}
                 >
                 <Tab label="Table" value='table'></Tab>
+                <Tab label="Top scorers" value='topscorers'></Tab>
+                <Tab label='Top assists' value='topassists'></Tab>
+                <Tab label='Upcomming Matches' value='upcommingmatches'></Tab>
+                <Tab label="Latest Matches" value='latestmatches'></Tab>
                 </Tabs>
                 {selectedView === 'table' && <StyledTable>
                   <thead>
@@ -100,6 +108,10 @@ const Bundesliga = () => {
     }
               </>
             )}
+            {selectedView === 'topscorers' && <BundesligaTopScorer/>}
+            {selectedView === 'topassists' && <BundesligaTopAssists/>}
+            {selectedView === 'upcommingmatches' && <BundesligaUpcommingMatches/>}
+            {selectedView === 'latestmatches' && <BundesligaLatestMatches/>}
           </StyledWrapper>
           </ContentWrapper>
         </>

@@ -22,4 +22,11 @@ urlpatterns = [
     path('leagues/SA/upcommingmatches/', views.league_SA_upcomming_matches, name='SA-upcommingmatches'),
     path('leagues/SA/latestmatches/', views.league_SA_latest_matches, name='SA-latestmatches'),
     path('leagues/BL/', views.league_BL, name='BL'),
+    path('leagues/BL/topscorer/', views.top_scorers_BL, name='BL-topscorer'),
+    path('leagues/BL/topassists/', views.top_assists_BL, name='BL-topassists'),
+    path('leagues/BL/upcommingmatches/', views.league_BL_upcomming_matches, name='BL-upcommingmatches'),
+    path('leagues/BL/latestmatches/', views.league_BL_latest_matches, name='BL-latestmatches'),
+    path('leagues/FL/', views.league_FL, name='FL-league'),
+    path('leagues/FL/topscorer/', views.top_scorers_FL, name='FL-topscorer'),
+    path('leagues/FL/topassists/', views.top_assists_FL, name='FL-topassists')
 ]

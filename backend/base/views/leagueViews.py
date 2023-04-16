@@ -5,25 +5,6 @@ from django.http import Http404
 from ..serializer import LeagueSerializer
 import requests
 
-
-premier_league = League(name='Premier League', country='England', season=2022, start_date='2022-08-12', end_date='2023-05-22')
-premier_league.save()
-
-serie_a = League(name='Serie A', country='Italy', season=2022, start_date='2022-08-21', end_date='2023-05-28')
-serie_a.save()
-
-bundesliga = League(name='Bundesliga', country='Germany', season=2022, start_date='2022-08-13', end_date='2023-05-20')
-bundesliga.save()
-
-ligue_1 = League(name='Ligue 1', country='France', season=2022, start_date='2022-08-05', end_date='2023-05-21')
-ligue_1.save()
-
-la_liga = League(name='La Liga', country='Spain', season=2022, start_date='2022-08-13', end_date='2023-05-28')
-la_liga.save()
-
-champions_league = League(name='Champions League', country='Europe', season=2022, start_date='2022-09-13', end_date='2023-05-28')
-champions_league.save()
-
 @api_view(['GET'])
 def league_PL(request):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
@@ -44,6 +25,14 @@ def league_SA(request):
 def league_BL(request):
     headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
     url = 'https://api.football-data.org/v4/competitions/BL1/standings'
+    response = requests.get(url, headers=headers)
+    standings = response.json()['standings'][0]['table']
+    return Response(standings)
+
+@api_view(['GET'])
+def league_FL(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/FL1/standings'
     response = requests.get(url, headers=headers)
     standings = response.json()['standings'][0]['table']
     return Response(standings)
@@ -75,7 +64,6 @@ def next_matchday(request):
         })
     matches = matches[:20] 
     return Response(matches)
-
 
 @api_view(['GET'])
 def league_CL(request):
@@ -112,7 +100,24 @@ def league_SA_upcomming_matches(request):
             'status': match['status']
         })
         matches = matches[:20]
-    return Response(matches)    
+    return Response(matches)
+
+@api_view(['GET'])
+def league_BL_upcomming_matches(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/BL1/matches?status=SCHEDULED'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    matches = []
+    for match in data['matches']:
+        matches.append({
+            'home_team': match['homeTeam']['name'],
+            'away_team': match['awayTeam']['name'],
+            'kickoff_time': match['utcDate'],
+            'status': match['status'],
+        })
+    matches = matches[:18]
+    return Response(matches)
 
 @api_view(['GET'])
 def league_SA_latest_matches(request):
@@ -175,7 +180,28 @@ def league_CL_latest_matches(request):
             'away_team_score': away_goals,
         })
     matches = matches[-20:]
-    return Response(matches)    
+    return Response(matches)
+
+@api_view(['GET'])
+def league_BL_latest_matches(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/BL1/matches?=status=FINISHED'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    matches = []
+    for match in data['matches']:
+        home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
+        away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
+        matches.append({
+            'home_team': match['homeTeam']['shortName'],
+            'away_team': match['awayTeam']['shortName'],
+            'kickoff_time': match['utcDate'],
+            'status' : match['status'],
+            'home_team_score': home_goals,
+            'away_team_score' : away_goals,
+        })
+   
+    return Response(matches)       
 
 @api_view(['GET'])
 def top_scores(request):
@@ -215,8 +241,8 @@ def top_scores_SA(request):
             })
         except KeyError as e:
             print(f"Error fetching data scorer data: {scorer}, KeyError: {e}")
-    return Response(top_scorers)           
-
+    return Response(top_scorers)         
+        
 @api_view(['GET'])
 def top_scores_CL(request):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
@@ -237,6 +263,89 @@ def top_scores_CL(request):
             print(f"Error processing scorer data: {scorer}, KeyError: {e}")
     return Response(top_scores_CL)
 
+@api_view(['GET'])
+def top_scorers_BL(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/BL1/scorers'
+    response = requests.get(url, headers=headers)
+    scorers = response.json()['scorers'][:10]
+    top_scorers = []
+    for scorer in scorers:
+        try:
+            top_scorers.append({
+            'name' : scorer['player']['name'],
+            'team' : scorer['team']['name'],
+            'goals' : scorer['goals'],
+            'nationality' : scorer['player']['nationality'],
+            'position' : scorer['player']['position']
+        })
+        except KeyError as e:
+            print(f"Error fetching data {scorer}, KeyError: {e} ")
+    return Response(top_scorers)
+
+@api_view(['GET'])
+def top_scorers_FL(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/FL1/scorers'
+    response = requests.get(url, headers=headers)
+    scorers = response.json()['scorers'][:10]
+    top_scorers = []
+    for scorer in scorers:
+        try:
+            top_scorers.append({
+            'name': scorer['player']['name'],
+            'team': scorer['team']['name'],
+            'goals': scorer['goals'],
+            'nationality': scorer['player']['nationality'],
+            'position': scorer['player']['position']
+        })
+        except KeyError as e:
+            print(f"Error fetching scorer data {scorer} Keyerror as {e}")
+    return Response(top_scorers) 
+
+@api_view(['GET'])
+def top_assists_FL(request):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/FL1/scorers?sort=assists'
+    response = requests.get(url, headers=headers)
+    assisters = response.json()['scorers'][:10]
+    sorted_assisters = sorted(assisters, key=lambda x: x['assists'], reverse=True)[:10]
+    top_assists = []
+    for assister in sorted_assisters:
+        try:
+            top_assists.append({
+                'name': assister['player']['name'],
+                'team': assister['team']['name'],
+                'assists': assister['assists'],
+                'nationality': assister['player']['nationality'],
+                'position' : assister['player']['position']
+            })
+        except KeyError as e:
+            print(f"Error fetching assists data {assister}. Keyerror as {e}")
+    return Response(top_assists)                       
+    
+@api_view(['GET'])
+def top_assists_BL(request):
+    headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/BL1/scorers?sort=assists'
+    response = requests.get(url, headers=headers)
+    assisters = response.json()['scorers'][:10]
+    sorted_assisters = sorted(assisters, key=lambda x: x['assists'], reverse=True)[:10]
+    top_assists = []
+    for assister in sorted_assisters:
+        try:
+            top_assists.append({
+                'name': assister['player']['name'],
+                'team': assister['team']['name'],
+                'assists': assister['assists'],
+                'nationality': assister['player']['nationality'],
+                'position': assister['player']['position'],
+            })
+        except KeyError as e:
+            print(f"Error processing assister data: {assister}, KeyError: {e}")
+    return Response(top_assists)
+
+     
 @api_view(['GET'])
 def top_assists_PL(request):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
