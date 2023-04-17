@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchLigue1TopAssists } from '../../../slice/Ligue1TopAssistsSlice'
 import Loader from '../../Loader/Loader'
-import { StyledWrapper } from './Ligue1TopAssistsElements'
+import { StyledLink, StyledTable, StyledWrapper } from './Ligue1TopAssistsElements'
 
 const Ligue1TopAssists = () => {
     const dispatch = useDispatch();
@@ -11,15 +11,59 @@ const Ligue1TopAssists = () => {
     const Ligue1TopAssistsStatus = useSelector((state) => state.Ligue1TopAssists.status);
     const Ligue1TopAssistsError = useSelector((state) => state.Ligue1TopAssists.error);
 
+    const getTeamLogo = (teamName) => {
+        for(const team of Ligue1){
+            if(team.team.name === teamName){
+                return team.team.crest;
+            }
+        }
+        return ''
+    }
+
+    const getTeamId = (teamName) => {
+        for(const team of Ligue1){
+            if(team.team.name === teamName){
+                return team.team.id;
+            }
+        }
+        return ''
+    }
+
     useEffect(() => {
         if(Ligue1TopAssistsStatus === 'idle'){
             dispatch(fetchLigue1TopAssists());
         }
     }, [Ligue1TopAssistsStatus, dispatch])
+
+    if(Ligue1TopAssistsStatus === 'loading'){
+        return <Loader/>;
+    }
     
   return (
     <StyledWrapper>
-
+        <StyledTable>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Team</th>
+                    <th>Assists</th>
+                </tr>
+            </thead>
+            <tbody>
+                {Ligue1TopAssists.map((player) => {
+                    return(
+                        <tr key={player.id}>
+                            <td>{player.name}</td>
+                            <td>
+                                <img src={getTeamLogo(player.team)} width={30}></img>
+                                <StyledLink to={`/team/${getTeamId(player.team)}`}>{player.team}</StyledLink>
+                            </td>
+                            <td>{player.assists}</td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </StyledTable>
     </StyledWrapper>
   )
 }

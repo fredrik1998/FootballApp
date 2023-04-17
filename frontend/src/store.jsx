@@ -25,6 +25,8 @@ import { BundesligaLatestMatchesSlice } from './slice/BundesligaLatestMatchesSli
 import { Ligue1Slice } from './slice/Ligue1Slice';
 import { Ligue1TopScorerSlice } from './slice/Ligue1TopScorerSlice';
 import { Ligue1TopAssistsSlice } from './slice/Ligue1TopAssistsSlice';
+import { Ligue1UpcommingMatchesSlice } from './slice/Ligue1UpcommingMatchesSlice';
+import { Ligue1LatestMatchesSlice } from './slice/Ligue1LatestMatchesSlice';
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
@@ -53,5 +55,7 @@ export default configureStore({
     Ligue1: Ligue1Slice.reducer,
     Ligue1TopScorer: Ligue1TopScorerSlice.reducer,
     Ligue1TopAssists: Ligue1TopAssistsSlice.reducer,
+    Ligue1UpcommingMatches: Ligue1UpcommingMatchesSlice.reducer,
+    Ligue1LatestMatches: Ligue1LatestMatchesSlice.reducer,
   },
 });

@@ -8,6 +8,9 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import GlobalStyle from '../../GlobalStyles'
 import {StyledWrapper, StyledDiv, StyledLink, StyledTable, ContentWrapper } from './Ligue1Elements'
 import Ligue1TopScorers from '../../components/Topscorers/Ligue1/Ligue1TopScorers'
+import Ligue1TopAssists from '../../components/Topassists/Ligue1/Ligue1TopAssists'
+import Ligue1UpcommingMatches from '../../components/UpcommingMatches/Ligue1/Ligue1UpcommingMatches'
+import Ligue1LatestMatches from '../../components/LatestMatches/Ligue1/Ligue1LatestMatches'
 
 const Ligue1 = () => {
     const dispatch = useDispatch();
@@ -55,6 +58,9 @@ const Ligue1 = () => {
             >
             <Tab label='Table' value='table'></Tab>
             <Tab label='Top scorers' value='topscorers'></Tab>
+            <Tab label="Top assists" value='topassists'></Tab>
+            <Tab label="Upcomming matches" value='upcommingmatches'></Tab>
+            <Tab label='Latest Matches' value="latestmatches"></Tab>
             </Tabs>
         {selectedView === 'table' && <StyledTable>
             <thead>
@@ -98,6 +104,9 @@ const Ligue1 = () => {
         </>
     )}
     {selectedView === 'topscorers' && <Ligue1TopScorers/>} 
+    {selectedView === 'topassists' && <Ligue1TopAssists/>}
+    {selectedView === 'upcommingmatches' && <Ligue1UpcommingMatches/>}
+    {selectedView === 'latestmatches' && <Ligue1LatestMatches/>}
     </StyledWrapper>   
     </ContentWrapper>
     </>
