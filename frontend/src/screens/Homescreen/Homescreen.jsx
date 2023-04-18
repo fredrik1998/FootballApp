@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import TopScorers from '../../components/Topscorers/PL/Topscorers';
 import PLMatches from '../../components/UpcommingMatches/PL/PLMatches';
@@ -20,6 +21,7 @@ const Homescreen = () => {
   const [selectedView, setSelectedView] = useState('table')
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const location = useLocation();
   const hamburgerMenuRef = useRef()
 
   useEffect(() => {
@@ -41,11 +43,14 @@ const Homescreen = () => {
   setIsOpen(!isOpen);
  }
 
-  
+useEffect(() => {
+  setIsOpen(false);
+}, [location]);
+
   return (
     <>
       <GlobalStyle />
-      <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={!isOpen}  />
+      <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen}  />
       <ContentWrapper>
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
       <StyledWrapper>

@@ -11,6 +11,7 @@ import Ligue1TopScorers from '../../components/Topscorers/Ligue1/Ligue1TopScorer
 import Ligue1TopAssists from '../../components/Topassists/Ligue1/Ligue1TopAssists'
 import Ligue1UpcommingMatches from '../../components/UpcommingMatches/Ligue1/Ligue1UpcommingMatches'
 import Ligue1LatestMatches from '../../components/LatestMatches/Ligue1/Ligue1LatestMatches'
+import { useLocation } from 'react-router-dom'
 
 const Ligue1 = () => {
     const dispatch = useDispatch();
@@ -21,12 +22,17 @@ const Ligue1 = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const hamburgerMenuRef = useRef();
+    const location = useLocation();
 
     useEffect(() => {
         if(Ligue1Status === 'idle'){
             dispatch(fetchLigue1());
         }
     }, [Ligue1Status, dispatch])
+
+    useEffect(() => {
+        setIsOpen(false)
+    }, [location])
 
     const getTeamId = (teamName) => {
         for(const team of Ligue1){
@@ -37,14 +43,14 @@ const Ligue1 = () => {
         return '';
     }
 
-    const toggleSidebar = (open) => {
-        setIsOpen(open)
+    const toggleSidebar = () => {
+       setIsOpen(!isOpen)
     }
 
   return (
     <>
     <GlobalStyle/>
-    <Header toggleSidebar={toggleSidebar}  isMobile={isMobile}/>
+    <Header toggleSidebar={toggleSidebar}  isMobile={isMobile} isOpen={isOpen}/>
     <ContentWrapper>
     <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef}/>
     <StyledWrapper>

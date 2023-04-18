@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchBundesliga } from '../../slice/BundesligaSlice'
 import Loader from '../../components/Loader/Loader'
@@ -20,6 +21,7 @@ const Bundesliga = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
     const hamburgerMenuRef = useRef()
+    const location = useLocation();
 
     useEffect(() => {
         if(BundesligaStatus === 'idle'){
@@ -27,6 +29,10 @@ const Bundesliga = () => {
         }
     }, [BundesligaStatus, dispatch])
 
+    useEffect(() => {
+      setIsOpen(false);
+    }, [location]);
+    
     const getTeamId = (teamName) => {
         for(const team of Bundesliga){
             if(team.team.name === teamName){
@@ -36,14 +42,14 @@ const Bundesliga = () => {
         return ''
     }
 
-    const toggleSidebar = (open) => {
-        setIsOpen(open)
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen)
     }
 
     return (
         <>
           <GlobalStyle />
-          <Header toggleSidebar={toggleSidebar} isMobile={isMobile}  />
+          <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen}  />
           <ContentWrapper>
           <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
           <StyledWrapper>

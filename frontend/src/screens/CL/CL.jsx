@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { useLocation } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../components/Header/Header'
 import CLTopScorers from '../../components/Topscorers/CL/CLTopScorers'
@@ -16,7 +16,6 @@ import CLLatestMatches from '../../components/LatestMatches/CL/CLLatestMatches'
 const StyledTab = styled(Tab)`
 color: #fafafa;
 `
-
 const CL = () => {
   const dispatch = useDispatch()
   const championsLeague = useSelector((state) => state.championsLeague.table)
@@ -26,6 +25,11 @@ const CL = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const hamburgerMenuRef = useRef()
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   useEffect(() => {
     if(championsLeagueStatus ==='idle'){
@@ -33,14 +37,20 @@ const CL = () => {
     }
   }, [championsLeague, dispatch])
 
-  const toggleSidebar = (open) => {
-    setIsOpen(open)
+ 
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen)
   }
+
+   useEffect(() => {
+    setIsOpen(false);
+  }, [location])
+
 
   return (
     <>
     <GlobalStyle/>
-    <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
+    <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen}/>
     <ContentWrapper>
     <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
     <StyledWrapper>

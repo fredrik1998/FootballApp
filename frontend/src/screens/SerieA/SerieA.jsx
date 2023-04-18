@@ -11,6 +11,7 @@ import Topscorers from '../../components/Topscorers/SerieA/Topscorers'
 import SerieAMatches from '../../components/UpcommingMatches/SerieA/SerieAMatches'
 import SerieALatestMatches from '../../components/LatestMatches/SerieA/SerieALatestMatches'
 import SerieATopAssists from '../../components/Topassists/SerieA/SerieATopAssists'
+import { useLocation } from 'react-router-dom'
 const SerieA = () => {
     const dispatch = useDispatch()
     const SerieA = useSelector((state) => state.SerieA.table);
@@ -20,6 +21,7 @@ const SerieA = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
     const hamburgerMenuRef = useRef()
+    const location = useLocation();
 
     useEffect(() => {
         if(SerieAStatus === 'idle'){
@@ -27,8 +29,8 @@ const SerieA = () => {
         }
     }, [SerieAStatus, dispatch])
 
-    const toggleSidebar = (open) => {
-      setIsOpen(open)
+    const toggleSidebar = () => {
+      setIsOpen(!isOpen)
     }
 
     const getTeamId = (teamName) => {
@@ -38,12 +40,16 @@ const SerieA = () => {
             }
         }
         return ''
-    }  
+    } 
+    
+    useEffect(() => {
+      setIsOpen(false);
+    }, [location]);
 
   return (
     <>
     <GlobalStyle/>
-    <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
+    <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen}/>
     <ContentWrapper>
      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef}/>   
     <StyedWrapper>

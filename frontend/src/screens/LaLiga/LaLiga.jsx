@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchLaLiga } from '../../slice/LaLigaSlice'
 import Loader from '../../components/Loader/Loader'
@@ -6,7 +7,7 @@ import { ContentWrapper, StyledLink, StyledTable, StyledWrapper } from './LaLiga
 import GlobalStyle from '../../GlobalStyles'
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Sidebar/Sidebar'
-import { Tab, Tabs } from '@mui/material'
+import { Fab, Tab, Tabs } from '@mui/material'
 import LaLigaTopScorers from '../../components/Topscorers/LaLiga/LaLigaTopScorers'
 import LaLigaTopAssists from '../../components/Topassists/LaLiga/LaLigaTopAssists'
 import LaLigaUpcomingMatches from '../../components/UpcommingMatches/LaLiga/LaLigaUpcomingMatches'
@@ -21,12 +22,17 @@ const LaLiga = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const hamburgerMenuRef = useRef();
+    const location = useLocation();
 
     useEffect(() => {
         if(LaLigaStatus === 'idle'){
             dispatch(fetchLaLiga());
         }
     }, [dispatch, LaLigaStatus])
+
+    useEffect(() => {
+      setIsOpen(false)
+    }, [location])
 
     const getTeamId = (teamName) => {
         for(const team of LaLiga){
@@ -44,7 +50,7 @@ const LaLiga = () => {
   return (
     <>
     <GlobalStyle/>
-    <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
+    <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={isOpen}/>
     <ContentWrapper>
     <Sidebar toggleSidebar={toggleSidebar} isOpen={isOpen} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef}/>
     <StyledWrapper>
