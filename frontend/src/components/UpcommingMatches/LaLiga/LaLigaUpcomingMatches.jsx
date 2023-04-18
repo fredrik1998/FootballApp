@@ -1,33 +1,24 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchLigue1UpcommingMatches } from '../../../slice/Ligue1Slice'
+import { fetchLaLigaUpcomingMatches } from '../../../slice/LaLigaSlice'
 import Loader from '../../Loader/Loader'
-import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './Ligue1UpcommingMatchesElements'
+import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './LaLigaUpcomingMatchesElements'
 
-const Ligue1UpcommingMatches = () => {
+const LaLigaUpcomingMatches = () => {
     const dispatch = useDispatch();
-    const Ligue1 = useSelector((state) => state.Ligue1.table);
-    const Ligue1UpcommingMatches = useSelector((state) => state.Ligue1.upcomingMatches);
-    const Ligue1UpcommingMatchesStatus = useSelector((state) => state.Ligue1.upcomingMatchesStatus);
-    const Ligue1UpcommingMatchesError = useSelector((state) => state.Ligue1.upcomingMatchesError);
+    const LaLiga = useSelector((state) => state.LaLiga.table);
+    const LaLigaUpcomingMatches = useSelector((state) => state.LaLiga.upcomingMatches);
+    const LaLigaUpcomingMatchesStatus = useSelector((state) => state.LaLiga.upcomingMatchesStatus);
+    const LaLigaUpcomingMatchesError = useSelector((state) => state.LaLiga.upcomingMatchesError);
 
     useEffect(() => {
-        if(Ligue1UpcommingMatchesStatus === 'idle'){
-            dispatch(fetchLigue1UpcommingMatches());
+        if(LaLigaUpcomingMatchesStatus === 'idle'){
+            dispatch(fetchLaLigaUpcomingMatches());
         }
-    }, [dispatch, Ligue1UpcommingMatchesStatus])
-
-    const getTeamId = (teamName) => {
-        for(const team of Ligue1){
-            if(team.team.shortName === teamName){
-                return team.team.id;
-            }
-        }
-        return '';
-    }
+    }, [LaLigaUpcomingMatchesStatus, dispatch])
 
     const getTeamLogo = (teamName) => {
-        for(const team of Ligue1){
+        for(const team of LaLiga){
             if(team.team.shortName === teamName){
                 return team.team.crest;
             }
@@ -35,28 +26,36 @@ const Ligue1UpcommingMatches = () => {
         return '';
     }
 
+    const getTeamId = (teamName) => {
+        for(const team of LaLiga){
+            if(team.team.shortName === teamName){
+                return team.team.id;
+            }
+        }
+        return '';
+    }
+
     const matchesByDate = useMemo(() => {
         const matches = {};
-        for(const match of Ligue1UpcommingMatches){
+        for(const match of LaLigaUpcomingMatches){
             const date = new Date(match.kickoff_time)
-            const formattedDate = date.toLocaleDateString('en-GB', {weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'})
+            const formattedDate = date.toLocaleDateString('en-GB', {weekday: 'long', day: '2-digit', month:'long', year:'numeric'})
             if(!matches[formattedDate]){
                 matches[formattedDate] = []
             }
             matches[formattedDate].push(match)
         }
         return matches
+    }, [LaLigaUpcomingMatches])
 
-    }, [Ligue1UpcommingMatches])
-
-    if(Ligue1UpcommingMatchesStatus === 'loading'){
+    if(LaLigaUpcomingMatchesStatus === 'loading'){
         return <Loader/>;
     }
 
   return (
-    <StyledWrapper>
-        {Object.keys(matchesByDate).map((date) => {
-            return(
+   <StyledWrapper>
+    {Object.keys(matchesByDate).map((date) => {
+        return(
             <StyledDiv key={date}>
                 <h3>{date}</h3>
                 <StyledTable>
@@ -67,9 +66,9 @@ const Ligue1UpcommingMatches = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {matchesByDate[date].map((match, index) => {
-                            return (
-                                <tr key={index}>
+                        {matchesByDate[date].map((match) => {
+                            return(
+                                <tr key={match.id}>
                                     <td>
                                         <img src={getTeamLogo(match.home_team)} width={30}></img>
                                         <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>
@@ -78,16 +77,16 @@ const Ligue1UpcommingMatches = () => {
                                         <img src={getTeamLogo(match.away_team)} width={30}></img>
                                         <StyledLink to={`/team/${getTeamId(match.away_team)}`}>{match.away_team}</StyledLink>
                                     </td>
-
                                 </tr>
                             )
                         })}
                     </tbody>
                 </StyledTable>
             </StyledDiv>
-        )})}
-    </StyledWrapper>
+        )
+    })}
+   </StyledWrapper>
   )
 }
 
-export default Ligue1UpcommingMatches
+export default LaLigaUpcomingMatches

@@ -31,7 +31,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        isOpen && // Only close the sidebar if it's open
+        isOpen && 
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
         (!hamburgerMenuRef.current || !hamburgerMenuRef.current.contains(event.target)) &&
@@ -40,12 +40,13 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
         toggleSidebar(false);
       }
     };
-
+  
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [toggleSidebar, hamburgerMenuRef, isOpen]);
+  
 
   const getChampionsLeagueEmblem = () => {
     const championsLeague = Leagues.find(league => league.name === 'UEFA Champions League');
@@ -85,7 +86,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
       <StyledLink to='/SA'><StyledImage src={getSerieAEmblem()}></StyledImage>Serie A</StyledLink>
       <StyledLink to='/BL'><StyledImage src={getBundesligaEmblem()} ></StyledImage>Bundesliga</StyledLink>
       <StyledLink to='/Ligue1'><StyledImage src={getLigue1Emblem()}></StyledImage>Ligue 1</StyledLink>
-      <StyledLink><StyledImage src={getLaLigaEmblem()}></StyledImage>La Liga</StyledLink>
+      <StyledLink to='/LaLiga'><StyledImage src={getLaLigaEmblem()}></StyledImage>La Liga</StyledLink>
     </StyledNav>
   );
 };

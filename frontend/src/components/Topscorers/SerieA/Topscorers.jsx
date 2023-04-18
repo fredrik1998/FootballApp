@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSerieATopscorers } from '../../../slice/SerieATopScorersSlice'
+import { fetchSerieATopscorers } from '../../../slice/SerieASlice'
 import { StyledTable, StyledWrapper, StyledLink } from './TopscorersElements'
 import Loader from '../../Loader/Loader'
 
 const Topscorers = () => {
     const dispatch = useDispatch()
-    const SerieATopScorer = useSelector((state) => state.SerieATopScorer.data)
-    const SerieATopScorerStatus  = useSelector((state) => state.SerieATopScorer.status)
-    const SerieATopScorerError = useSelector((state) => state.SerieATopScorer.error)
-    const SerieA = useSelector((state) => state.SerieA.data)
+    const SerieATopScorer = useSelector((state) => state.SerieA.topScorers);
+    const SerieATopScorerStatus  = useSelector((state) => state.SerieA.topScorersStatus);
+    const SerieATopScorerError = useSelector((state) => state.SerieA.topScorersError);
+    const SerieA = useSelector((state) => state.SerieA.table);
 
     useEffect(() => {
         if(SerieATopScorerStatus === 'idle'){

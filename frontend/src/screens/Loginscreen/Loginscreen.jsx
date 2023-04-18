@@ -38,21 +38,20 @@ const dispatch = useDispatch();
 
   const submitHandler = (event) => {
     event.preventDefault();
-    
+  
     const errors = {};
-    if(!email){
-      errors.email = 'Email is required'
+    if (!email) {
+      errors.email = 'Email is required';
     }
-    if(!password){
-      errors.password = 'Password is required'
+    if (!password) {
+      errors.password = 'Password is required';
     }
     setFormErrors(errors);
-    if(Object.keys(errors).length === 0){
-      dispatch(login(email, password))
-    
+    if (Object.keys(errors).length === 0) {
+      dispatch(login({ email, password }));
     }
-  }
-
+  };
+  
   useEffect(() => {
     if(userInfo){
       navigate(redirect)

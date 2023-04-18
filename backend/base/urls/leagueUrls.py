@@ -31,5 +31,9 @@ urlpatterns = [
     path('leagues/FL/topassists/', views.top_assists_FL, name='FL-topassists'),
     path('leagues/FL/upcommingmatches/', views.league_FL_upcomming_matches, name='FL-upcommingmatches'),
     path('leagues/FL/latestmatches/', views.league_FL_latest_matches, name='FL-latestmatches'),
-    path('leagues/PD/', views.league_PD, name='PD')
+    path('leagues/PD/', views.league_PD, name='PD'),
+    path('leagues/PD/topscorer/', views.top_scorers_PD, name='PD-topscorer'),
+    path('leagues/PD/topassists/', views.top_assists_PD, name='PD-topassists'),
+    path('leagues/PD/upcomingmatches/', views.league_PD_upcomming_matches, name='PD-upcommingmatches'),
+    path('leagues/PD/latestmatches/', views.league_PD_latest_matches, name='PD-latestmatches')
 ]

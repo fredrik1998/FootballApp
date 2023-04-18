@@ -13,9 +13,9 @@ import BundesligaUpcommingMatches from '../../components/UpcommingMatches/Bundes
 import BundesligaLatestMatches from '../../components/LatestMatches/Bundesliga/BundesligaLatestMatches'
 const Bundesliga = () => {
     const dispatch = useDispatch();
-    const Bundesliga = useSelector((state) => state.Bundesliga.data);
-    const BundesligaStatus = useSelector((state) => state.Bundesliga.status);
-    const BundesligaError = useSelector((state) => state.Bundesliga.error);
+    const Bundesliga = useSelector((state) => state.Bundesliga.table);
+    const BundesligaStatus = useSelector((state) => state.Bundesliga.tableStatus);
+    const BundesligaError = useSelector((state) => state.Bundesliga.tableError);
     const [selectedView, setSelectedView] = useState('table')
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -61,7 +61,7 @@ const Bundesliga = () => {
                 <Tab label='Upcomming Matches' value='upcommingmatches'></Tab>
                 <Tab label="Latest Matches" value='latestmatches'></Tab>
                 </Tabs>
-                {selectedView === 'table' && <StyledTable>
+                {selectedView === 'table' &&(<StyledTable>
                   <thead>
                     <tr>
                       <th style={{padding: '5px'}}></th>
@@ -105,7 +105,7 @@ const Bundesliga = () => {
                     })}
                   </tbody>
                 </StyledTable>
-    }
+    )}
               </>
             )}
             {selectedView === 'topscorers' && <BundesligaTopScorer/>}

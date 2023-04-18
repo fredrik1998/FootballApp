@@ -1,98 +1,86 @@
-import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const login = createAsyncThunk(
+  'user/login',
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+      const { data } = await axios.post('/api/users/login/', { username: email, password: password }, config);
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response && error.response.data.detail ? error.response.data.detail : error.message);
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  'user/register',
+  async ({ name, email, password }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+      const { data } = await axios.post('/api/users/register/', { name, email, password }, config);
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response && error.response.data.detail ? error.response.data.detail : error.message);
+    }
+  }
+);
 
 const initialState = {
   userInfo: null,
   loading: false,
   error: null,
-}
+};
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userLoginRequest: (state) => {
-      state.loading = true
-    },
-    userLoginSuccess: (state, action) => {
-      state.loading = false
-      state.userInfo = action.payload
-      state.error = null
-    },
-    userLoginFail: (state, action) => {
-      state.loading = false
-      state.error = action.payload
-    },
     userLogout: (state) => {
-      state.userInfo = null
-    },
-    userRegisterRequest: (state) => {
-      state.loading = true
-    },
-    userRegisterSuccess: (state, action) => {
-      state.loading = false
-      state.userInfo = action.payload
-      state.error = null
-    },
-    userRegisterFail: (state, action) => {
-      state.loading = false
-      state.error = action.payload
+      state.userInfo = null;
+      localStorage.removeItem('userInfo');
     },
   },
-})
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userInfo = action.payload;
+        state.error = null;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(register.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userInfo = action.payload;
+        state.error = null;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
 
-export const {
-  userLoginRequest,
-  userLoginSuccess,
-  userLoginFail,
-  userLogout,
-  userRegisterRequest,
-  userRegisterSuccess,
-  userRegisterFail,
-} = userSlice.actions
+export const { userLogout } = userSlice.actions;
 
-export const login = (email, password) => async (dispatch) => {
-  try {
-    dispatch(userLoginRequest())
-
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-      },
-    }
-
-    const { data } = await axios.post('/api/users/login/', { username: email, password: password }, config)
-
-    dispatch(userLoginSuccess(data))
-
-    localStorage.setItem('userInfo', JSON.stringify(data))
-  } catch (error) {
-    dispatch(userLoginFail(error.response && error.response.data.detail ? error.response.data.detail : error.message))
-  }
-}
-
-export const logout = () => async (dispatch) => {
-  localStorage.removeItem('userInfo')
-  dispatch(userLogout())
-}
-
-export const register = (name, email, password) => async (dispatch) => {
-  try {
-    dispatch(userRegisterRequest())
-
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-      },
-    }
-
-    const { data } = await axios.post('/api/users/register/', { name, email, password }, config)
-
-    dispatch(userRegisterSuccess(data))
-    dispatch(userLoginSuccess(data))
-  } catch (error) {
-    dispatch(userRegisterFail(error.response && error.response.data.detail ? error.response.data.detail : error.message))
-  }
-}
-
-export default userSlice.reducer
+export default userSlice.reducer;

@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCLLatestMatches } from '../../../slice/CLLatestMatchesSlice';
+import { fetchCLLatestMatches } from '../../../slice/championsLeageuSlice';
 import Loader from '../../Loader/Loader';
 import { StyledLink, StyledTable, StyledWrapper, StyledDiv } from './CLLatestMatchesElements';
 
 const CLLatestMatches = () => {
   const dispatch = useDispatch();
-  const CLLatestMatches = useSelector((state) => state.CLLatestMatches.data);
-  const CLLatestMatchesStatus = useSelector((state) => state.CLLatestMatches.status);
-  const championsLeague = useSelector((state) => state.championsLeague.data);
+  const CLLatestMatches = useSelector((state) => state.championsLeague.latestMatches);
+  const CLLatestMatchesStatus = useSelector((state) => state.championsLeague.latestMatchesStatus);
+  const championsLeague = useSelector((state) => state.championsLeague.table);
 
   useEffect(() => {
     if (CLLatestMatchesStatus === 'idle') {

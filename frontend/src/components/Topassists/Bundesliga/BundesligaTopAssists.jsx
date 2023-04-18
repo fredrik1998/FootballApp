@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchBundesligaTopAssists } from '../../../slice/BundesligaTopAssistsSlice'
+import { fetchBundesligaTopAssists } from '../../../slice/BundesligaSlice'
 import Loader from '../../Loader/Loader'
 import { StyledLink, StyledTable, StyledWrapper } from './BundesligaTopAssistsElements'
 
 const BundesligaTopAssists = () => {
     const dispatch = useDispatch();
-    const BundesligaTopAssists = useSelector((state) => state.BundesligaTopAssists.data)
-    const BundesligaTopAssistsStatus = useSelector((state) => state.BundesligaTopAssists.status)
-    const BundesligaTopAssistsError = useSelector((state) => state.BundesligaTopAssists.error)
-    const Bundesliga = useSelector((state) => state.Bundesliga.data)
+    const BundesligaTopAssists = useSelector((state) => state.Bundesliga.topAssists)
+    const BundesligaTopAssistsStatus = useSelector((state) => state.Bundesliga.topAssistsStatus)
+    const BundesligaTopAssistsError = useSelector((state) => state.Bundesliga.topAssistsError)
+    const Bundesliga = useSelector((state) => state.Bundesliga.table)
 
     useEffect(() => {
         if(BundesligaTopAssistsStatus === 'idle'){

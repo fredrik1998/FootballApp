@@ -3,11 +3,10 @@ import {StyledHeader, StyledLink, StyledSeperator, StyledTitle } from './HeaderE
 import MenuIcon from '@mui/icons-material/Menu';
 import { StyledButton } from '../Sidebar/SidebarElements';
 
-const Header = ({toggleSidebar, isMobile}) => {
+const Header = ({toggleSidebar, isMobile }) => {
     const [location, setLocation] = useState(window.location.pathname)
     const hamburgerMenuRef = useRef()
-
-
+  
   return (
     <StyledHeader>
         <StyledTitle>FootyFrenzy</StyledTitle>

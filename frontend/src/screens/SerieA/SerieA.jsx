@@ -13,9 +13,9 @@ import SerieALatestMatches from '../../components/LatestMatches/SerieA/SerieALat
 import SerieATopAssists from '../../components/Topassists/SerieA/SerieATopAssists'
 const SerieA = () => {
     const dispatch = useDispatch()
-    const SerieA = useSelector((state) => state.SerieA.data)
-    const SerieAStatus = useSelector((state) => state.SerieA.status)
-    const SerieAError = useSelector((state) => state.SerieA.error)
+    const SerieA = useSelector((state) => state.SerieA.table);
+    const SerieAStatus = useSelector((state) => state.SerieA.tableStatus);
+    const SerieAError = useSelector((state) => state.SerieA.tableError);
     const [selectedView, setSelectedView] = useState('table')
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)

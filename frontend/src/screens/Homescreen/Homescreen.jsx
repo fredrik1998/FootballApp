@@ -4,7 +4,7 @@ import TopScorers from '../../components/Topscorers/PL/Topscorers';
 import PLMatches from '../../components/UpcommingMatches/PL/PLMatches';
 import PLTopAssists from '../../components/Topassists/PL/PLTopAssists';
 import GlobalStyle from '../../GlobalStyles';
-import { StyledWrapper, StyledDiv, StyledTable, StyledLink, ContentWrapper} from './HomescreenElements';
+import { StyledWrapper,StyledTable, StyledLink, ContentWrapper} from './HomescreenElements';
 import Loader from '../../components/Loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPremierLeague } from '../../slice/premierLeagueSlice';
@@ -14,9 +14,9 @@ import PLLatestMatches from '../../components/LatestMatches/PL/PLLatestMatches';
 
 const Homescreen = () => {
   const dispatch = useDispatch();
-  const premierLeague = useSelector((state) => state.premierLeague.data);
-  const premierLeagueStatus = useSelector((state) => state.premierLeague.status);
-  const premierLeagueError = useSelector((state) => state.premierLeague.error);
+  const premierLeague = useSelector((state) => state.premierLeague.table);
+  const premierLeagueStatus = useSelector((state) => state.premierLeague.tableStatus);
+  const premierLeagueError = useSelector((state) => state.premierLeague.tableError);
   const [selectedView, setSelectedView] = useState('table')
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -37,8 +37,8 @@ const Homescreen = () => {
     return ''
   }
 
-  const toggleSidebar = (open) => {
-    setIsOpen(open);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
   };
   
   return (

@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSerieALatestMatches } from '../../../slice/SerieALatestMatchesSlice';
+import { fetchSerieALatestMatches } from '../../../slice/SerieASlice';
 import Loader from '../../Loader/Loader';
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieALatestMatchesElements';
 
 const SerieALatestMatches = () => {
   const dispatch = useDispatch();
-  const serieALatestMatches = useSelector((state) => state.SerieALatestMatches.data);
-  const serieALatestMatchesStatus = useSelector((state) => state.SerieALatestMatches.status);
-  const serieALatestMatchesError = useSelector((state) => state.SerieALatestMatches.error);
-  const serieA = useSelector((state) => state.SerieA.data);
+  const serieALatestMatches = useSelector((state) => state.SerieA.latestMatches);
+  const serieALatestMatchesStatus = useSelector((state) => state.SerieA.latestMatchesStatus);
+  const serieALatestMatchesError = useSelector((state) => state.SerieA.latestMatchesError);
+  const serieA = useSelector((state) => state.SerieA.table);
 
   useEffect(() => {
     if (serieALatestMatchesStatus === 'idle') {

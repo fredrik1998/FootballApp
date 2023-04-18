@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchSerieAUpcommingMatches } from '../../../slice/SerieAUpcommingMatchesSlice'
+import { fetchSerieAUpcommingMatches } from '../../../slice/SerieASlice'
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieAMatchesElements'
 import Loader from '../../Loader/Loader'
 import CLLatestMatches from '../../LatestMatches/CL/CLLatestMatches'
 const SerieAMatches = () => {
     const dispatch = useDispatch()
-    const SerieAUpcommingMatches = useSelector((state) => state.SerieAUpcommingMatches.data)
-    const SerieAUpcommingMatchesStatus = useSelector((state) => state.SerieAUpcommingMatches.status)
-    const SerieAUpcommingMatchesErrror = useSelector((state) => state.SerieAUpcommingMatches.error)
-    const SerieA = useSelector((state) => state.SerieA.data)
+    const SerieAUpcommingMatches = useSelector((state) => state.SerieA.upcomingMatches);
+    const SerieAUpcommingMatchesStatus = useSelector((state) => state.SerieA.upcomingMatchesStatus);
+    const SerieAUpcommingMatchesErrror = useSelector((state) => state.SerieA.upcomingMatchesError);
+    const SerieA = useSelector((state) => state.SerieA.table);
     
     useEffect(() => {
         if(SerieAUpcommingMatchesStatus === 'idle'){

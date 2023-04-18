@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchBundesligaUpcommingMatches } from '../../../slice/BundesligaUpcommingMathcesSlice'
+import { fetchBundesligaUpcommingMatches } from '../../../slice/BundesligaSlice'
 import Loader from '../../Loader/Loader'
 import { StyledLink, StyledTable, StyledWrapper, StyledDiv } from './BundesligaUpcommingMatchesElements'
 
 const BundesligaUpcommingMatches = () => {
     const dispatch = useDispatch();
-    const BundesligaUpcommingMatches = useSelector((state) => state.BundesligaUpcommingMatches.data);
-    const BundesligaUpcommingMatchesStatus = useSelector((state) => state.BundesligaUpcommingMatches.status);
-    const BundesligaUpcommingMatchesError = useSelector((state) => state.BundesligaUpcommingMatches.error);
-    const Bundesliga = useSelector((state) => state.Bundesliga.data);
+    const BundesligaUpcommingMatches = useSelector((state) => state.Bundesliga.upcomingMatches);
+    const BundesligaUpcommingMatchesStatus = useSelector((state) => state.Bundesliga.upcomingMatchesStatus);
+    const BundesligaUpcommingMatchesError = useSelector((state) => state.Bundesliga.upcomingMatchesError);
+    const Bundesliga = useSelector((state) => state.Bundesliga.table);
 
     useEffect(() => {
         if(BundesligaUpcommingMatchesStatus === 'idle'){

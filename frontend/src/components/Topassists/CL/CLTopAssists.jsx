@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { fetchCLTopAssists } from '../../../slice/CLTopAssistsSlice'
+import { fetchCLTopAssists } from '../../../slice/championsLeageuSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { StyledWrapper, StyledTable, StyledLink} from './CLTopAssistsElements'
 import Loader from '../../Loader/Loader'
@@ -7,10 +7,10 @@ import GlobalStyle from '../../../GlobalStyles'
 
 const CLTopAssists = () => {
     const dispatch = useDispatch()
-    const CLTopAssists = useSelector((state) => state.CLTopAssists.data)
-    const CLTopAssistsStatus = useSelector((state) => state.CLTopAssists.status)
-    const CLTopAssistsError = useSelector((state) => state.CLTopAssists.error)
-    const championsLeague = useSelector((state) => state.championsLeague.data)
+    const CLTopAssists = useSelector((state) => state.championsLeague.topAssists);
+    const CLTopAssistsStatus = useSelector((state) => state.championsLeague.topAssistsStatus);
+    const CLTopAssistsError = useSelector((state) => state.championsLeague.topAssistsError);
+    const championsLeague = useSelector((state) => state.championsLeague.table);
 
     useEffect(() => {
         if(CLTopAssistsStatus === 'idle'){

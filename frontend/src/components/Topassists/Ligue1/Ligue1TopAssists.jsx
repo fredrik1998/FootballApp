@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchLigue1TopAssists } from '../../../slice/Ligue1TopAssistsSlice'
+import { fetchLigue1TopAssists } from '../../../slice/Ligue1Slice'
 import Loader from '../../Loader/Loader'
 import { StyledLink, StyledTable, StyledWrapper } from './Ligue1TopAssistsElements'
 
 const Ligue1TopAssists = () => {
     const dispatch = useDispatch();
-    const Ligue1 = useSelector((state) => state.Ligue1.data);
-    const Ligue1TopAssists = useSelector((state) => state.Ligue1TopAssists.data);
-    const Ligue1TopAssistsStatus = useSelector((state) => state.Ligue1TopAssists.status);
-    const Ligue1TopAssistsError = useSelector((state) => state.Ligue1TopAssists.error);
+    const Ligue1 = useSelector((state) => state.Ligue1.table);
+    const Ligue1TopAssists = useSelector((state) => state.Ligue1.topAssists);
+    const Ligue1TopAssistsStatus = useSelector((state) => state.Ligue1.topAssistsStatus);
+    const Ligue1TopAssistsError = useSelector((state) => state.Ligue1.topAssistsError);
 
     const getTeamLogo = (teamName) => {
         for(const team of Ligue1){

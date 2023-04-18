@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchLigue1LatestMatches } from '../../../slice/Ligue1LatestMatchesSlice'
+import { fetchLigue1LatestMatches } from '../../../slice/Ligue1Slice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './Ligue1LatestMatchesElements'
 
 const Ligue1LatestMatches = () => {
     const dispatch = useDispatch();
-    const Ligue1 = useSelector((state) => state.Ligue1.data);
-    const Ligue1LatestMatches = useSelector((state) => state.Ligue1LatestMatches.data);
-    const Ligue1LatestMatchesStatus = useSelector((state) => state.Ligue1LatestMatches.status);
-    const Ligue1LatestMatchesError = useSelector((state) => state.Ligue1LatestMatches.error);
+    const Ligue1 = useSelector((state) => state.Ligue1.table);
+    const Ligue1LatestMatches = useSelector((state) => state.Ligue1.latestMatches);
+    const Ligue1LatestMatchesStatus = useSelector((state) => state.Ligue1.latestMatchesStatus);
+    const Ligue1LatestMatchesError = useSelector((state) => state.Ligue1.latestMatchesError);
 
     useEffect(() => {
         if(Ligue1LatestMatchesStatus === 'idle'){

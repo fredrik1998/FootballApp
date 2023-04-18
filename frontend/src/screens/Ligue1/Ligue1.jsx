@@ -14,9 +14,9 @@ import Ligue1LatestMatches from '../../components/LatestMatches/Ligue1/Ligue1Lat
 
 const Ligue1 = () => {
     const dispatch = useDispatch();
-    const Ligue1 = useSelector((state) => state.Ligue1.data);
-    const Ligue1Status = useSelector((state) => state.Ligue1.status);
-    const Ligue1Error = useSelector((state) => state.Ligue1.error);
+    const Ligue1 = useSelector((state) => state.Ligue1.table);
+    const Ligue1Status = useSelector((state) => state.Ligue1.tableStatus);
+    const Ligue1Error = useSelector((state) => state.Ligue1.tableError);
     const [selectedView, setSelectedView] = useState('table');
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -62,11 +62,11 @@ const Ligue1 = () => {
             <Tab label="Upcomming matches" value='upcommingmatches'></Tab>
             <Tab label='Latest Matches' value="latestmatches"></Tab>
             </Tabs>
-        {selectedView === 'table' && <StyledTable>
+            {selectedView === 'table' && <StyledTable>
             <thead>
                 <tr>
-                    <th>Position</th>
                     <th></th>
+                    <th>Team</th>
                     <th></th>
                     <th>MP</th>
                     <th>W</th>
@@ -75,34 +75,39 @@ const Ligue1 = () => {
                     <th>GF</th>
                     <th>GA</th>
                     <th>GD</th>
-                    <th>P</th>
+                    <th>Points</th>
                 </tr>
             </thead>
             <tbody>
                 {Ligue1.map((team) => {
                     return(
-                        <tr key={team.id}>
-                            <td>{team.position}</td>
-                            <td>
-                                <img width={30} src={team.team.crest}></img>
-                                <StyledLink to={`/team/${getTeamId(team.team.name)}`}>{team.team.name}</StyledLink>
-                            </td>
-                            <td></td>
-                            <td>{team.playedGames}</td>
-                            <td>{team.won}</td>
-                            <td>{team.draw}</td>
-                            <td>{team.lost}</td>
-                            <td>{team.goalsFor}</td>
-                            <td>{team.goalsAgainst}</td>
-                            <td>{team.goalDifference}</td>
-                            <td>{team.points}</td>
-                        </tr>
-                    )
+                        <tr key={team.position}>
+                      <th>{team.position}</th>
+
+                      <img
+                        style={{ width: '30px', marginTop: '12px' }}
+                        src={team.team.crest}
+                        alt={team.team.name}
+                      />
+                      <td>
+  <StyledLink to={`/team/${getTeamId(team.team.name)}`}>{team.team.name}</StyledLink>
+</td>
+                    <td>{team.playedGames}</td>
+                    <td>{team.won}</td>
+                    <td>{team.draw}</td>
+                    <td>{team.lost}</td>
+                    <td>{team.goalsFor}</td>
+                    <td>{team.goalsAgainst}</td>
+                    <td>{team.goalDifference}</td>
+                    <td>{team.points}</td>
+                    </tr>
+                  );
                 })}
-            </tbody>
-        </StyledTable>}     
-        </>
-    )}
+              </tbody>
+            </StyledTable>
+}
+</>
+        )}
     {selectedView === 'topscorers' && <Ligue1TopScorers/>} 
     {selectedView === 'topassists' && <Ligue1TopAssists/>}
     {selectedView === 'upcommingmatches' && <Ligue1UpcommingMatches/>}

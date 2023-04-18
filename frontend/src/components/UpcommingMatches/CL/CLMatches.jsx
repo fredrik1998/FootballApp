@@ -2,15 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Loader from '../../Loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCLUpcommingMatches } from '../../../slice/CLUpcommingMatchesSlice';
+import { fetchCLUpcommingMatches } from '../../../slice/championsLeageuSlice';
 import { StyledTable, StyledWrapper, StyledDiv, StyledLink } from './CLMatchesElements'
 
 const CLMatches = () => {
     const dispatch = useDispatch()
-    const CLUpcommingMatches = useSelector((state) => state.CLUpcommingMatches.data)
-    const CLUpcommingMatchesStatus = useSelector((state) => state.CLUpcommingMatches.status)
-    const CLUpcommingMatchesError = useSelector((state) => state.CLUpcommingMatches.error)
-    const championsLeague = useSelector((state) => state.championsLeague.data)
+    const CLUpcommingMatches = useSelector((state) => state.championsLeague.upcomingMatches);
+    const CLUpcommingMatchesStatus = useSelector((state) => state.championsLeague.upcomingMatchesStatus);
+    const CLUpcommingMatchesError = useSelector((state) => state.championsLeague.upcomingMatchesError);
+    const championsLeague = useSelector((state) => state.championsLeague.table);
     
     useEffect(() => {
         if(CLUpcommingMatchesStatus === 'idle'){

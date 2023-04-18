@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchSerieATopAssists } from '../../../slice/SerieATopAssistsSlice'
+import { fetchSerieATopAssists } from '../../../slice/SerieASlice'
 import Loader from '../../Loader/Loader'
 import { StyledWrapper, StyledTable, StyledLink } from './SerieATopAssistsElements'
 
 const SerieATopAssists = () => {
   const dispatch = useDispatch()
-  const SerieATopAssists = useSelector((state) => state.SerieATopAssists.data)
-  const SerieATopAssistsStatus = useSelector((state) => state.SerieATopAssists.status)
-  const SerieATopAssistsError = useSelector((state) => state.SerieATopAssists.error)
-  const SerieA = useSelector((state) => state.SerieA.data)
+  const SerieATopAssists = useSelector((state) => state.SerieA.topAssists);
+  const SerieATopAssistsStatus = useSelector((state) => state.SerieA.topAssistsStatus);
+  const SerieATopAssistsError = useSelector((state) => state.SerieA.topAssistsError);
+  const SerieA = useSelector((state) => state.SerieA.table);
 
   useEffect(() => {
     if(SerieATopAssistsStatus === 'idle'){

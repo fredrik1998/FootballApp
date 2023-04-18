@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTopScorerPL } from '../../../slice/PLTopScorerSlice';
+import { fetchTopScorerPL } from '../../../slice/premierLeagueSlice';
 import Loader from '../../Loader/Loader';
 import { StyledWrapper, StyledTable, StyledLink } from './TopScorerElements';
 const TopScorers = () => {
   const dispatch = useDispatch()
-  const PLTopScorer = useSelector((state) => state.PLTopScorer.data)
-  const PLTopScorerStatus = useSelector((state) => state.PLTopScorer.status)
-  const PLTopScorerError = useSelector((state) => state.PLTopScorer.error)
-  const premierLeague = useSelector((state) => state.premierLeague.data)
+  const PLTopScorer = useSelector((state) => state.premierLeague.topScorers);
+  const PLTopScorerStatus = useSelector((state) => state.premierLeague.topScorersStatus);
+  const PLTopScorerError = useSelector((state) => state.premierLeague.topScorersError);
+  const premierLeague = useSelector((state) => state.premierLeague.table);
 
   useEffect(() => {
     if(PLTopScorerStatus === 'idle'){

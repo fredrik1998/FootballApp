@@ -9,6 +9,7 @@ import Team from './screens/Team/Team';
 import SerieA from './screens/SerieA/SerieA';
 import Bundesliga from './screens/Bundesliga/Bundesliga';
 import Ligue1 from './screens/Ligue1/Ligue1';
+import LaLiga from './screens/LaLiga/LaLiga';
 const App =() => {
   return (
   <Routes>
@@ -21,6 +22,7 @@ const App =() => {
     <Route path='/SA' element={<SerieA/>}/>
     <Route path='/BL' element={<Bundesliga/>}/>
     <Route path='/Ligue1' element={<Ligue1/>}/>
+    <Route path='/LaLiga' element={<LaLiga/>}/>
   </Routes>
   )
 }

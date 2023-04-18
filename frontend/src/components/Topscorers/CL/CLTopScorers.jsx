@@ -1,18 +1,15 @@
-import { Fab } from '@mui/material'
-import axios from 'axios'
+import { fetchTopScorerCL } from '../../../slice/championsLeageuSlice'
 import React, { useEffect, useState } from 'react'
 import GlobalStyle from '../../../GlobalStyles'
-import Header from '../../Header/Header'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchTopScorerCL } from '../../../slice/CLTopScorerSlice'
 import Loader from '../../Loader/Loader'
 import { StyledTable, StyledWrapper, StyledLink } from './CLTopScorerElements'
 const CLTopScorers = () => {
     const dispatch = useDispatch()
-    const CLTopScorer = useSelector((state) => state.CLTopScorer.data)
-    const CLTopScorerStatus = useSelector((state) => state.CLTopScorer.status)
-    const CLTopScorerError = useSelector((state) => state.CLTopScorer.error)
-    const championsLeague = useSelector((state) => state.championsLeague.data)
+    const CLTopScorer = useSelector((state) => state.championsLeague.topScorers)
+    const CLTopScorerStatus = useSelector((state) => state.championsLeague.topScorersStatus)
+    const CLTopScorerError = useSelector((state) => state.championsLeague.topScorersError)
+    const championsLeague = useSelector((state) => state.championsLeague.table)
 
     useEffect(() => {
         if(CLTopScorerStatus === 'idle'){

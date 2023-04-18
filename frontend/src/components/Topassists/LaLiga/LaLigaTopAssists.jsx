@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchLigue1TopScorer } from '../../../slice/Ligue1Slice'
+import { fetchLaLigaTopAssists } from '../../../slice/LaLigaSlice'
 import Loader from '../../Loader/Loader'
-import { StyledLink, StyledTable, StyledWrapper } from './Ligue1TopScorersElements'
+import { StyledLink, StyledTable, StyledWrapper } from './LaLigaTopAssistsElements'
 
-const Ligue1TopScorers = () => {
+const LaLigaTopAssists = () => {
     const dispatch = useDispatch();
-    const Ligue1 = useSelector((state) => state.Ligue1.table);
-    const Ligue1TopScorer = useSelector((state) => state.Ligue1.topScorers);
-    const Ligue1TopScorerStatus = useSelector((state) => state.Ligue1.topScorersStatus);
-    const Ligue1TopScorersError = useSelector((state) => state.Ligue1.topScorersError);
+    const LaLiga = useSelector((state) => state.LaLiga.table);
+    const LaLigaTopAssists = useSelector((state) => state.LaLiga.topAssists);
+    const LaLigaTopAssistsStatus = useSelector((state) => state.LaLiga.topAssistsStatus);
+    const LaLigaTopAssistsError = useSelector((state) => state.LaLiga.topAssistsError);
 
     useEffect(() => {
-        if(Ligue1TopScorerStatus === 'idle'){
-            dispatch(fetchLigue1TopScorer());
+        if(LaLigaTopAssistsStatus === 'idle'){
+            dispatch(fetchLaLigaTopAssists());
         }
-    }, [Ligue1TopScorerStatus, dispatch])
+    }, [LaLigaTopAssistsStatus, dispatch])
 
     const getTeamLogo = (teamName) => {
-        for(const team of Ligue1){
+        for(const team of LaLiga){
             if(team.team.name === teamName){
                 return team.team.crest;
             }
@@ -27,7 +27,7 @@ const Ligue1TopScorers = () => {
     }
 
     const getTeamId = (teamName) => {
-        for(const team of Ligue1){
+        for(const team of LaLiga){
             if(team.team.name === teamName){
                 return team.team.id;
             }
@@ -35,11 +35,9 @@ const Ligue1TopScorers = () => {
         return '';
     }
 
-    if(Ligue1TopScorerStatus === 'loading'){
+    if(LaLigaTopAssistsStatus === 'loading'){
         return <Loader/>;
     }
-
-
   return (
     <StyledWrapper>
         <StyledTable>
@@ -47,19 +45,19 @@ const Ligue1TopScorers = () => {
                 <tr>
                     <th>Player</th>
                     <th>Team</th>
-                    <th>Goals</th>
+                    <th>Assists</th>
                 </tr>
             </thead>
             <tbody>
-                {Ligue1TopScorer.map((player) => {
-                    return (
+                {LaLigaTopAssists.map((player) => {
+                    return(
                         <tr key={player.id}>
                             <td>{player.name}</td>
                             <td>
                                 <img src={getTeamLogo(player.team)} width={30}></img>
                                 <StyledLink to={`/team/${getTeamId(player.team)}`}>{player.team}</StyledLink>
                             </td>
-                            <td>{player.goals}</td>
+                            <td>{player.assists}</td>
                         </tr>
                     )
                 })}
@@ -69,4 +67,4 @@ const Ligue1TopScorers = () => {
   )
 }
 
-export default Ligue1TopScorers
+export default LaLigaTopAssists

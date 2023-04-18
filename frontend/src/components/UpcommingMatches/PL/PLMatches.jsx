@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { StyledWrapper, StyledTable, StyledDiv, StyledLink } from './PLMatchesElements';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPLUpcommingMatches } from '../../../slice/PLUpcommingMatchesSlice';
+import { fetchPLUpcommingMatches } from '../../../slice/premierLeagueSlice';
 import Loader from '../../Loader/Loader';
 
 const PLMatches = () => {
   const dispatch = useDispatch();
-  const PLUpcommingMatches = useSelector((state) => state.PLUpcommingMatches.data);
-  const PLUpcommingMatchesStatus = useSelector((state) => state.PLUpcommingMatches.status);
-  const PLUpcommingMatchesError = useSelector((state) => state.PLUpcommingMatches.error);
-  const premierLeague = useSelector((state) => state.premierLeague.data);
+  const PLUpcommingMatches = useSelector((state) => state.premierLeague.upcomingMatches);
+  const PLUpcommingMatchesStatus = useSelector((state) => state.premierLeague.upcomingMatchesStatus);
+  const PLUpcommingMatchesError = useSelector((state) => state.premierLeague.upcomingMatchesError);
+  const premierLeague = useSelector((state) => state.premierLeague.table);
 
   useEffect(() => {
     if (PLUpcommingMatchesStatus === 'idle') {

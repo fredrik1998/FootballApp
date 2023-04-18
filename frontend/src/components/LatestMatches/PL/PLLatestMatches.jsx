@@ -1,20 +1,21 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPLLatestMatches } from '../../../slice/PLLatestMatchesSlice';
+import { fetchPLLatestMatches } from '../../../slice/premierLeagueSlice';
 import Loader from '../../Loader/Loader';
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './PLLatestMatchesElements';
 
 const PLLatestMatches = () => {
   const dispatch = useDispatch();
+  const premierLeague = useSelector((state) => state.premierLeague.table);
+  const PLLatestMatches = useSelector((state) => state.premierLeague.latestMatches);
+  const PLLatestMatchesStatus = useSelector((state) => state.premierLeague.latestMatchesStatus);
+  const PLLatestMatchesError = useSelector((state) => state.premierLeague.latestMatchesError);
 
   useEffect(() => {
-    dispatch(fetchPLLatestMatches());
-  }, [dispatch]);
-
-  const premierLeague = useSelector((state) => state.premierLeague.data);
-  const PLLatestMatches = useSelector((state) => state.PLLatestMatches.data);
-  const PLLatestMatchesStatus = useSelector((state) => state.PLLatestMatches.status);
-  const PLLatestMatchesError = useSelector((state) => state.PLLatestMatches.error);
+    if(PLLatestMatchesStatus === 'idle'){
+      dispatch(fetchPLLatestMatches());
+    }
+  }, [dispatch,]);
 
   const matchesByDate = useMemo(() => {
     const matches = {};

@@ -18,6 +18,11 @@ export const theme = createTheme({
           '&.Mui-selected': {
             color: '#9ACD32', // Your desired highlight color for the selected tab text
           },
+          "@media (max-width: 768px)": {
+            fontSize: "14px",
+            fontWeight: '400',
+            maxWidth: "10px",
+          },
         },
       },
     },
