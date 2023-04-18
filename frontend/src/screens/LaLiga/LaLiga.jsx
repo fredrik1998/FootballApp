@@ -44,7 +44,7 @@ const LaLiga = () => {
   return (
     <>
     <GlobalStyle/>
-    <Header isOpen={isOpen} isMobile={isMobile}/>
+    <Header toggleSidebar={toggleSidebar} isMobile={isMobile}/>
     <ContentWrapper>
     <Sidebar toggleSidebar={toggleSidebar} isOpen={isOpen} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef}/>
     <StyledWrapper>

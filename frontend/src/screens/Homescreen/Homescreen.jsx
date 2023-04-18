@@ -37,14 +37,15 @@ const Homescreen = () => {
     return ''
   }
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+ const toggleSidebar = () => {
+  setIsOpen(!isOpen);
+ }
+
   
   return (
     <>
       <GlobalStyle />
-      <Header toggleSidebar={toggleSidebar} isMobile={isMobile}  />
+      <Header toggleSidebar={toggleSidebar} isMobile={isMobile} isOpen={!isOpen}  />
       <ContentWrapper>
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} setIsMobile={setIsMobile} hamburgerMenuRef={hamburgerMenuRef} />
       <StyledWrapper>

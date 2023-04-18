@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
 
+
 export const StyledHeader = styled.header`
 display: flex;
 justify-content: space-around;
+align-items: center;
 border-bottom: 1px solid #ccc;
 padding-bottom: 2em;
 `
@@ -27,3 +29,4 @@ border: 1px solid #ccc;
 export const StyledButton = styled.button`
 background: none;
 `
+
