@@ -48,6 +48,10 @@ const LaLigaLatestMatches = () => {
         return matches
     }, [LaLigaLatestMatches])
 
+    if(LaLigaLatestMatchesStatus === 'loading'){
+        return <Loader/>;
+    }
+
   return (
     <StyledWrapper>
         {Object.keys(matchesByDate).map((date) => {
