@@ -28,11 +28,6 @@ const LaLiga = () => {
         }
     }, [dispatch, LaLigaStatus])
 
-   
-    const toggleSidebar = (open) => {
-        setIsOpen(open)
-    }
-
     const getTeamId = (teamName) => {
         for(const team of LaLiga){
             if(team.team.name === teamName){
@@ -40,6 +35,10 @@ const LaLiga = () => {
             }
         }
         return '';
+    }
+
+    const toggleSidebar = () => {
+      setIsOpen(!isOpen)
     }
 
   return (
