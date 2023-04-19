@@ -51,7 +51,9 @@ const SerieATopAssists = () => {
           <tbody>
           {SerieATopAssists.map((player) => (
   <tr key={player.id}>
-    <td>{player.name}</td>
+    <td>
+      <StyledLink to={`/player/${player.id}`}>{player.name}</StyledLink>
+    </td>
     <td>
       <img src={getTeamLogo(player.team)} width={30}></img>
       <StyledLink to={`/team/${getTeamId(player.team)}`}>{player.team}</StyledLink>

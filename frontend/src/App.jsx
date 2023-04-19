@@ -10,6 +10,9 @@ import SerieA from './screens/SerieA/SerieA';
 import Bundesliga from './screens/Bundesliga/Bundesliga';
 import Ligue1 from './screens/Ligue1/Ligue1';
 import LaLiga from './screens/LaLiga/LaLiga';
+import Player from './screens/Player/Player'
+import Match from './screens/Match/Match';
+
 const App =() => {
   return (
   <Routes>
@@ -18,11 +21,13 @@ const App =() => {
     <Route path='/register' element={<RegisterScreen/>}/>
     <Route path='/homescreen' element={<Homescreen/>}/>
     <Route path='/CL' element={<CL/>}/>
-    <Route path='/team/:team_id' element={<Team/>}></Route>
+    <Route path='/team/:team_id' element={<Team/>}/>
     <Route path='/SA' element={<SerieA/>}/>
     <Route path='/BL' element={<Bundesliga/>}/>
     <Route path='/Ligue1' element={<Ligue1/>}/>
     <Route path='/LaLiga' element={<LaLiga/>}/>
+    <Route path='/player/:player_id' element={<Player/>}/>
+    <Route path='/match/:match_id' element={<Match/>}/>
   </Routes>
   )
 }

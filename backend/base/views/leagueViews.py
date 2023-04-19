@@ -65,6 +65,7 @@ def next_matchday(request):
     matches = []
     for match in data['matches']:
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['name'],
             'away_team': match['awayTeam']['name'],
             'kickoff_time': match['utcDate'],
@@ -102,6 +103,7 @@ def league_SA_upcomming_matches(request):
     matches = []
     for match in data['matches']:
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -119,6 +121,7 @@ def league_BL_upcomming_matches(request):
     matches = []
     for match in data['matches']:
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['name'],
             'away_team': match['awayTeam']['name'],
             'kickoff_time': match['utcDate'],
@@ -136,6 +139,7 @@ def league_FL_upcomming_matches(request):
     matches = []
     for match in data['matches']:
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -153,6 +157,7 @@ def league_PD_upcomming_matches(request):
     matches = []
     for match in data['matches']:
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -172,6 +177,7 @@ def league_SA_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -193,6 +199,7 @@ def league_PD_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -214,6 +221,7 @@ def league_PL_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -235,6 +243,7 @@ def league_CL_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -256,6 +265,7 @@ def league_BL_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -277,6 +287,7 @@ def league_FL_latest_matches(request):
         home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
         away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
         matches.append({
+            'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team': match['awayTeam']['shortName'],
             'kickoff_time': match['utcDate'],
@@ -298,6 +309,7 @@ def top_scores(request):
     for scorer in scorers:
         try:
             top_scores.append({
+                'id': scorer['player']['id'],
                 'name': scorer['player']['name'],
                 'team': scorer['team']['name'],
                 'goals': scorer['goals'],
@@ -318,6 +330,7 @@ def top_scores_SA(request):
     for scorer in scorers:
         try:
             top_scorers.append({
+                'id': scorer['player']['id'],
                 'name': scorer['player']['name'],
                 'team': scorer['team']['name'],
                 'goals': scorer['goals'],
@@ -338,6 +351,7 @@ def top_scores_CL(request):
     for scorer in scorers:
         try:
             top_scores_CL.append({
+                'id': scorer['player']['id'],
                 'name': scorer['player']['name'],
                 'team': scorer['team']['name'],
                 'goals': scorer['goals'],
@@ -358,6 +372,7 @@ def top_scorers_BL(request):
     for scorer in scorers:
         try:
             top_scorers.append({
+            'id' : scorer['player']['id'],   
             'name' : scorer['player']['name'],
             'team' : scorer['team']['name'],
             'goals' : scorer['goals'],
@@ -378,6 +393,7 @@ def top_scorers_FL(request):
     for scorer in scorers:
         try:
             top_scorers.append({
+            'id': scorer['player']['id'],   
             'name': scorer['player']['name'],
             'team': scorer['team']['name'],
             'goals': scorer['goals'],
@@ -398,6 +414,7 @@ def top_scorers_PD(request):
     for scorer in scorers:
         try:
             top_scorers.append({
+                'id': scorer['player']['id'],
                 'name' : scorer['player']['name'],
                 'team' : scorer['team']['name'],
                 'goals' : scorer['goals'],
@@ -419,6 +436,7 @@ def top_assists_FL(request):
     for assister in sorted_assisters:
         try:
             top_assists.append({
+                'id': assister['player']['id'],
                 'name': assister['player']['name'],
                 'team': assister['team']['name'],
                 'assists': assister['assists'],
@@ -440,6 +458,7 @@ def top_assists_BL(request):
     for assister in sorted_assisters:
         try:
             top_assists.append({
+                'id': assister['player']['id'],
                 'name': assister['player']['name'],
                 'team': assister['team']['name'],
                 'assists': assister['assists'],
@@ -462,6 +481,7 @@ def top_assists_PL(request):
     for assister in sorted_assisters:
         try:
             top_assists.append({
+                'id': assister['player']['id'],
                 'name': assister['player']['name'],
                 'team': assister['team']['name'],
                 'assists': assister['assists'],
@@ -483,6 +503,7 @@ def get_top_assists_SA(request):
     for assister in sorted_assisters:
         try:
             top_assists.append({
+                'id' : assister['player']['id'],
                 'name' : assister['player']['name'],
                 'team' : assister['team']['name'],
                 'assists': assister['assists'],
@@ -505,6 +526,7 @@ def top_assists_CL(request):
     for assister in sorted_assisters:
         try:
             top_assists.append({
+                'id': assister['player']['id'],
                 'name': assister['player']['name'],
                 'team': assister['team']['name'],
                 'assists': assister['assists'],
@@ -526,6 +548,7 @@ def top_assists_PD(request):
     for assister in sorted_assisters:
         try:
             top_assists.append({
+                'id': assister['player']['id'],
                 'name': assister['player']['name'],
                 'team': assister['team']['name'],
                 'assists': assister['assists'],
@@ -550,6 +573,31 @@ def get_team_squad(request, team_id):
         return Response({'error': 'Unable to fetch data'})
     
 @api_view(['GET'])
+def get_player(request, player_id):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = f'https://api.football-data.org/v4/persons/{player_id}'
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        player_data = response.json()
+        return Response(player_data)
+    else:
+        return Response({'Error' : 'Unable to fetch data'})
+    
+@api_view(['GET'])
+def get_match(request, match_id):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = f'https://api.football-data.org/v4/matches{match_id}'
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        match_data = response.json()
+        return Response(match_data)
+    else:
+        return Response({'Error' : 'Unable to fetch data'})
+
+    
+@api_view(['GET'])
 def get_all_leagues(request):
     headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
     url = 'https://api.football-data.org/v4/competitions/'    
@@ -560,6 +608,8 @@ def get_all_leagues(request):
         return Response(league_data)
     else:
         return Response({'error' : 'Unable to fetch data'})
+    
+
         
 
 

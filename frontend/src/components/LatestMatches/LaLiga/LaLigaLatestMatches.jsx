@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchLaLigaLatestMatches } from '../../../slice/LaLigaSlice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './LaLigaLatestMatchesElements'
+import { useNavigate } from 'react-router-dom'
 
 const LaLigaLatestMatches = () => {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const LaLigaLatestMatches = () => {
     const LaLigaLatestMatches = useSelector((state) => state.LaLiga.latestMatches);
     const LaLigaLatestMatchesStatus = useSelector((state) => state.LaLiga.latestMatchesStatus);
     const LaLigaLatestMatchesError = useSelector((state) => state.LaLiga.latestMatchesError);
-
+    const navigate = useNavigate();
     useEffect(() => {
         if(LaLigaLatestMatchesStatus === 'idle'){
             dispatch(fetchLaLigaLatestMatches());
@@ -71,7 +72,12 @@ const LaLigaLatestMatches = () => {
                         <tbody>
                             {matchesByDate[date].map((match) => {
                                 return(
-                                    <tr key={match.id}>
+                                    <tr key={match.id} onClick={(e) => {
+                                        if(e.target.tagName.toLowerCase() === 'a'){
+                                            return '';
+                                        }
+                                        navigate(`/match/${match.id}`)
+                                    }}>
                                         <td>
                                             <img src={getTeamLogo(match.home_team)} width={30}></img>
                                             <StyledLink to={`/team/${match.home_team}`}>{match.home_team}</StyledLink>

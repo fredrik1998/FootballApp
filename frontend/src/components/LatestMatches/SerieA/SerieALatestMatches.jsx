@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchSerieALatestMatches } from '../../../slice/SerieASlice';
 import Loader from '../../Loader/Loader';
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieALatestMatchesElements';
+import { useNavigate } from 'react-router-dom';
 
 const SerieALatestMatches = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const SerieALatestMatches = () => {
   const serieALatestMatchesStatus = useSelector((state) => state.SerieA.latestMatchesStatus);
   const serieALatestMatchesError = useSelector((state) => state.SerieA.latestMatchesError);
   const serieA = useSelector((state) => state.SerieA.table);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (serieALatestMatchesStatus === 'idle') {
       dispatch(fetchSerieALatestMatches());
@@ -69,7 +70,12 @@ const SerieALatestMatches = () => {
                 </thead>
                 <tbody>
                   {matchesByDate[date].map((match, index) => (
-                    <tr key={index}>
+                    <tr key={index} onClick={(e) => {
+                      if(e.target.tagName.toLowerCase() === 'a'){
+                        return;
+                      }
+                      navigate(`/match/${match.id}`)
+                    }}>
                       <td>
                         <img src={`${getTeamLogo(match.home_team)}`} width={30} height={30} alt="team logo" />
                         <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>

@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCLLatestMatches } from '../../../slice/championsLeageuSlice';
 import Loader from '../../Loader/Loader';
 import { StyledLink, StyledTable, StyledWrapper, StyledDiv } from './CLLatestMatchesElements';
-
+import { useNavigate } from 'react-router-dom';
 const CLLatestMatches = () => {
   const dispatch = useDispatch();
   const CLLatestMatches = useSelector((state) => state.championsLeague.latestMatches);
   const CLLatestMatchesStatus = useSelector((state) => state.championsLeague.latestMatchesStatus);
   const championsLeague = useSelector((state) => state.championsLeague.table);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (CLLatestMatchesStatus === 'idle') {
       dispatch(fetchCLLatestMatches());
@@ -73,7 +73,12 @@ const CLLatestMatches = () => {
             </thead>
             <tbody>
               {matchesByDate[date].map((match, index) => (
-                <tr key={index}>
+                <tr key={index} onClick={(e) => {
+                  if(e.target.tagName.toLowerCase() === 'a'){
+                    return;
+                  }
+                  navigate(`/match/${match.id}`)
+                }}>
                   <td>
                     <img src={getTeamLogo(match.home_team)} width={30} alt={match.home_team} />
                     <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>

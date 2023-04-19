@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchLigue1UpcommingMatches } from '../../../slice/Ligue1Slice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './Ligue1UpcommingMatchesElements'
-
+import { useNavigate } from 'react-router-dom';
 const Ligue1UpcommingMatches = () => {
     const dispatch = useDispatch();
     const Ligue1 = useSelector((state) => state.Ligue1.table);
     const Ligue1UpcommingMatches = useSelector((state) => state.Ligue1.upcomingMatches);
     const Ligue1UpcommingMatchesStatus = useSelector((state) => state.Ligue1.upcomingMatchesStatus);
     const Ligue1UpcommingMatchesError = useSelector((state) => state.Ligue1.upcomingMatchesError);
-
+    const navigate = useNavigate();
     useEffect(() => {
         if(Ligue1UpcommingMatchesStatus === 'idle'){
             dispatch(fetchLigue1UpcommingMatches());
@@ -69,7 +69,12 @@ const Ligue1UpcommingMatches = () => {
                     <tbody>
                         {matchesByDate[date].map((match, index) => {
                             return (
-                                <tr key={index}>
+                                <tr key={index} onClick={(e) => {
+                                    if(e.target.tagName.toLowerCase() === 'a'){
+                                        return;
+                                    }
+                                    navigate(`/match/${match.id}`)
+                                }}>
                                     <td>
                                         <img src={getTeamLogo(match.home_team)} width={30}></img>
                                         <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>

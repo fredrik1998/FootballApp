@@ -3,14 +3,14 @@ import { StyledWrapper, StyledTable, StyledDiv, StyledLink } from './PLMatchesEl
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPLUpcommingMatches } from '../../../slice/premierLeagueSlice';
 import Loader from '../../Loader/Loader';
-
+import { useNavigate } from 'react-router-dom';
 const PLMatches = () => {
   const dispatch = useDispatch();
   const PLUpcommingMatches = useSelector((state) => state.premierLeague.upcomingMatches);
   const PLUpcommingMatchesStatus = useSelector((state) => state.premierLeague.upcomingMatchesStatus);
   const PLUpcommingMatchesError = useSelector((state) => state.premierLeague.upcomingMatchesError);
   const premierLeague = useSelector((state) => state.premierLeague.table);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (PLUpcommingMatchesStatus === 'idle') {
       dispatch(fetchPLUpcommingMatches());
@@ -67,7 +67,12 @@ for (const match of PLUpcommingMatches) {
                     const date = new Date(match.kickoff_time);
                     const formattedDate = date.toLocaleDateString('en-GB', { year: '2-digit', month: '2-digit', day: '2-digit' });
                     return (
-                      <tr key={index}>
+                      <tr key={index} onClick={(e) => {
+                        if(e.target.tagName.toLowerCase() === 'a'){
+                          return;
+                        }
+                        navigate(`/match/${match.id}`)
+                      }}>
   <td>
     <img src={getTeamLogo(match.home_team)} width={30} height={30} alt={match.home_team} />
     <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>

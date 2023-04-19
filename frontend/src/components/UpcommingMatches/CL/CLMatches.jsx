@@ -4,6 +4,7 @@ import Loader from '../../Loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCLUpcommingMatches } from '../../../slice/championsLeageuSlice';
 import { StyledTable, StyledWrapper, StyledDiv, StyledLink } from './CLMatchesElements'
+import { useNavigate } from 'react-router-dom';
 
 const CLMatches = () => {
     const dispatch = useDispatch()
@@ -11,7 +12,7 @@ const CLMatches = () => {
     const CLUpcommingMatchesStatus = useSelector((state) => state.championsLeague.upcomingMatchesStatus);
     const CLUpcommingMatchesError = useSelector((state) => state.championsLeague.upcomingMatchesError);
     const championsLeague = useSelector((state) => state.championsLeague.table);
-    
+    const navigate = useNavigate();
     useEffect(() => {
         if(CLUpcommingMatchesStatus === 'idle'){
             dispatch(fetchCLUpcommingMatches())
@@ -85,7 +86,12 @@ const CLMatches = () => {
         <tbody>
           {matchesByDate[date].map((match, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} onClick={(e) => {
+                if(e.target.tagName.toLowerCase() === 'a'){
+                  return;
+                }
+                navigate(`/match/${match.id}`)
+              }}>
                 <td>{formatMatchStage(match.stage)}</td>
                 <td>
                   <img src={getTeamLogo(match.homeTeam.name)} alt={`${match.homeTeam.name} logo`} width="30" height="30" />

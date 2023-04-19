@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchBundesligaLatestMatches } from '../../../slice/BundesligaSlice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './BundesligaLatestMatchesElements'
-
+import { useNavigate } from 'react-router-dom'
 const BundesligaLatestMatches = () => {
     const dispatch = useDispatch();
     const BundesligaLatestMatches = useSelector((state) => state.Bundesliga.latestMatches);
     const BundesligaLatestMatchesStatus = useSelector((state) => state.Bundesliga.latestMatchesStatus);
     const BundesligaLatestMatchesError = useSelector((state) => state.Bundesliga.latestMatchesError);
     const Bundesliga = useSelector((state) => state.Bundesliga.table);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(BundesligaLatestMatchesStatus === 'idle'){
@@ -71,7 +72,12 @@ const BundesligaLatestMatches = () => {
                     <tbody>
                         {matchesByDate[date].map((match, index) => {
                             return(
-                                <tr key={index}>
+                                <tr key={index} onClick={(e) => {
+                                    if(e.target.tagName.toLowerCase() === 'a'){
+                                        return;
+                                    }
+                                    navigate(`/match/${match.id}`)
+                                }}>
                                     <td>
                                     <img src={getTeamLogo(match.home_team)} width={30}></img>
                                     <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>

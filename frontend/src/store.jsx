@@ -8,13 +8,17 @@ import { SerieASlice } from './slice/SerieASlice';
 import { BundesligaSlice } from './slice/BundesligaSlice';
 import { Ligue1Slice } from './slice/Ligue1Slice';
 import { LaLigaSlice } from './slice/LaLigaSlice';
+import { playerSlice } from './slice/playerSlice';
+import { matchSlice } from './slice/matchesSlice';
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
     premierLeague : premierLeagueSlice.reducer,
     championsLeague: championsLeagueSlice.reducer,
     TeamSquad: TeamSquadSlice.reducer,
+    Player: playerSlice.reducer,
     Leagues: LeaguesSlice.reducer,
+    Match: matchSlice.reducer,
     SerieA: SerieASlice.reducer,
     Bundesliga: BundesligaSlice.reducer,
     Ligue1: Ligue1Slice.reducer,

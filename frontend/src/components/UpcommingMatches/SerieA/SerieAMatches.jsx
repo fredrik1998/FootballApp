@@ -4,13 +4,15 @@ import { fetchSerieAUpcommingMatches } from '../../../slice/SerieASlice'
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieAMatchesElements'
 import Loader from '../../Loader/Loader'
 import CLLatestMatches from '../../LatestMatches/CL/CLLatestMatches'
+import { useNavigate } from 'react-router-dom';
 const SerieAMatches = () => {
     const dispatch = useDispatch()
     const SerieAUpcommingMatches = useSelector((state) => state.SerieA.upcomingMatches);
     const SerieAUpcommingMatchesStatus = useSelector((state) => state.SerieA.upcomingMatchesStatus);
     const SerieAUpcommingMatchesErrror = useSelector((state) => state.SerieA.upcomingMatchesError);
     const SerieA = useSelector((state) => state.SerieA.table);
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
         if(SerieAUpcommingMatchesStatus === 'idle'){
             dispatch(fetchSerieAUpcommingMatches())
@@ -67,7 +69,12 @@ if(SerieAUpcommingMatchesStatus === 'loading'){
                         <tbody>
                           {matchesByDate[date].map((match, index) => {
                             return(
-                                <tr key={index}>
+                                <tr key={index} onClick={(e) => {
+                                    if(e.target.tagName.toLowerCase() === 'a'){
+                                        return;
+                                    }
+                                    navigate(`/match/${match.id}`)
+                                }}>
                                     <td>
                                      <img src={`${getTeamLogo(match.home_team)}`} width={30} height={30}></img> 
                                      <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>  

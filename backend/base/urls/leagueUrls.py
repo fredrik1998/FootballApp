@@ -35,5 +35,7 @@ urlpatterns = [
     path('leagues/PD/topscorer/', views.top_scorers_PD, name='PD-topscorer'),
     path('leagues/PD/topassists/', views.top_assists_PD, name='PD-topassists'),
     path('leagues/PD/upcomingmatches/', views.league_PD_upcomming_matches, name='PD-upcommingmatches'),
-    path('leagues/PD/latestmatches/', views.league_PD_latest_matches, name='PD-latestmatches')
+    path('leagues/PD/latestmatches/', views.league_PD_latest_matches, name='PD-latestmatches'),
+    path('player/<int:player_id>/', views.get_player, name='get_player'),
+    path('match/<int:match_id>/', views.get_match, name='get_match')
 ]

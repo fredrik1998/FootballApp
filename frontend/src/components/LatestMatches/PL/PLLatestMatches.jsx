@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPLLatestMatches } from '../../../slice/premierLeagueSlice';
 import Loader from '../../Loader/Loader';
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './PLLatestMatchesElements';
-
+import { useNavigate } from 'react-router-dom';
 const PLLatestMatches = () => {
   const dispatch = useDispatch();
   const premierLeague = useSelector((state) => state.premierLeague.table);
   const PLLatestMatches = useSelector((state) => state.premierLeague.latestMatches);
   const PLLatestMatchesStatus = useSelector((state) => state.premierLeague.latestMatchesStatus);
   const PLLatestMatchesError = useSelector((state) => state.premierLeague.latestMatchesError);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if(PLLatestMatchesStatus === 'idle'){
@@ -68,7 +69,12 @@ const PLLatestMatches = () => {
                   <tbody>
                     {matchesByDate[date].map((match, index) => {
                       return (
-                        <tr key={index}>
+                        <tr key={index} onClick={(e) => {
+                          if(e.target.tagName.toLowerCase() === 'a'){
+                            return;
+                          }
+                          navigate(`/match/${match.id}`)
+                        }}>
                           <td>
                             <img src={getTeamLogo(match.home_team)} width={30} height={30} />
                             <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>
