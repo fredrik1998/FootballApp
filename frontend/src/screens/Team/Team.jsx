@@ -3,9 +3,10 @@ import GlobalStyle from '../../GlobalStyles';
 import Header from '../../components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeamSquad } from '../../slice/TeamSquadSlice';
-import { StyledWrapper, StyledTable } from './TeamElements';
+import { StyledWrapper, StyledTable, StyledH1, StyledLogo, StyledLink } from './TeamElements';
 import Loader from '../../components/Loader/Loader';
 import { useParams } from 'react-router-dom';
+
 
 const Team = () => {
   const dispatch = useDispatch();
@@ -34,23 +35,29 @@ const Team = () => {
           <Loader />
         ) : (
             <>
-            <h1>{TeamSquad.name}</h1>
-            <img src={TeamSquad.crest} width={100}></img>
+            <StyledH1>{TeamSquad.name}</StyledH1>
+            <StyledLogo src={TeamSquad.crest} ></StyledLogo>
             <h2>Squad</h2>
           <StyledTable>
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Position</th>
+                <th>Nationality</th>
+                <th>Birthday</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(TeamSquad.squad) &&
-                TeamSquad.squad.map((team) => {
+                TeamSquad.squad.map((player) => {
                   return (
-                    <tr key={team.id}>
-                      <th>{team.name}</th>
-                      <th>{team.position}</th>
+                    <tr key={player.id}>
+                      <td>
+                        <StyledLink to={`/player/${player.id}`}>{player.name}</StyledLink>
+                      </td>
+                      <td>{player.position}</td>
+                      <td>{player.nationality}</td>
+                      <td>{player.dateOfBirth}</td>
                     </tr>
                   );
                 })}

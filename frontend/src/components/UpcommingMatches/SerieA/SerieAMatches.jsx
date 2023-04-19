@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchSerieAUpcommingMatches } from '../../../slice/SerieASlice'
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieAMatchesElements'
 import Loader from '../../Loader/Loader'
-import CLLatestMatches from '../../LatestMatches/CL/CLLatestMatches'
 import { useNavigate } from 'react-router-dom';
 const SerieAMatches = () => {
     const dispatch = useDispatch()

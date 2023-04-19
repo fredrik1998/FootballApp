@@ -5,6 +5,7 @@ import Loader from '../../components/Loader/Loader'
 import GlobalStyle from '../../GlobalStyles'
 import Header from '../../components/Header/Header'
 import { useParams } from 'react-router-dom'
+import { StyledWrapper } from './PlayerElements'
 
 const Player = () => {
     const dispatch = useDispatch();
@@ -21,11 +22,25 @@ const Player = () => {
         }
     }, [dispatch, player_id, PlayerStatus])
 
-
   return (
     <>
     <GlobalStyle/>
     <Header/>
+    {PlayerStatus === 'loading' ? (
+        <Loader/>
+    ) : (
+        <StyledWrapper>
+        <h1>{Player.name}</h1>
+        <div style={{display: 'flex'}}>
+            {Player.currentTeam && (
+                <>
+                <img style={{marginTop: '12px'}} src={Player.currentTeam.crest} width={30} height={30}></img>
+                <h2>{Player.currentTeam.name}</h2>
+                </>
+            )}
+        </div>
+        </StyledWrapper>
+    )}
     </>
   )
 }

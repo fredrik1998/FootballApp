@@ -80,7 +80,7 @@ const LaLigaLatestMatches = () => {
                                     }}>
                                         <td>
                                             <img src={getTeamLogo(match.home_team)} width={30}></img>
-                                            <StyledLink to={`/team/${match.home_team}`}>{match.home_team}</StyledLink>
+                                            <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>
                                         </td>
                                         <td>{match.home_team_score}</td>
                                         <td>-</td>
