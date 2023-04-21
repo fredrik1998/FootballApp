@@ -41,7 +41,6 @@ export const fetchSerieALatestMatches = createAsyncThunk(
     }
 )
 
-
 const initialState = {
     table: [],
     tableStatus: 'idle',

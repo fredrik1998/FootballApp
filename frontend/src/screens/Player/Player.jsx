@@ -5,8 +5,8 @@ import Loader from '../../components/Loader/Loader'
 import GlobalStyle from '../../GlobalStyles'
 import Header from '../../components/Header/Header'
 import { useParams } from 'react-router-dom'
-import { StyledWrapper } from './PlayerElements'
-
+import { StyledWrapper, StyledImage, StyledDiv } from './PlayerElements'
+import {Typography } from '@mui/material'
 const Player = () => {
     const dispatch = useDispatch();
     const Player = useSelector((state) => state.Player.data);
@@ -22,6 +22,22 @@ const Player = () => {
         }
     }, [dispatch, player_id, PlayerStatus])
 
+    const calculateAge = (birthday) => {
+        const birthDate = new Date(birthday);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+      
+        if (
+          monthDifference < 0 ||
+          (monthDifference === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+      
+        return age;
+      }
+
   return (
     <>
     <GlobalStyle/>
@@ -34,11 +50,28 @@ const Player = () => {
         <div style={{display: 'flex'}}>
             {Player.currentTeam && (
                 <>
-                <img style={{marginTop: '12px'}} src={Player.currentTeam.crest} width={30} height={30}></img>
+                <StyledImage src={Player.currentTeam.crest}></StyledImage>
                 <h2>{Player.currentTeam.name}</h2>
                 </>
             )}
         </div>
+        <Typography>Country: {Player.nationality}</Typography>
+        <Typography>Shirtnumber: {Player.shirtNumber}</Typography>
+        <Typography>Position: {Player.position}</Typography>
+        <Typography>Age:{calculateAge(Player.dateOfBirth)}</Typography>
+        <StyledDiv>
+        <h2>Competitions:</h2>
+  {Player.currentTeam && Array.isArray(Player.currentTeam.runningCompetitions) &&
+    Player.currentTeam.runningCompetitions.map((competition) => {
+      return (
+        <div key={competition.id}>
+          <h3>{competition.name}</h3>
+          <img src={competition.emblem} width={100} alt={competition.name} />
+        </div>
+      );
+  })}
+</StyledDiv>
+
         </StyledWrapper>
     )}
     </>
