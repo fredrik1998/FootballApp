@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from ..models import League
 from django.http import Http404
 from ..serializer import LeagueSerializer
+from datetime import datetime, timedelta
 import requests
 
 @api_view(['GET'])
@@ -608,6 +609,31 @@ def get_all_leagues(request):
         return Response(league_data)
     else:
         return Response({'error' : 'Unable to fetch data'})
+    
+
+@api_view(['GET'])
+def today_matches(request):
+    headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/matches'
+    
+    today = datetime.now().strftime('%Y-%m-%d')
+    tomorrow = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+    params = {
+        'dateFrom': today,
+        'dateTo': tomorrow,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+
+    if response.status_code == 200:
+        data = response.json()
+        matches = data['matches']
+    else:
+        matches = []
+
+    return Response({'matches': matches})
+ 
+    
     
 
         

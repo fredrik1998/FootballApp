@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { motion } from 'framer-motion'
 
 export const StyledNav = styled.nav`
-display: none;
-@media (min-width: 768px){
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: flex-start;
-height: 100vh;
-padding-left: 20px;
-margin-top: 2rem;
-gap: 50px;
-}
-&.expanded {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    padding-left: 20px;
+    margin-top: 2rem;
+    gap: 50px;
+  }
+
+  &.expanded {
     @media (max-width: 767px) {
       display: flex;
       justify-content: flex-start;
@@ -28,9 +31,21 @@ gap: 50px;
       gap: 50px;
       background-color: rgba(0, 0, 0, 0.9);
       z-index: 10;
+      animation: slideIn 0.5s ease-in-out forwards;
     }
   }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
 `;
+
 
 export const StyledLink = styled(Link)`
 text-decoration: none;

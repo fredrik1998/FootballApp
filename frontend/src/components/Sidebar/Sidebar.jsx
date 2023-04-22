@@ -8,6 +8,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
   const Leagues = useSelector((state) => state.Leagues.data)
   const LeaguesStatus = useSelector((state) => state.Leagues.status)
   const sidebarRef = useRef()
+  const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,6 +47,10 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [toggleSidebar, hamburgerMenuRef, isOpen]);
+
+  const ToggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
   
 
   const getChampionsLeagueEmblem = () => {
@@ -55,38 +60,40 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
 
   const getPremierLeagueEmblem = () => {
     const premierLeague = Leagues.find(league => league.name === 'Premier League');
-    return premierLeague ? premierLeague.area.flag : '';
-  }
+    return premierLeague ? premierLeague.emblem : '';
+  };
 
   const getSerieAEmblem = () => {
     const serieA = Leagues.find(league => league.name === 'Serie A')
-    return serieA ? serieA.area.flag : ''
-  }
+    return serieA ? serieA.emblem : ''
+  };
 
   const getBundesligaEmblem = () => {
     const bundesliga = Leagues.find(league => league.name === 'Bundesliga')
-    return bundesliga ? bundesliga.area.flag : ''
-  }
+    return bundesliga ? bundesliga.emblem : ''
+  };
 
   const getLigue1Emblem = () => {
     const Ligue1 = Leagues.find(league => league.name === 'Ligue 1')
-    return Ligue1 ? Ligue1.area.flag : ''
-  }
+    return Ligue1 ? Ligue1.emblem : ''
+  };
 
   const getLaLigaEmblem = () => {
     const LaLiga = Leagues.find(league => league.name === 'Primera Division')
-    return LaLiga ? LaLiga.area.flag : ''
-  }
+    return LaLiga ? LaLiga.emblem : ''
+  };
 
   return (
-    <StyledNav className={isOpen || window.innerWidth >= 768 ? 'expanded' : ''} ref={sidebarRef}>
-      <h1>Leagues</h1>
-      <StyledLink to='/homescreen'><StyledImage src={getPremierLeagueEmblem()}></StyledImage>Premier League</StyledLink>
-      <StyledLink to='/CL'><StyledImage src={getChampionsLeagueEmblem()} ></StyledImage>Champions League</StyledLink>
-      <StyledLink to='/SA'><StyledImage src={getSerieAEmblem()}></StyledImage>Serie A</StyledLink>
-      <StyledLink to='/BL'><StyledImage src={getBundesligaEmblem()} ></StyledImage>Bundesliga</StyledLink>
-      <StyledLink to='/Ligue1'><StyledImage src={getLigue1Emblem()}></StyledImage>Ligue 1</StyledLink>
-      <StyledLink to='/LaLiga'><StyledImage src={getLaLigaEmblem()}></StyledImage>La Liga</StyledLink>
+    <StyledNav className={isOpen || window.innerWidth >= 768 ? 'expanded' : '' || isExpanded ? "expanded slideIn" : "slideOut"} ref={sidebarRef}  animate={isOpen ? "open" : "closed"}
+   >
+    <h1>Leagues</h1>
+    <StyledLink to='/PL'><StyledImage src={getPremierLeagueEmblem()}></StyledImage>Premier League</StyledLink>
+    <StyledLink to='/CL'><StyledImage src={getChampionsLeagueEmblem()} ></StyledImage>Champions League</StyledLink>
+    <StyledLink to='/SA'><StyledImage src={getSerieAEmblem()}></StyledImage>Serie A</StyledLink>
+    <StyledLink to='/BL'><StyledImage src={getBundesligaEmblem()} ></StyledImage>Bundesliga</StyledLink>
+    <StyledLink to='/Ligue1'><StyledImage src={getLigue1Emblem()}></StyledImage>Ligue 1</StyledLink>
+    <StyledLink to='/LaLiga'><StyledImage src={getLaLigaEmblem()}></StyledImage>La Liga</StyledLink>
+
     </StyledNav>
   );
 };
