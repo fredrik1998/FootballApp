@@ -7,6 +7,7 @@ import Header from '../../components/Header/Header'
 import { ContentWrapper, StyledDiv, StyledLink, StyledTable, StyledWrapper } from './HomescreenElements'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import { useLocation } from 'react-router-dom'
+
 const Homescreen = () => {
     const dispatch = useDispatch();
     const TodaysMatches = useSelector((state) => state.TodaysMatches.data);
@@ -42,8 +43,26 @@ const Homescreen = () => {
         }
         return matches;
     }, [TodaysMatches.matches]);
-    
 
+    const formatMatchStatus = (status, dateString) => {
+      switch (status) {
+        case 'TIMED':
+          return formatTime(dateString);
+        case 'POSTPONED':
+          return 'PP';
+        case 'IN_PLAY':
+          return 'LIVE';
+        case 'FINISHED':
+          return 'FT';
+      }
+    };
+    
+    const formatTime = (dateString) => {
+      const date = new Date(dateString);
+      const options = {  hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleTimeString(undefined, options);
+    };
+    
     return (
         <>
           <GlobalStyle />
@@ -79,19 +98,26 @@ const Homescreen = () => {
                             {competition.matches.map((match) => {
                               return (
                                 <tr key={match.id}>
-                                  <td>
-                                    <img src={match.homeTeam.crest} width={30}></img>
-                                    <StyledLink to={`/team/${match.homeTeam.id}`}>{match.homeTeam.shortName}</StyledLink>
-                                  </td>
-                                    <td data-content={match.status}>{match.status}</td>
-                                  <td>{match.score.fullTime.home}</td>
-                                  <td>-</td>
-                                  <td>{match.score.fullTime.away}</td>
-                                  <td>
-                                    <img src={match.awayTeam.crest} width={30}></img>
-                                    <StyledLink to={`/team/${match.awayTeam.id}`}>{match.awayTeam.shortName}</StyledLink>
-                                  </td>
-                                </tr>
+  <td>
+    <img src={match.homeTeam.crest} width={30}></img>
+    <StyledLink to={`/team/${match.homeTeam.id}`}>{match.homeTeam.shortName}</StyledLink>
+  </td>
+  <td data-content={formatMatchStatus(match.status, match.utcDate)}>{formatMatchStatus(match.status, match.utcDate)}</td>
+  <td>
+    <div className="score-container">
+      <span>{match.score.fullTime.home}</span>
+      <span className="score-separator">-</span>
+      <span>{match.score.fullTime.away}</span>
+    </div>
+  </td>
+  <td></td>
+  <td></td>
+  <td>
+    <img src={match.awayTeam.crest} width={30}></img>
+    <StyledLink to={`/team/${match.awayTeam.id}`}>{match.awayTeam.shortName}</StyledLink>
+  </td>
+</tr>
+
                               );
                             })}
                           </tbody>
