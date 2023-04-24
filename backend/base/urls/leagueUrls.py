@@ -38,5 +38,7 @@ urlpatterns = [
     path('leagues/PD/latestmatches/', views.league_PD_latest_matches, name='PD-latestmatches'),
     path('player/<int:player_id>/', views.get_player, name='get_player'),
     path('match/<int:match_id>/', views.get_match, name='get_match'),
-    path('matches/todaysmatches/', views.today_matches, name='today-matches')
+    path('matches/todaysmatches/', views.today_matches, name='today-matches'),
+    path('team/upcomingmatches/<int:team_id>/', views.get_team_upcoming_matches, name='team-upcomingmatches'),
+    path('team/latestmatches/<int:team_id>/', views.get_team_latest_matches, name='team-latestmatches')
 ]

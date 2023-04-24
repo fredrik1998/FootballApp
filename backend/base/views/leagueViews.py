@@ -574,6 +574,53 @@ def get_team_squad(request, team_id):
         return Response({'error': 'Unable to fetch data'})
     
 @api_view(['GET'])
+def get_team_upcoming_matches(request, team_id):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = f'https://api.football-data.org/v4/teams/{team_id}/matches?status=SCHEDULED'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    matches = []
+    for match in data['matches']:
+        matches.append({
+            'id': match['id'],
+            'home_team': match['homeTeam']['shortName'],
+            'away_team': match['awayTeam']['shortName'],
+            'home_team_id': match['homeTeam']['id'],
+            'away_team_id': match['awayTeam']['id'],
+            'home_team_crest': match['homeTeam']['crest'],
+            'away_team_crest': match['awayTeam']['crest'],
+            'status': match['status'],
+            'kickoff_time': match['utcDate']
+        })
+    matches = matches[:10]    
+    return Response(matches)
+
+@api_view(['GET'])
+def get_team_latest_matches(request, team_id):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = f'https://api.football-data.org/v4/teams/{team_id}/matches?status=FINISHED'
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    matches = []
+    for match in data['matches']:
+        home_goals = match['score']['fullTime']['home'] if 'home' in match['score']['fullTime'] else None
+        away_goals = match['score']['fullTime']['away'] if 'away' in match['score']['fullTime'] else None
+        
+        matches.append({
+            'id': match['id'],
+            'home_team': match['homeTeam']['shortName'],
+            'away_team' : match['awayTeam']['shortName'],
+            'home_team_crest': match['homeTeam']['crest'],
+            'away_team_crest': match['awayTeam']['crest'],
+            'status': match['status'],
+            'kickoff_time': match['utcDate'],
+            'home_team_score': home_goals,
+            'away_team_score': away_goals
+        })
+    matches = matches[-10:]
+    return Response(matches)    
+    
+@api_view(['GET'])
 def get_player(request, player_id):
     headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
     url = f'https://api.football-data.org/v4/persons/{player_id}'

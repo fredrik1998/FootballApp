@@ -11,6 +11,8 @@ import { LaLigaSlice } from './slice/LaLigaSlice';
 import { playerSlice } from './slice/playerSlice';
 import { matchSlice } from './slice/matchesSlice';
 import { TodaysMatchesSlice } from './slice/todaysMatchesSlice';
+import { TeamUpcomingMatchesSlice } from './slice/TeamUpcomingMatchesSlice';
+import { TeamLatestMatchesSlice} from './slice/TeamLatestMatchesSlice';
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
@@ -25,5 +27,7 @@ export default configureStore({
     Ligue1: Ligue1Slice.reducer,
     LaLiga: LaLigaSlice.reducer,
     TodaysMatches: TodaysMatchesSlice.reducer,
+    TeamUpcomingMatches: TeamUpcomingMatchesSlice.reducer,
+    TeamLatestMatches: TeamLatestMatchesSlice.reducer,
   },
 });
