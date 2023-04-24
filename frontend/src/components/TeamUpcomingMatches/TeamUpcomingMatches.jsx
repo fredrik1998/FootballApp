@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo} from 'react'
+import React, { useEffect, useMemo, useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchTeamUpcomingMatches } from '../../slice/TeamUpcomingMatchesSlice'
@@ -10,7 +10,9 @@ const TeamUpcomingMatches = () => {
     const TeamUpcomingMatches = useSelector((state) => state.TeamUpcomingMatches.data);
     const TeamUpcomingMatchesStatus = useSelector((state) => state.TeamUpcomingMatches.status);
     const TeamUpcomingMatchesError = useSelector((state) => state.TeamUpcomingMatches.error);
+    const TeamSquad = useSelector((state) => state.TeamSquad.data);
     const { team_id } = useParams();
+    console.log('TeamSquad:', TeamSquad);
 
     useEffect(() => {
         if(TeamUpcomingMatchesStatus === 'idle'){

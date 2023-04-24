@@ -5,18 +5,18 @@ export const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: '#9ACD32',
-          color: '#fafafa' // Replace with your desired color
+          backgroundColor: '#00FFFF',
+          color: '#fafafa' 
         },
       },
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          color: '#CCC',
+          color: '#7e7a7a',
           fontWeight: '700',
           '&.Mui-selected': {
-            color: '#9ACD32', // Your desired highlight color for the selected tab text
+            color: '#FFFFFF', 
           },
           "@media (max-width: 768px)": {
             fontSize: "14px",

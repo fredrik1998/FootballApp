@@ -3,7 +3,16 @@ import GlobalStyle from '../../GlobalStyles';
 import Header from '../../components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeamSquad } from '../../slice/TeamSquadSlice';
-import { StyledWrapper, StyledTable, StyledH1, StyledLogo, StyledLink, StyledDiv, StyledCountryLogo } from './TeamElements';
+import { 
+  StyledWrapper,
+  StyledTable,
+  StyledH1,
+  StyledLogo,
+  StyledLink,
+  StyledDiv,
+  StyledCountryLogo,
+  StyledText,
+} from './TeamElements';
 import Loader from '../../components/Loader/Loader';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -16,6 +25,7 @@ const Team = () => {
   const TeamSquad = useSelector((state) => state.TeamSquad.data);
   const TeamSquadStatus = useSelector((state) => state.TeamSquad.status);
   const TeamSquadError = useSelector((state) => state.TeamSquad.error);
+  const TeamLatestMatches = useSelector((state) => state.TeamLatestMatches.data);
   const prevTeamId = useRef(null)
   const { team_id } = useParams();
   const [flags, setFlags] = useState({});
@@ -70,7 +80,7 @@ const Team = () => {
     }
     setFlags(flagUrls);
   };
-  
+
   useEffect(() => {
     if (TeamSquad.squad) {
       const uniqueNationalities = new Set(
@@ -79,7 +89,11 @@ const Team = () => {
       fetchFlags(uniqueNationalities);
     }
   }, [TeamSquad.squad]);
-  
+
+  useEffect(() => {
+    setSelectedView('squad')
+  }, [team_id])
+
   return (
     <>
       <GlobalStyle />
@@ -99,7 +113,15 @@ const Team = () => {
             </Tabs>
             {selectedView === 'squad' && (
               <> 
-               <StyledH1>{TeamSquad.name}</StyledH1>
+              <StyledH1>{TeamSquad.name}</StyledH1>
+              <StyledText>
+              {TeamSquad.area && (
+              <>
+              <StyledCountryLogo src={flags[TeamSquad.area.name]} />
+              {TeamSquad.area.name}
+              </>
+              )}
+              </StyledText>
                <StyledLogo src={TeamSquad.crest} ></StyledLogo>
                {Object.keys(squadByPosition).map((position) => (
                  <StyledDiv key={position}>

@@ -10,9 +10,14 @@ border-bottom: 1px solid #ccc;
 padding-bottom: 2em;
 `
 
-export const StyledTitle = styled.h1`
+export const StyledTitle = styled(Link)`
+display: flex;
+align-items: center;
+justify-content: center;
 font-size: 28px;
 color: #fafafa;
+text-decoration: none;
+margin-top: 20px;
 `
 
 export const StyledLink = styled(Link)`

@@ -610,6 +610,8 @@ def get_team_latest_matches(request, team_id):
             'id': match['id'],
             'home_team': match['homeTeam']['shortName'],
             'away_team' : match['awayTeam']['shortName'],
+            'home_team_id': match['homeTeam']['id'],
+            'away_team_id': match['awayTeam']['id'],
             'home_team_crest': match['homeTeam']['crest'],
             'away_team_crest': match['awayTeam']['crest'],
             'status': match['status'],

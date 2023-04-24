@@ -14,7 +14,7 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
 
   return (
     <StyledHeader>
-      <StyledTitle>FootyFrenzy</StyledTitle>
+      <StyledTitle to='/homescreen'>FootyFrenzy</StyledTitle>
       {location === '/' ? <StyledLink to='/login'>Sign in</StyledLink> : null}
       {isMobile &&
         (isOpen ? (

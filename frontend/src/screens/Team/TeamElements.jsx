@@ -7,11 +7,10 @@ flex-wrap: wrap;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-height: 100%;
+
 `
 export const StyledDiv = styled.div`
 width: 50%;
-
 @media screen and (max-width: 768px){
     width: 80%;
 }
@@ -32,7 +31,19 @@ td:nth-child(3){
     gap: 5px;
 }
 `
+export const StyledSquadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -20px;
+`;
+
 export const StyledH1 = styled.h1`
+margin-top: 40px;
+margin-bottom: 0px;
+`
+export const StyledText = styled.p`
+color: #ccc;
 `
 export const StyledLogo = styled.img`
 display: flex;

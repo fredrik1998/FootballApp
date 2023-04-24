@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice'
 import Loader from '../Loader/Loader'

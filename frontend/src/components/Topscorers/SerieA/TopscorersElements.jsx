@@ -16,7 +16,6 @@ th, td {
     padding: 8px;
 }
 `
-
 export const StyledLink = styled(Link)`
 text-decoration: none;
 cursor: pointer;
