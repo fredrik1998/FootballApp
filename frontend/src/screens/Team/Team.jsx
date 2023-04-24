@@ -25,7 +25,7 @@ const Team = () => {
   const TeamSquad = useSelector((state) => state.TeamSquad.data);
   const TeamSquadStatus = useSelector((state) => state.TeamSquad.status);
   const TeamSquadError = useSelector((state) => state.TeamSquad.error);
-  const TeamLatestMatches = useSelector((state) => state.TeamLatestMatches.data);
+  
   const prevTeamId = useRef(null)
   const { team_id } = useParams();
   const [flags, setFlags] = useState({});

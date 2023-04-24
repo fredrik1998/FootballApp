@@ -52,6 +52,8 @@ const Homescreen = () => {
           return 'PP';
         case 'IN_PLAY':
           return 'LIVE';
+        case 'PAUSED':
+        return 'HT'
         case 'FINISHED':
           return 'FT';
       }
