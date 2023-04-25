@@ -15,7 +15,7 @@ const Homescreen = () => {
     const TodaysMatchesError = useSelector((state) => state.TodaysMatches.error);
     const [selectedView, setSelectedView] = useState('table');
     const [isOpen, setIsOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const location = useLocation();
     const hamburgerMenuRef = useRef();
 

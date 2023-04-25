@@ -14,7 +14,7 @@ overflow-x: auto;
 `
 
 export const StyledTable = styled.table`
-width: 70%;
+width: 80%;
 border-collapse: collapse;
 th,td {
     text-align: left;

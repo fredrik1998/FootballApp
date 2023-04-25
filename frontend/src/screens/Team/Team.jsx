@@ -3,6 +3,7 @@ import GlobalStyle from '../../GlobalStyles';
 import Header from '../../components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeamSquad } from '../../slice/TeamSquadSlice';
+import { fetchTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice';
 import { 
   StyledWrapper,
   StyledTable,
@@ -19,17 +20,20 @@ import axios from 'axios';
 import { Tab, Tabs } from '@mui/material';
 import TeamUpcomingMatches from '../../components/TeamUpcomingMatches/TeamUpcomingMatches';
 import TeamLatestMatches from '../../components/TeamLatestMatches/TeamLatestMatches';
+import TeamForm from '../../components/TeamForm/TeamForm';
 
 const Team = () => {
   const dispatch = useDispatch();
   const TeamSquad = useSelector((state) => state.TeamSquad.data);
   const TeamSquadStatus = useSelector((state) => state.TeamSquad.status);
   const TeamSquadError = useSelector((state) => state.TeamSquad.error);
-  
+  const TeamMatches = useSelector((state) => state.TeamLatestMatches.data);
+  const TeamMatchesStatus = useSelector((state) => state.TeamLatestMatches.status);
   const prevTeamId = useRef(null)
   const { team_id } = useParams();
   const [flags, setFlags] = useState({});
   const [selectedView, setSelectedView] = useState('squad')
+  
 
   useEffect(() => {
     if(TeamSquadStatus === 'idle' || team_id !== prevTeamId.current){
@@ -39,6 +43,50 @@ const Team = () => {
 
   }, [TeamSquadStatus, dispatch, team_id]);
 
+  useEffect(() => {
+    if(TeamMatchesStatus === 'idle'){
+      dispatch(fetchTeamLatestMatches(team_id));
+    }
+  }, [dispatch, TeamMatchesStatus])
+
+  const formResults = (() => {
+    const results = [];
+  
+    for (const match of TeamMatches) {
+      const isDraw = match.home_team_score === match.away_team_score;
+      const isHomeTeam = match.home_team_id === TeamSquad.id;
+      if (isDraw) {
+        results.push({ 
+        result: 'D',
+        score: `${match.home_team_score}-${match.away_team_score}`,
+        crest: isHomeTeam ? match.away_team_crest : match.home_team_crest,
+        id: match.id
+      });
+        
+      } else {
+        const isHomeTeam = match.home_team_id === TeamSquad.id;
+        const isHomeTeamWinner = match.home_team_score > match.away_team_score;
+        if (isHomeTeamWinner) {
+          results.push({ 
+            result: isHomeTeam ? 'W' : 'L',
+            score: isHomeTeam ? `${match.home_team_score}-${match.away_team_score}` : `${match.away_team_score}-${match.home_team_score}`,
+            crest: isHomeTeam ? match.away_team_crest : match.home_team_crest,
+            id: match.id
+          });
+        } else {
+          results.push({ 
+            result: isHomeTeam ? 'L' : 'W',
+            score: isHomeTeam ? `${match.home_team_score}-${match.away_team_score}` : `${match.away_team_score}-${match.home_team_score}`,
+            crest: isHomeTeam ? match.away_team_crest : match.home_team_crest,
+            id: match.id
+          });
+        }
+      }
+    }
+  
+    return results;
+  })();
+  
   const squadByPosition = useMemo(() => {
     if (!TeamSquad.squad) {
       return {};
@@ -123,6 +171,7 @@ const Team = () => {
               )}
               </StyledText>
                <StyledLogo src={TeamSquad.crest} ></StyledLogo>
+               <TeamForm form={formResults}></TeamForm>
                {Object.keys(squadByPosition).map((position) => (
                  <StyledDiv key={position}>
                    <h3>{position}</h3>

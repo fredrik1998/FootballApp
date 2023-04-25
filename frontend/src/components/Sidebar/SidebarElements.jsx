@@ -28,7 +28,7 @@ export const StyledNav = styled.nav`
       padding-left: 20px;
       padding-top: 100px;
       width: 250px;
-      gap: 50px;
+      gap: 30px;
       background-color: rgba(0, 0, 0, 0.9);
       z-index: 10;
       animation: slideIn 0.5s ease-in-out forwards;

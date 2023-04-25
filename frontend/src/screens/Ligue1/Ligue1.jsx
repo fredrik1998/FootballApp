@@ -20,7 +20,7 @@ const Ligue1 = () => {
     const Ligue1Error = useSelector((state) => state.Ligue1.tableError);
     const [selectedView, setSelectedView] = useState('table');
     const [isOpen, setIsOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const hamburgerMenuRef = useRef();
     const location = useLocation();
 

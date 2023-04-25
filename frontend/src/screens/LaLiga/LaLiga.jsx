@@ -20,7 +20,7 @@ const LaLiga = () => {
     const LaLigaError = useSelector((state) => state.LaLiga.tableError);
     const [selectedView, setSelectedView] = useState('table')
     const [isOpen, setIsOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const hamburgerMenuRef = useRef();
     const location = useLocation();
 

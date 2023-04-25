@@ -1,5 +1,5 @@
-import { useLocation } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import CLTopScorers from '../../components/Topscorers/CL/CLTopScorers'
 import CLMatches from '../../components/UpcommingMatches/CL/CLMatches'
@@ -23,13 +23,9 @@ const CL = () => {
   const championsLeagueError = useSelector((state) => state.championsLeague.tableError)
   const [selectedView, setSelectedView] = useState('table')
   const [isOpen, setIsOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const hamburgerMenuRef = useRef()
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const hamburgerMenuRef = useRef();
   const location = useLocation();
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
 
   useEffect(() => {
     if(championsLeagueStatus ==='idle'){
@@ -37,15 +33,13 @@ const CL = () => {
     }
   }, [championsLeague, dispatch])
 
- 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen)
   }
-
-   useEffect(() => {
-    setIsOpen(false);
-  }, [location])
-
 
   return (
     <>
@@ -112,10 +106,8 @@ const CL = () => {
            ))}
          </GridContainer>
         )}
-       
       </>
       )}
-     
       {selectedView==='topScorers' && <CLTopScorers/>}
       {selectedView === 'upcommingMatches' && <CLMatches/>}
       {selectedView === 'topAssists' && <CLTopAssists/>}

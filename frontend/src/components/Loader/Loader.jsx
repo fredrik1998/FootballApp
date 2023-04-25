@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import footballImage from '../../images/footballicon.png'
 function Loader() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', width: '100vh' }}>
       <img
         src={footballImage}
         alt="Football loader"

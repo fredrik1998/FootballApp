@@ -25,6 +25,7 @@ export const StyledTable = styled.table`
 width: 70%;
 th, td{
   text-align: left;
+  padding: 2px;
   border-collapse: collapse;
 }
 `

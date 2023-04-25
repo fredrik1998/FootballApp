@@ -39,7 +39,7 @@ const Ligue1LatestMatches = () => {
         const matches = {};
         for(const match of Ligue1LatestMatches){
             const date = new Date(match.kickoff_time);
-            const formattedDate = date.toLocaleTimeString('en-GB', {weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'})
+            const formattedDate = date.toLocaleDateString('en-GB', {weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'})
             if(!matches[formattedDate]){
                 matches[formattedDate] = []
             }

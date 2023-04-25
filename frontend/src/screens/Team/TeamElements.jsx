@@ -7,7 +7,6 @@ flex-wrap: wrap;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-
 `
 export const StyledDiv = styled.div`
 width: 50%;
@@ -41,6 +40,7 @@ export const StyledSquadContainer = styled.div`
 export const StyledH1 = styled.h1`
 margin-top: 40px;
 margin-bottom: 0px;
+
 `
 export const StyledText = styled.p`
 color: #ccc;

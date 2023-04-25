@@ -24,7 +24,7 @@ width: 70%;
 border-collapse: collapse;
 th, td{
   text-align: left;
-  
+
 }
 `
 export const StyledLink = styled(Link)`
