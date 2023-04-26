@@ -637,7 +637,7 @@ def get_player(request, player_id):
 @api_view(['GET'])
 def get_match(request, match_id):
     headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
-    url = f'https://api.football-data.org/v4/matches{match_id}'
+    url = f'https://api.football-data.org/v4/matches/{match_id}'
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:

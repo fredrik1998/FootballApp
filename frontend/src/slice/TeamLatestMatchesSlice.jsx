@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import {createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const fetchTeamLatestMatches = createAsyncThunk(
@@ -14,6 +14,8 @@ const initialState = {
     status: 'idle',
     error: null,
 }
+
+export const resetTeamLatestMatches = createAction('teamLatestMatches/reset')
 
 export const TeamLatestMatchesSlice = createSlice({
     name: 'TeamLatestMatches',
@@ -31,6 +33,11 @@ export const TeamLatestMatchesSlice = createSlice({
         .addCase(fetchTeamLatestMatches.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message;
+        })
+        .addCase(resetTeamLatestMatches, (state) => {
+            state.status = 'idle';
+            state.data = [];
+            state.error = null;
         })
     }
 })

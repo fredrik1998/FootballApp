@@ -3,7 +3,7 @@ import GlobalStyle from '../../GlobalStyles';
 import Header from '../../components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeamSquad } from '../../slice/TeamSquadSlice';
-import { fetchTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice';
+import { fetchTeamLatestMatches, resetTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice';
 import { 
   StyledWrapper,
   StyledTable,
@@ -34,7 +34,6 @@ const Team = () => {
   const [flags, setFlags] = useState({});
   const [selectedView, setSelectedView] = useState('squad')
   
-
   useEffect(() => {
     if(TeamSquadStatus === 'idle' || team_id !== prevTeamId.current){
         prevTeamId.current = team_id;
@@ -44,12 +43,32 @@ const Team = () => {
   }, [TeamSquadStatus, dispatch, team_id]);
 
   useEffect(() => {
-    if(TeamMatchesStatus === 'idle'){
+    if (TeamMatchesStatus === 'idle' || team_id !== prevTeamId.current) {
+      prevTeamId.current = team_id;
       dispatch(fetchTeamLatestMatches(team_id));
     }
-  }, [dispatch, TeamMatchesStatus])
+  }, [dispatch, TeamMatchesStatus, team_id]);
 
-  const formResults = (() => {
+  useEffect(() => {
+    if (TeamSquad.squad) {
+      const uniqueNationalities = new Set(
+        TeamSquad.squad.map((player) => player.nationality)
+      );
+      fetchFlags(uniqueNationalities);
+    }
+  }, [TeamSquad.squad]);
+
+  useEffect(() => {
+    setSelectedView('squad')
+  }, [team_id])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetTeamLatestMatches());
+    };
+  }, [team_id, dispatch]);
+  
+  const formResults = useMemo(() => {
     const results = [];
   
     for (const match of TeamMatches) {
@@ -85,7 +104,7 @@ const Team = () => {
     }
   
     return results;
-  })();
+  }, [TeamSquad, TeamMatches, team_id]);
   
   const squadByPosition = useMemo(() => {
     if (!TeamSquad.squad) {
@@ -128,19 +147,6 @@ const Team = () => {
     }
     setFlags(flagUrls);
   };
-
-  useEffect(() => {
-    if (TeamSquad.squad) {
-      const uniqueNationalities = new Set(
-        TeamSquad.squad.map((player) => player.nationality)
-      );
-      fetchFlags(uniqueNationalities);
-    }
-  }, [TeamSquad.squad]);
-
-  useEffect(() => {
-    setSelectedView('squad')
-  }, [team_id])
 
   return (
     <>

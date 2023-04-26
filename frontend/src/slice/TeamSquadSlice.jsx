@@ -31,7 +31,6 @@ export const TeamSquadSlice = createSlice({
         .addCase(fetchTeamSquad, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message
-
         })
     }
 })

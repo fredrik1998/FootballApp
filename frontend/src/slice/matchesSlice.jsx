@@ -4,10 +4,12 @@ import axios from 'axios'
 export const fetchMatchData = createAsyncThunk(
     'fetchMatchData/matchData',
     async (match_id) => {
-        const response = await axios.get(`/api/match/${match_id}/`)
-        return response.data;
-    }
-)
+      const response = await axios.get(`/api/match/${match_id}/`);
+      console.log('API response data:', response.data);
+      return response.data;
+    },
+  );
+  
 
 const initialState = {
     data: [],

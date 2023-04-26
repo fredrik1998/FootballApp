@@ -20,14 +20,23 @@ export const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
   font-size: 16px;
-  
-  
 
+  tr {
+  position: relative;
+  cursor: pointer;
+  }
+  tr:hover {
+    box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.3);
+  }
+  tr td {
+    position: relative;
+    z-index: 1;
+  }
   th,
   td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #fafafa;
+    border-bottom: 1px solid #000;
   }
 
   th {
