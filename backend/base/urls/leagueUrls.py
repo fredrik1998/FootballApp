@@ -40,5 +40,6 @@ urlpatterns = [
     path('match/<int:match_id>/', views.get_match, name='get_match'),
     path('matches/todaysmatches/', views.today_matches, name='today-matches'),
     path('team/upcomingmatches/<int:team_id>/', views.get_team_upcoming_matches, name='team-upcomingmatches'),
-    path('team/latestmatches/<int:team_id>/', views.get_team_latest_matches, name='team-latestmatches')
+    path('team/latestmatches/<int:team_id>/', views.get_team_latest_matches, name='team-latestmatches'),
+    path('match/<int:match_id>/head2head/', views.get_head_2_head, name='match-head2head')
 ]

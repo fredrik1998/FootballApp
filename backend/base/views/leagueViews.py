@@ -645,7 +645,17 @@ def get_match(request, match_id):
         return Response(match_data)
     else:
         return Response({'Error' : 'Unable to fetch data'})
-
+    
+@api_view(['GET'])
+def get_head_2_head(request, match_id):
+    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = f'https://api.football-data.org/v4/matches/{match_id}/head2head'
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        matches = response.json()
+        return Response(matches)
+    else:
+        return Response({'Error' : 'Unable to fetch head2head data'})
     
 @api_view(['GET'])
 def get_all_leagues(request):
@@ -671,9 +681,7 @@ def today_matches(request):
         'dateFrom': today,
         'dateTo': tomorrow,
     }
-
     response = requests.get(url, headers=headers, params=params)
-
     if response.status_code == 200:
         data = response.json()
         matches = data['matches']

@@ -33,6 +33,9 @@ export const StyledNav = styled.nav`
       z-index: 10;
       animation: slideIn 0.5s ease-in-out forwards;
     }
+    @media screen and (min-height: 1200px) {
+      gap: 70px;
+    }
   }
 
   @keyframes slideIn {

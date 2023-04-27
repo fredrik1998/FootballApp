@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { Suspense, lazy, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Loginscreen from './screens/Loginscreen/Loginscreen';
-import Landingscreen from './screens/Landingscreen/Landingscreen'
-import RegisterScreen from './screens/Registerscreen/Registerscreen'
-import PremierLeague from './screens/PL/PremierLeague';
-import CL from './screens/CL/CL';
-import Team from './screens/Team/Team';
-import SerieA from './screens/SerieA/SerieA';
-import Bundesliga from './screens/Bundesliga/Bundesliga';
-import Ligue1 from './screens/Ligue1/Ligue1';
-import LaLiga from './screens/LaLiga/LaLiga';
-import Player from './screens/Player/Player'
-import Match from './screens/Match/Match';
-import Homescreen from './screens/Homescreen/Homescreen';
+import Loader from './components/Loader/Loader';
+
+const Loginscreen = lazy(() => import('./screens/Loginscreen/Loginscreen'));
+const Landingscreen = lazy(() => import( './screens/Landingscreen/Landingscreen'));
+const RegisterScreen = lazy(() => import('./screens/Registerscreen/Registerscreen'));
+const PremierLeague = lazy(() => import('./screens/PL/PremierLeague'));
+const CL = lazy(() => import('./screens/CL/CL'));
+const Team = lazy(() => import('./screens/Team/Team'));
+const SerieA = lazy(() => import('./screens/SerieA/SerieA'));
+const Bundesliga = lazy(() => import('./screens/Bundesliga/Bundesliga'));
+const Ligue1 = lazy(() => import('./screens/Ligue1/Ligue1'));
+const LaLiga = lazy(() => import('./screens/LaLiga/LaLiga'));
+const Player = lazy(() => import('./screens/Player/Player'));
+const Match = lazy(() => import('./screens/Match/Match'));
+const Homescreen = lazy(() => import('./screens/Homescreen/Homescreen'));
 
 const App =() => {
   return (
@@ -34,4 +36,10 @@ const App =() => {
   )
 }
 
-export default App
+export default function AppWrapper() {
+  return(
+  <Suspense fallback={<Loader/>}>
+    <App/>
+  </Suspense>
+  );
+}

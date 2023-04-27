@@ -13,6 +13,7 @@ import { matchSlice } from './slice/matchesSlice';
 import { TodaysMatchesSlice } from './slice/todaysMatchesSlice';
 import { TeamUpcomingMatchesSlice } from './slice/TeamUpcomingMatchesSlice';
 import { TeamLatestMatchesSlice} from './slice/TeamLatestMatchesSlice';
+import { Head2HeadSlice } from './slice/Head2HeadSlice';
 export default configureStore({
   reducer: {
     user: userSlice.reducer,
@@ -29,5 +30,6 @@ export default configureStore({
     TodaysMatches: TodaysMatchesSlice.reducer,
     TeamUpcomingMatches: TeamUpcomingMatchesSlice.reducer,
     TeamLatestMatches: TeamLatestMatchesSlice.reducer,
+    Head2Head: Head2HeadSlice.reducer,
   },
 });

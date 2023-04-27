@@ -1,30 +1,32 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import footballImage from '../../images/footballicon.png'
+import { motion } from 'framer-motion';
+
 function Loader() {
+  const loaderVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.5,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: 'easeInOut',
+      },
+    },
+  };
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', width: '100vh' }}>
-      <img
-        src={footballImage}
-        alt="Football loader"
-        style={{
-          width: '300px',
-          animation: 'spin 2s linear infinite',
-          background: 'none'
-        }}
-      />
-      <style>
-        {`
-          @keyframes spin {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-        `}
-      </style>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', width: '100vw' }}>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={loaderVariants}
+      >
+        <CircularProgress style={{width:'300px', height: '300px'}} />
+      </motion.div>
     </div>
   );
 }

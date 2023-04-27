@@ -8,7 +8,7 @@ flex-direction: column;
 width: 100%;
 `
 export const StyledTable = styled.table`
-width: 100%;
+width: 80%;
 border-collapse: collapse;
 th, td {
     text-align: left;

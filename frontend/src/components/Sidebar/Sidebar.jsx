@@ -86,7 +86,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
   return (
     <StyledNav className={isOpen || window.innerWidth >= 768 ? 'expanded' : '' || isExpanded ? "expanded slideIn" : "slideOut"} ref={sidebarRef}  animate={isOpen ? "open" : "closed"}
    >
-    <h1>Leagues</h1>
+    <h1 style={{margin: 0}}>Leagues</h1>
     <StyledLink to='/PL'><StyledImage src={getPremierLeagueEmblem()}></StyledImage>Premier League</StyledLink>
     <StyledLink to='/CL'><StyledImage src={getChampionsLeagueEmblem()} ></StyledImage>Champions League</StyledLink>
     <StyledLink to='/SA'><StyledImage src={getSerieAEmblem()}></StyledImage>Serie A</StyledLink>

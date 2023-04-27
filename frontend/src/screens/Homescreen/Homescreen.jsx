@@ -6,7 +6,7 @@ import GlobalStyle from '../../GlobalStyles'
 import Header from '../../components/Header/Header'
 import { ContentWrapper, StyledDiv, StyledLink, StyledTable, StyledWrapper } from './HomescreenElements'
 import Sidebar from '../../components/Sidebar/Sidebar'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Homescreen = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const Homescreen = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const location = useLocation();
     const hamburgerMenuRef = useRef();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(TodaysMatchesStatus === 'idle'){
@@ -99,7 +100,12 @@ const Homescreen = () => {
                           <tbody>
                             {competition.matches.map((match) => {
                               return (
-                                <tr key={match.id}>
+                                <tr key={match.id} onClick={(e) => {
+                                  if(e.target.tagName.toLowerCase() === 'a'){
+                                    return;
+                                  }
+                                  navigate(`/match/${match.id}`)
+                                }}>
   <td>
     <img src={match.homeTeam.crest} width={30}></img>
     <StyledLink to={`/team/${match.homeTeam.id}`}>{match.homeTeam.shortName}</StyledLink>
