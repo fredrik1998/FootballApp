@@ -1,6 +1,7 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { motion } from 'framer-motion';
+import GlobalStyle from '../../GlobalStyles';
 
 function Loader() {
   const loaderVariants = {
@@ -19,6 +20,8 @@ function Loader() {
   };
 
   return (
+    <>
+    <GlobalStyle/>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', width: '100vw' }}>
       <motion.div
         initial="hidden"
@@ -28,6 +31,7 @@ function Loader() {
         <CircularProgress style={{width:'300px', height: '300px'}} />
       </motion.div>
     </div>
+    </>
   );
 }
 
