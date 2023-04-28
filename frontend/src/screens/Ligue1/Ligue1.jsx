@@ -6,7 +6,7 @@ import {Tabs, Tab } from '@mui/material'
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import GlobalStyle from '../../GlobalStyles'
-import {StyledWrapper, StyledDiv, StyledLink, StyledTable, ContentWrapper } from './Ligue1Elements'
+import {StyledWrapper, StyledLink, StyledTable, ContentWrapper } from './Ligue1Elements'
 import Ligue1TopScorers from '../../components/Topscorers/Ligue1/Ligue1TopScorers'
 import Ligue1TopAssists from '../../components/Topassists/Ligue1/Ligue1TopAssists'
 import Ligue1UpcommingMatches from '../../components/UpcommingMatches/Ligue1/Ligue1UpcommingMatches'
@@ -17,7 +17,6 @@ const Ligue1 = () => {
     const dispatch = useDispatch();
     const Ligue1 = useSelector((state) => state.Ligue1.table);
     const Ligue1Status = useSelector((state) => state.Ligue1.tableStatus);
-    const Ligue1Error = useSelector((state) => state.Ligue1.tableError);
     const [selectedView, setSelectedView] = useState('table');
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);

@@ -13,7 +13,6 @@ export const StyledWrapper = styled.div`
 export const StyledDiv = styled.div`
  width: 100%;
 margin: 1rem auto;
-
 `;
 
 export const StyledTable = styled.table`

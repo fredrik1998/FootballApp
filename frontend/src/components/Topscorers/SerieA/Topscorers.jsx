@@ -8,7 +8,6 @@ const Topscorers = () => {
     const dispatch = useDispatch()
     const SerieATopScorer = useSelector((state) => state.SerieA.topScorers);
     const SerieATopScorerStatus  = useSelector((state) => state.SerieA.topScorersStatus);
-    const SerieATopScorerError = useSelector((state) => state.SerieA.topScorersError);
     const SerieA = useSelector((state) => state.SerieA.table);
 
     useEffect(() => {

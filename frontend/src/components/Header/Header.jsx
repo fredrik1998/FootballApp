@@ -2,14 +2,13 @@ import React, { useState, useRef } from 'react';
 import {
   StyledHeader,
   StyledLink,
-  StyledSeperator,
   StyledTitle,
 } from './HeaderElements';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Header = ({ toggleSidebar, isMobile, isOpen }) => {
-  const [location, setLocation] = useState(window.location.pathname);
+  const [location] = useState(window.location.pathname);
   const hamburgerMenuRef = useRef();
 
   return (
@@ -29,7 +28,6 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
             onClick={() => toggleSidebar(true)}
             style={{ color: '#fff', fontSize: '2.5rem'}}
           />
-         
         ))}
     </StyledHeader>
   );

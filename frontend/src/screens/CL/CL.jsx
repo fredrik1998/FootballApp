@@ -20,7 +20,6 @@ const CL = () => {
   const dispatch = useDispatch()
   const championsLeague = useSelector((state) => state.championsLeague.table)
   const championsLeagueStatus = useSelector((state) => state.championsLeague.tableStatus)
-  const championsLeagueError = useSelector((state) => state.championsLeague.tableError)
   const [selectedView, setSelectedView] = useState('table')
   const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)

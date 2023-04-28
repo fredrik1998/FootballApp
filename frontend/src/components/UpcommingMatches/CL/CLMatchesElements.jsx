@@ -8,13 +8,11 @@ export const StyledWrapper = styled.div`
   justify-content: space-evenly;
   width: 80%;
   margin: 0 auto;
-  
 `;
 
 export const StyledDiv = styled.div`
  width: 100%;
-margin: 1rem auto;
-
+ margin: 1rem auto;
 `;
 
 export const StyledTable = styled.table`

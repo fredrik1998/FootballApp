@@ -9,7 +9,6 @@ const PLLatestMatches = () => {
   const premierLeague = useSelector((state) => state.premierLeague.table);
   const PLLatestMatches = useSelector((state) => state.premierLeague.latestMatches);
   const PLLatestMatchesStatus = useSelector((state) => state.premierLeague.latestMatchesStatus);
-  const PLLatestMatchesError = useSelector((state) => state.premierLeague.latestMatchesError);
   const navigate = useNavigate();
 
   useEffect(() => {

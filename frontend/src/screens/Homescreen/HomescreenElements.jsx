@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,7 +9,6 @@ export const StyledWrapper = styled.div`
 `;
 export const ContentWrapper = styled.main`
 display: flex;
-
 `
 export const StyledDiv = styled.div`
 display: flex;
@@ -86,7 +86,6 @@ export const StyledTable = styled.table`
   gap: 20px;
 }
 `;
-
 
 export const StyledLink = styled(Link)`
 text-decoration: none;

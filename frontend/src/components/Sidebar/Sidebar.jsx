@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyledLink, StyledNav, StyledImage, StyledSidebar, StyledButton } from './SidebarElements';
+import { StyledLink, StyledNav, StyledImage} from './SidebarElements';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchLeagues } from '../../slice/LeaguesSlice';
 
@@ -8,7 +8,7 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
   const Leagues = useSelector((state) => state.Leagues.data)
   const LeaguesStatus = useSelector((state) => state.Leagues.status)
   const sidebarRef = useRef()
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,11 +47,6 @@ const Sidebar = ({toggleSidebar, isOpen, setIsMobile, hamburgerMenuRef}) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [toggleSidebar, hamburgerMenuRef, isOpen]);
-
-  const ToggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
-  
 
   const getChampionsLeagueEmblem = () => {
     const championsLeague = Leagues.find(league => league.name === 'UEFA Champions League');

@@ -9,7 +9,7 @@ import { StyledWrapper,StyledTable, StyledLink, ContentWrapper} from './PremierL
 import Loader from '../../components/Loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPremierLeague } from '../../slice/premierLeagueSlice';
-import {Tabs, Tab, Fab,} from '@mui/material'
+import {Tabs, Tab} from '@mui/material'
 import Sidebar from '../../components/Sidebar/Sidebar';
 import PLLatestMatches from '../../components/LatestMatches/PL/PLLatestMatches';
 
@@ -17,7 +17,6 @@ const PremierLeague = () => {
   const dispatch = useDispatch();
   const premierLeague = useSelector((state) => state.premierLeague.table);
   const premierLeagueStatus = useSelector((state) => state.premierLeague.tableStatus);
-  const premierLeagueError = useSelector((state) => state.premierLeague.tableError);
   const [selectedView, setSelectedView] = useState('table')
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);

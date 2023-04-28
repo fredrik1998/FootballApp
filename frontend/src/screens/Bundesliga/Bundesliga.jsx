@@ -12,11 +12,11 @@ import BundesligaTopScorer from '../../components/Topscorers/Bundesliga/Bundesli
 import BundesligaTopAssists from '../../components/Topassists/Bundesliga/BundesligaTopAssists'
 import BundesligaUpcommingMatches from '../../components/UpcommingMatches/Bundesliga/BundesligaUpcommingMatches'
 import BundesligaLatestMatches from '../../components/LatestMatches/Bundesliga/BundesligaLatestMatches'
+
 const Bundesliga = () => {
     const dispatch = useDispatch();
     const Bundesliga = useSelector((state) => state.Bundesliga.table);
     const BundesligaStatus = useSelector((state) => state.Bundesliga.tableStatus);
-    const BundesligaError = useSelector((state) => state.Bundesliga.tableError);
     const [selectedView, setSelectedView] = useState('table')
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)

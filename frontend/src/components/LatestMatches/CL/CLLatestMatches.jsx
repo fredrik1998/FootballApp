@@ -54,7 +54,7 @@ const CLLatestMatches = () => {
 
   if (CLLatestMatchesStatus === 'loading') {
     return <Loader />;
-  }
+  };
 
   return (
     <StyledWrapper>

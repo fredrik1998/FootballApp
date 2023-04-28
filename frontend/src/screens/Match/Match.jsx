@@ -32,10 +32,8 @@ const Match = () => {
   const dispatch = useDispatch();
   const Match = useSelector((state) => state.Match.data);
   const MatchStatus = useSelector((state) => state.Match.status);
-  const MatchError = useSelector((state) => state.Match.error);
   const Head2Head = useSelector((state) => state.Head2Head.data);
   const Head2HeadStatus = useSelector((state) => state.Head2Head.status);
-  const Head2HeadError = useSelector((state) => state.Head2Head.error);
   const prevMatchId = useRef(null);
   const { match_id } = useParams();
   const navigate = useNavigate();

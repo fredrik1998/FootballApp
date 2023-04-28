@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Loader from '../../Loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCLUpcommingMatches } from '../../../slice/championsLeageuSlice';

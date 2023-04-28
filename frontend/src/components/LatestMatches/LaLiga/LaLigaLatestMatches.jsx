@@ -3,15 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchLaLigaLatestMatches } from '../../../slice/LaLigaSlice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './LaLigaLatestMatchesElements'
-import { useNavigate } from 'react-router-dom'
 
 const LaLigaLatestMatches = () => {
     const dispatch = useDispatch();
     const LaLiga = useSelector((state) => state.LaLiga.table);
     const LaLigaLatestMatches = useSelector((state) => state.LaLiga.latestMatches);
     const LaLigaLatestMatchesStatus = useSelector((state) => state.LaLiga.latestMatchesStatus);
-    const LaLigaLatestMatchesError = useSelector((state) => state.LaLiga.latestMatchesError);
-    const navigate = useNavigate();
+    
     useEffect(() => {
         if(LaLigaLatestMatchesStatus === 'idle'){
             dispatch(fetchLaLigaLatestMatches());
@@ -88,8 +86,7 @@ const LaLigaLatestMatches = () => {
                                         <td>
                                             <img src={getTeamLogo(match.away_team)} width={30}></img>
                                             <StyledLink to={`/team/${getTeamId(match.away_team)}`}>{match.away_team}</StyledLink>
-                                        </td>
-                                            
+                                        </td>  
                                     </tr>
                                 )
                             })}

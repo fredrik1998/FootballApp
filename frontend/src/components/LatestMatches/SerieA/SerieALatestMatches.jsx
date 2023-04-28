@@ -9,7 +9,6 @@ const SerieALatestMatches = () => {
   const dispatch = useDispatch();
   const serieALatestMatches = useSelector((state) => state.SerieA.latestMatches);
   const serieALatestMatchesStatus = useSelector((state) => state.SerieA.latestMatchesStatus);
-  const serieALatestMatchesError = useSelector((state) => state.SerieA.latestMatchesError);
   const serieA = useSelector((state) => state.SerieA.table);
   const navigate = useNavigate();
   useEffect(() => {

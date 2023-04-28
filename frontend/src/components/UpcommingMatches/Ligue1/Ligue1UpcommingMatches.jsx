@@ -4,12 +4,12 @@ import { fetchLigue1UpcommingMatches } from '../../../slice/Ligue1Slice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './Ligue1UpcommingMatchesElements'
 import { useNavigate } from 'react-router-dom';
+
 const Ligue1UpcommingMatches = () => {
     const dispatch = useDispatch();
     const Ligue1 = useSelector((state) => state.Ligue1.table);
     const Ligue1UpcommingMatches = useSelector((state) => state.Ligue1.upcomingMatches);
     const Ligue1UpcommingMatchesStatus = useSelector((state) => state.Ligue1.upcomingMatchesStatus);
-    const Ligue1UpcommingMatchesError = useSelector((state) => state.Ligue1.upcomingMatchesError);
     const navigate = useNavigate();
     useEffect(() => {
         if(Ligue1UpcommingMatchesStatus === 'idle'){

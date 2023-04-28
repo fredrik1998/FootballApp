@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import GlobalStyle from '../../../GlobalStyles'
 import Loader from '../../Loader/Loader'
 import { StyledWrapper, StyledTable, StyledLink } from './PLTopAssistsElements'
+
 const PLTopAssists = () => {  
     const dispatch = useDispatch()
     const PLTopAssists = useSelector((state) => state.premierLeague.topAssists);
     const PLTopAssistsStatus = useSelector((state) => state.premierLeague.topAssistsStatus);
-    const PLTopAssistsError = useSelector((state) => state.premierLeague.topAssistsError);
     const premierLeague = useSelector((state) => state.premierLeague.table);
+
     useEffect(() => {
         if(PLTopAssistsStatus === 'idle'){
             dispatch(fetchPLTopAssists())

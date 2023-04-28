@@ -5,13 +5,11 @@ export const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   width: 80%;
-  
 `;
 
 export const StyledDiv = styled.div`
  width: 100%;
 margin: 1rem auto;
-
 `;
 
 export const StyledTable = styled.table`

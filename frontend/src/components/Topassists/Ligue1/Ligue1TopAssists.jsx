@@ -9,8 +9,7 @@ const Ligue1TopAssists = () => {
     const Ligue1 = useSelector((state) => state.Ligue1.table);
     const Ligue1TopAssists = useSelector((state) => state.Ligue1.topAssists);
     const Ligue1TopAssistsStatus = useSelector((state) => state.Ligue1.topAssistsStatus);
-    const Ligue1TopAssistsError = useSelector((state) => state.Ligue1.topAssistsError);
-
+   
     const getTeamLogo = (teamName) => {
         for(const team of Ligue1){
             if(team.team.name === teamName){

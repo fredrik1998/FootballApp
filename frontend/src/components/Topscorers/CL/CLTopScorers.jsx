@@ -1,14 +1,14 @@
 import { fetchTopScorerCL } from '../../../slice/championsLeageuSlice'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import GlobalStyle from '../../../GlobalStyles'
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../../Loader/Loader'
 import { StyledTable, StyledWrapper, StyledLink } from './CLTopScorerElements'
+
 const CLTopScorers = () => {
     const dispatch = useDispatch()
     const CLTopScorer = useSelector((state) => state.championsLeague.topScorers)
     const CLTopScorerStatus = useSelector((state) => state.championsLeague.topScorersStatus)
-    const CLTopScorerError = useSelector((state) => state.championsLeague.topScorersError)
     const championsLeague = useSelector((state) => state.championsLeague.table)
 
     useEffect(() => {

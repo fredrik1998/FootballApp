@@ -29,8 +29,8 @@ const dispatch = useDispatch();
     password: '',
   })
 
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [message, setMessage] = useState('')
+  const [setIsDisabled] = useState(true)
+  const [message] = useState('')
 
   const { userInfo, loading, error } = useSelector((state) => state.user)
 
@@ -71,7 +71,7 @@ const dispatch = useDispatch();
           {message && <StyledError>{message}</StyledError>}
           {error && <StyledError>{error}</StyledError>}
         <StyledTitle>Sign in</StyledTitle>
-          <StyledLabel>Useremail</StyledLabel>
+          <StyledLabel htmlFor='email'>Useremail</StyledLabel>
           <StyledInput 
           type='text'
           onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +80,7 @@ const dispatch = useDispatch();
           >
           </StyledInput>
           <StyledError>{formErrors.email}</StyledError>
-          <StyledLabel>Password</StyledLabel>
+          <StyledLabel htmlFor='password'>Password</StyledLabel>
           <StyledInput 
           type='password'
           id='password'

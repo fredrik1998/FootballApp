@@ -8,9 +8,9 @@ const BundesligaUpcommingMatches = () => {
     const dispatch = useDispatch();
     const BundesligaUpcommingMatches = useSelector((state) => state.Bundesliga.upcomingMatches);
     const BundesligaUpcommingMatchesStatus = useSelector((state) => state.Bundesliga.upcomingMatchesStatus);
-    const BundesligaUpcommingMatchesError = useSelector((state) => state.Bundesliga.upcomingMatchesError);
     const Bundesliga = useSelector((state) => state.Bundesliga.table);
     const navigate = useNavigate();
+
     useEffect(() => {
         if(BundesligaUpcommingMatchesStatus === 'idle'){
             dispatch(fetchBundesligaUpcommingMatches());

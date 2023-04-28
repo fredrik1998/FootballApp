@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import GlobalStyle from '../../GlobalStyles'
 import Header from '../../components/Header/Header'
 import { StyledButton, StyledForm, StyledInput, StyledLabel, StyledTitle, StyledWrapper, StyledError, StyledLink} from './RegisterscreenElements'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux'
 import { register } from '../../slice/userSlice'
+
 const RegisterScreen = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
-    const [isDisabled, setIsDisabled]  = useState(true)
+    const [setIsDisabled]  = useState(true)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -73,8 +74,8 @@ const RegisterScreen = () => {
         {message && <StyledError>{message}</StyledError>}
         {error && <StyledError>{error}</StyledError>}
         <StyledTitle>Register</StyledTitle>
-        <StyledLabel>Username</StyledLabel>
-        <StyledInput
+        <StyledLabel htmlFor='name'>Username</StyledLabel>
+        <StyledInput 
         type='name'
         id='name'
         placeholder='eg. fredrik1998'
@@ -83,7 +84,7 @@ const RegisterScreen = () => {
         >
         </StyledInput>
         <StyledError>{formErrors.name}</StyledError>
-        <StyledLabel>Email</StyledLabel>
+        <StyledLabel htmlFor='email'>Email</StyledLabel>
         <StyledInput
         type='email'
         id='email'
@@ -92,7 +93,7 @@ const RegisterScreen = () => {
         onChange={(e) => setEmail(e.target.value)}
         ></StyledInput>
         <StyledError>{formErrors.email}</StyledError>
-        <StyledLabel>Password</StyledLabel>
+        <StyledLabel htmlFor='password'>Password</StyledLabel>
         <StyledInput
         type='password'
         id='password'
@@ -101,7 +102,7 @@ const RegisterScreen = () => {
         >
         </StyledInput>
         <StyledError>{formErrors.password}</StyledError>
-        <StyledLabel>Confirm Password</StyledLabel>
+        <StyledLabel htmlFor='confirmpassword'>Confirm Password</StyledLabel>
         <StyledInput
         type='password'
         id='confirmpassword'

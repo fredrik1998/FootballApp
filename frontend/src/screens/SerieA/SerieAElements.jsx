@@ -12,7 +12,6 @@ gap: 40px;
 flex-grow: 1;
 overflow-x: auto;
 `
-
 export const StyledTable = styled.table`
 width: 80%;
 border-collapse: collapse;

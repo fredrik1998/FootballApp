@@ -8,7 +8,6 @@ const BundesligaTopScorer = () => {
     const dispatch = useDispatch()
     const BundesligaTopScorer = useSelector((state) => state.Bundesliga.topScorers);
     const BundesligaTopScorerStatus = useSelector((state) => state.Bundesliga.topScorersStatus);
-    const BundesligaTopScorerError = useSelector((state) => state.Bundesliga.topScorersError);
     const Bundesliga = useSelector((state) => state.Bundesliga.table);
 
     useEffect(() => {

@@ -3,13 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchTeamUpcomingMatches } from '../../slice/TeamUpcomingMatchesSlice'
 import Loader from '../Loader/Loader'
-import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './TeamUpcomingMatchesElements'
+import { 
+    StyledDiv,
+    StyledLink,
+    StyledTable,
+    StyledWrapper 
+} from './TeamUpcomingMatchesElements'
 
 const TeamUpcomingMatches = () => {
     const dispatch = useDispatch();
     const TeamUpcomingMatches = useSelector((state) => state.TeamUpcomingMatches.data);
     const TeamUpcomingMatchesStatus = useSelector((state) => state.TeamUpcomingMatches.status);
-    const TeamUpcomingMatchesError = useSelector((state) => state.TeamUpcomingMatches.error);
     const TeamSquad = useSelector((state) => state.TeamSquad.data);
     const { team_id } = useParams();
     console.log('TeamSquad:', TeamSquad);

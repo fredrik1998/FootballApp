@@ -6,10 +6,9 @@ import { StyledLink, StyledTable, StyledWrapper } from './BundesligaTopAssistsEl
 
 const BundesligaTopAssists = () => {
     const dispatch = useDispatch();
-    const BundesligaTopAssists = useSelector((state) => state.Bundesliga.topAssists)
-    const BundesligaTopAssistsStatus = useSelector((state) => state.Bundesliga.topAssistsStatus)
-    const BundesligaTopAssistsError = useSelector((state) => state.Bundesliga.topAssistsError)
-    const Bundesliga = useSelector((state) => state.Bundesliga.table)
+    const BundesligaTopAssists = useSelector((state) => state.Bundesliga.topAssists);
+    const BundesligaTopAssistsStatus = useSelector((state) => state.Bundesliga.topAssistsStatus);
+    const Bundesliga = useSelector((state) => state.Bundesliga.table);
 
     useEffect(() => {
         if(BundesligaTopAssistsStatus === 'idle'){

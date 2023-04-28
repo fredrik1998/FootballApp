@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchTopScorerPL } from '../../../slice/premierLeagueSlice';
 import Loader from '../../Loader/Loader';
 import { StyledWrapper, StyledTable, StyledLink } from './TopScorerElements';
+
 const TopScorers = () => {
   const dispatch = useDispatch()
   const PLTopScorer = useSelector((state) => state.premierLeague.topScorers);
   const PLTopScorerStatus = useSelector((state) => state.premierLeague.topScorersStatus);
-  const PLTopScorerError = useSelector((state) => state.premierLeague.topScorersError);
   const premierLeague = useSelector((state) => state.premierLeague.table);
 
   useEffect(() => {

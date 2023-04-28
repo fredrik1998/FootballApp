@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const ContentWrapper = styled.main`
 display: flex;
-
 `
 export const StyledWrapper = styled.div`
   display: flex;
@@ -11,7 +10,6 @@ export const StyledWrapper = styled.div`
   align-items: center;
   gap: 40px;
   flex-grow: 1;
-
   overflow-x: auto;
 `;
 export const StyledDiv = styled.div`

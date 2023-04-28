@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { StyledWrapper, StyledImage, StyledDiv, StyledCountryLogo, StyledPlayerStats } from './PlayerElements'
 import { Typography } from '@mui/material'
 import axios from 'axios'
+
 const Player = () => {
     const dispatch = useDispatch();
     const Player = useSelector((state) => state.Player.data);

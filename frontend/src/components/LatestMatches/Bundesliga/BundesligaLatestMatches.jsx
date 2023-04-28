@@ -8,7 +8,6 @@ const BundesligaLatestMatches = () => {
     const dispatch = useDispatch();
     const BundesligaLatestMatches = useSelector((state) => state.Bundesliga.latestMatches);
     const BundesligaLatestMatchesStatus = useSelector((state) => state.Bundesliga.latestMatchesStatus);
-    const BundesligaLatestMatchesError = useSelector((state) => state.Bundesliga.latestMatchesError);
     const Bundesliga = useSelector((state) => state.Bundesliga.table);
     const navigate = useNavigate();
 

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { motion } from 'framer-motion'
 
 export const StyledNav = styled.nav`
   display: none;
@@ -48,7 +47,6 @@ export const StyledNav = styled.nav`
   }
 
 `;
-
 
 export const StyledLink = styled(Link)`
 text-decoration: none;

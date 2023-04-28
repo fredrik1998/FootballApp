@@ -12,8 +12,6 @@ const Homescreen = () => {
     const dispatch = useDispatch();
     const TodaysMatches = useSelector((state) => state.TodaysMatches.data);
     const TodaysMatchesStatus = useSelector((state) => state.TodaysMatches.status);
-    const TodaysMatchesError = useSelector((state) => state.TodaysMatches.error);
-    const [selectedView, setSelectedView] = useState('table');
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const location = useLocation();
@@ -125,7 +123,6 @@ const Homescreen = () => {
     <StyledLink to={`/team/${match.awayTeam.id}`}>{match.awayTeam.shortName}</StyledLink>
   </td>
 </tr>
-
                               );
                             })}
                           </tbody>

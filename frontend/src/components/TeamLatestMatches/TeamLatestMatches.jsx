@@ -3,12 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice'
 import Loader from '../Loader/Loader'
 import { useParams } from 'react-router-dom'
-import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './TeamLatestMatchesElements'
+import { 
+    StyledDiv,
+    StyledLink,
+    StyledTable,
+    StyledWrapper 
+} from './TeamLatestMatchesElements'
+
 const TeamLatestMatches = () => {
     const dispatch = useDispatch();
     const TeamLatestMatches = useSelector((state) => state.TeamLatestMatches.data);
     const TeamLatestMatchesStatus = useSelector((state) => state.TeamLatestMatches.status);
-    const TeamLatestMatchesError = useSelector((state) => state.TeamLatestMatches.error);
     const { team_id } = useParams();
 
     useEffect(() => {

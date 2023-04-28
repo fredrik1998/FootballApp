@@ -9,8 +9,7 @@ const LaLigaTopAssists = () => {
     const LaLiga = useSelector((state) => state.LaLiga.table);
     const LaLigaTopAssists = useSelector((state) => state.LaLiga.topAssists);
     const LaLigaTopAssistsStatus = useSelector((state) => state.LaLiga.topAssistsStatus);
-    const LaLigaTopAssistsError = useSelector((state) => state.LaLiga.topAssistsError);
-
+   
     useEffect(() => {
         if(LaLigaTopAssistsStatus === 'idle'){
             dispatch(fetchLaLigaTopAssists());

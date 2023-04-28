@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSerieA } from '../../slice/SerieASlice'
 import GlobalStyle from '../../GlobalStyles'
-import { StyedWrapper, ContentWrapper, StyledTable, StyledLink } from './SerieAElements'
+import { 
+  StyedWrapper,
+  ContentWrapper,
+  StyledTable,
+  StyledLink } 
+  from './SerieAElements'
 import { Tab, Tabs } from '@mui/material'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Loader from '../../components/Loader/Loader'
@@ -12,11 +17,11 @@ import SerieAMatches from '../../components/UpcommingMatches/SerieA/SerieAMatche
 import SerieALatestMatches from '../../components/LatestMatches/SerieA/SerieALatestMatches'
 import SerieATopAssists from '../../components/Topassists/SerieA/SerieATopAssists'
 import { useLocation } from 'react-router-dom'
+
 const SerieA = () => {
     const dispatch = useDispatch()
     const SerieA = useSelector((state) => state.SerieA.table);
     const SerieAStatus = useSelector((state) => state.SerieA.tableStatus);
-    const SerieAError = useSelector((state) => state.SerieA.tableError);
     const [selectedView, setSelectedView] = useState('table')
     const [isOpen, setIsOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)

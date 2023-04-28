@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.header`
 display: flex;
@@ -9,7 +8,6 @@ align-items: center;
 border-bottom: 1px solid #ccc;
 padding-bottom: 2em;
 `
-
 export const StyledTitle = styled(Link)`
 display: flex;
 align-items: center;
@@ -27,7 +25,6 @@ color: #000;
 margin-top: 10px;
 text-decoration: none;
 `
-
 export const StyledSeperator = styled.div`
 border: 1px solid #ccc;
 `

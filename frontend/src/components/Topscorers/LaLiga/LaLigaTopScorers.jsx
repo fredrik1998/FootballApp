@@ -9,7 +9,6 @@ const LaLigaTopScorers = () => {
   const LaLiga = useSelector((state) => state.LaLiga.table);
   const LaLigaTopScorers = useSelector((state) => state.LaLiga.topScorers);
   const LaLigaTopScorersStatus = useSelector((state) => state.LaLiga.topScorersStatus);
-  const LaLigaTopScorersError = useSelector((state) => state.LaLiga.topScorersError);
 
   useEffect(() => {
     if(LaLigaTopScorersStatus === 'idle'){

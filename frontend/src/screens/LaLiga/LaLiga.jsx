@@ -17,7 +17,6 @@ const LaLiga = () => {
     const dispatch = useDispatch();
     const LaLiga = useSelector((state) => state.LaLiga.table);
     const LaLigaStatus = useSelector((state) => state.LaLiga.tableStatus);
-    const LaLigaError = useSelector((state) => state.LaLiga.tableError);
     const [selectedView, setSelectedView] = useState('table')
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);

@@ -1,4 +1,12 @@
-import { FormBoxContainer, WinBox, LossBox, DrawBox, StyledH1, AwayTeamLogo, StyledLink } from './TeamFormElements';
+import { 
+  FormBoxContainer,
+  WinBox,
+  LossBox,
+  DrawBox,
+  StyledH1,
+  AwayTeamLogo,
+  StyledLink
+  } from './TeamFormElements';
 
 const TeamForm = ({ form }) => {
   return (

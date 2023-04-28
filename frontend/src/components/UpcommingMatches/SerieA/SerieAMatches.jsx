@@ -4,11 +4,11 @@ import { fetchSerieAUpcommingMatches } from '../../../slice/SerieASlice'
 import { StyledWrapper, StyledTable, StyledLink, StyledDiv } from './SerieAMatchesElements'
 import Loader from '../../Loader/Loader'
 import { useNavigate } from 'react-router-dom';
+
 const SerieAMatches = () => {
     const dispatch = useDispatch()
     const SerieAUpcommingMatches = useSelector((state) => state.SerieA.upcomingMatches);
     const SerieAUpcommingMatchesStatus = useSelector((state) => state.SerieA.upcomingMatchesStatus);
-    const SerieAUpcommingMatchesErrror = useSelector((state) => state.SerieA.upcomingMatchesError);
     const SerieA = useSelector((state) => state.SerieA.table);
     const navigate = useNavigate();
 

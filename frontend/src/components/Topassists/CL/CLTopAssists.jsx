@@ -9,7 +9,6 @@ const CLTopAssists = () => {
     const dispatch = useDispatch()
     const CLTopAssists = useSelector((state) => state.championsLeague.topAssists);
     const CLTopAssistsStatus = useSelector((state) => state.championsLeague.topAssistsStatus);
-    const CLTopAssistsError = useSelector((state) => state.championsLeague.topAssistsError);
     const championsLeague = useSelector((state) => state.championsLeague.table);
 
     useEffect(() => {
