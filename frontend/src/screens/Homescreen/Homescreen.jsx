@@ -8,6 +8,7 @@ import { ContentWrapper, StyledDiv, StyledLink, StyledTable, StyledWrapper } fro
 import Sidebar from '../../components/Sidebar/Sidebar'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+
 const Homescreen = () => {
     const dispatch = useDispatch();
     const TodaysMatches = useSelector((state) => state.TodaysMatches.data);
@@ -81,7 +82,7 @@ const Homescreen = () => {
                     return (
                       <StyledDiv key={competitionName}>
                         <div style={{display: 'flex'}}>
-                        <img src={competition.emblem} width={50} height={50}></img>
+                        <img src={competition.emblem} width={30} height={30} style={{marginTop: '15px'}}></img>
                         <h2>{competitionName}</h2>
                         </div>
                         <StyledTable>

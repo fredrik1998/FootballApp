@@ -26,9 +26,9 @@ const App =() => {
     <Route path='/CL' element={<CL/>}/>
     <Route path='/team/:team_id' element={<Team/>}/>
     <Route path='/SA' element={<SerieA/>}/>
-    <Route path='/BL' element={<Bundesliga/>}/>
-    <Route path='/Ligue1' element={<Ligue1/>}/>
-    <Route path='/LaLiga' element={<LaLiga/>}/>
+    <Route path='/BL1' element={<Bundesliga/>}/>
+    <Route path='/FL1' element={<Ligue1/>}/>
+    <Route path='/PD' element={<LaLiga/>}/>
     <Route path='/player/:player_id' element={<Player/>}/>
     <Route path='/match/:match_id' element={<Match/>}/>
     <Route path='/homescreen' element={<Homescreen/>}/>

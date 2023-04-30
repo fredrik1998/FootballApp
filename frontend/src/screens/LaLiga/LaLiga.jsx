@@ -62,7 +62,6 @@ const LaLiga = () => {
         onChange={(event, newValue) => setSelectedView(newValue)}>
         <Tab label='table' value='table'></Tab>
         <Tab label='Top scorers' value='topscorers'></Tab>
-        <Tab label='Top assists' value='topassists'></Tab>
         <Tab label='Upcoming Matches' value='upcomingmatches'></Tab>
         <Tab label='Latest matches' value='latestmatches'></Tab>    
         </Tabs>
@@ -113,7 +112,6 @@ const LaLiga = () => {
 </>
         )}
         {selectedView === 'topscorers' && <LaLigaTopScorers/>}
-        {selectedView === 'topassists' && <LaLigaTopAssists/>}
         {selectedView === 'upcomingmatches' && <LaLigaUpcomingMatches/>}
         {selectedView === 'latestmatches' && <LaLigaLatestMatches/>}
       </StyledWrapper>

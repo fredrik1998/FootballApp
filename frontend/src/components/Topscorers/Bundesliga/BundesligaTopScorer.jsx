@@ -18,7 +18,7 @@ const BundesligaTopScorer = () => {
 
     const getTeamLogo = (teamName) => {
         for(const team of Bundesliga){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.crest;
             }
         }
@@ -27,7 +27,7 @@ const BundesligaTopScorer = () => {
 
     const getTeamId = (teamName) => {
         for(const team of Bundesliga){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.id;
             }
         }

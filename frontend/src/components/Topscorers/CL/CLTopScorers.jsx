@@ -21,7 +21,7 @@ const CLTopScorers = () => {
         for (const group in championsLeague) {
           for (const team of championsLeague[group]) {
             console.log(`Comparing: ${team.team.name} === ${teamName}`);
-            if (team.team.name === teamName) {
+            if (team.team.shortName === teamName) {
               return team.team.crest;
             }
           }
@@ -32,7 +32,7 @@ const CLTopScorers = () => {
     const getTeamId = (teamName) => {
         for (const group in championsLeague){
             for(const team of championsLeague[group]){
-                if(team.team.name === teamName){
+                if(team.team.shortName === teamName){
                     return team.team.id
                 }
             }

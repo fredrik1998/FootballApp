@@ -37,8 +37,8 @@ export const StyledTable = styled.table`
   th,
   td {
     text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #fafafa;
+    padding: 9px;
+    border-bottom: 1px solid #000;
   }
 
   th {

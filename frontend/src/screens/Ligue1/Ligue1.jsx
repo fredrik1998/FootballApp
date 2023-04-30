@@ -63,7 +63,6 @@ const Ligue1 = () => {
             >
             <Tab label='Table' value='table'></Tab>
             <Tab label='Top scorers' value='topscorers'></Tab>
-            <Tab label="Top assists" value='topassists'></Tab>
             <Tab label="Upcomming matches" value='upcommingmatches'></Tab>
             <Tab label='Latest Matches' value="latestmatches"></Tab>
             </Tabs>
@@ -114,7 +113,6 @@ const Ligue1 = () => {
 </>
         )}
     {selectedView === 'topscorers' && <Ligue1TopScorers/>} 
-    {selectedView === 'topassists' && <Ligue1TopAssists/>}
     {selectedView === 'upcommingmatches' && <Ligue1UpcommingMatches/>}
     {selectedView === 'latestmatches' && <Ligue1LatestMatches/>}
     </StyledWrapper>   

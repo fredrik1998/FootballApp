@@ -19,7 +19,7 @@ const TopScorers = () => {
 
   const getTeamLogo = (teamName) => {
     for(const team of premierLeague){
-      if(team.team.name === teamName){
+      if(team.team.shortName === teamName){
         return team.team.crest
       }
     }

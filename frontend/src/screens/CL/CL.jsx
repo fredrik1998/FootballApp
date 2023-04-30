@@ -40,6 +40,10 @@ const CL = () => {
     setIsOpen(!isOpen)
   }
 
+  const formatGroupName = (groupName) => {
+    return groupName.replace(/_/g, ' ');
+  };
+  
   return (
     <>
     <GlobalStyle/>
@@ -59,14 +63,13 @@ const CL = () => {
         <StyledTab label="Table" value="table" />
         <StyledTab label="Top Scorers" value="topScorers" />
         <StyledTab label="Upcoming Matches" value="upcommingMatches" />
-        <StyledTab label="Top Assists" value="topAssists"></StyledTab>
         <StyledTab label="Latest Matches" value="latestmatches"></StyledTab>
         </Tabs>
         {selectedView === 'table' && (
            <GridContainer>
-           {Object.keys(championsLeague).map((groupName, index) => (
+           {Object.keys(championsLeague).map((groupName) => (
              <GridItem key={groupName}>
-               <h2>{groupName}</h2>
+               <h2>{formatGroupName(groupName)}</h2>
                <StyledTable>
                  <thead>
                    <tr>
@@ -109,7 +112,6 @@ const CL = () => {
       )}
       {selectedView==='topScorers' && <CLTopScorers/>}
       {selectedView === 'upcommingMatches' && <CLMatches/>}
-      {selectedView === 'topAssists' && <CLTopAssists/>}
       {selectedView === "latestmatches" && <CLLatestMatches/>}
     </StyledWrapper>
     </ContentWrapper>

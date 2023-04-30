@@ -4,6 +4,7 @@ import { fetchBundesligaLatestMatches } from '../../../slice/BundesligaSlice'
 import Loader from '../../Loader/Loader'
 import { StyledDiv, StyledLink, StyledTable, StyledWrapper } from './BundesligaLatestMatchesElements'
 import { useNavigate } from 'react-router-dom'
+
 const BundesligaLatestMatches = () => {
     const dispatch = useDispatch();
     const BundesligaLatestMatches = useSelector((state) => state.Bundesliga.latestMatches);

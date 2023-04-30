@@ -5,6 +5,7 @@ from django.http import Http404
 from ..serializer import LeagueSerializer
 from datetime import datetime, timedelta
 import requests
+from django.views.decorators.cache import cache_page
 
 @api_view(['GET'])
 def league_PL(request):
@@ -299,9 +300,8 @@ def league_FL_latest_matches(request):
     matches = matches[-20:]
     return Response(matches)    
 
-    
 @api_view(['GET'])
-def top_scores(request):
+def top_scores_PL(request):
     headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
     url = 'https://api.football-data.org/v4/competitions/PL/scorers'
     response = requests.get(url, headers=headers)
@@ -312,7 +312,7 @@ def top_scores(request):
             top_scores.append({
                 'id': scorer['player']['id'],
                 'name': scorer['player']['name'],
-                'team': scorer['team']['name'],
+                'team': scorer['team']['shortName'],
                 'goals': scorer['goals'],
                 'nationality': scorer['player']['nationality'],
                 'position': scorer['player']['position'],
@@ -333,7 +333,7 @@ def top_scores_SA(request):
             top_scorers.append({
                 'id': scorer['player']['id'],
                 'name': scorer['player']['name'],
-                'team': scorer['team']['name'],
+                'team': scorer['team']['shortName'],
                 'goals': scorer['goals'],
                 'nationality': scorer['player']['nationality'],
                 'position': scorer['player']['position'],
@@ -354,7 +354,7 @@ def top_scores_CL(request):
             top_scores_CL.append({
                 'id': scorer['player']['id'],
                 'name': scorer['player']['name'],
-                'team': scorer['team']['name'],
+                'team': scorer['team']['shortName'],
                 'goals': scorer['goals'],
                 'nationality': scorer['player']['nationality'],
                 'position': scorer['player']['position'],
@@ -375,7 +375,7 @@ def top_scorers_BL(request):
             top_scorers.append({
             'id' : scorer['player']['id'],   
             'name' : scorer['player']['name'],
-            'team' : scorer['team']['name'],
+            'team' : scorer['team']['shortName'],
             'goals' : scorer['goals'],
             'nationality' : scorer['player']['nationality'],
             'position' : scorer['player']['position']
@@ -396,7 +396,7 @@ def top_scorers_FL(request):
             top_scorers.append({
             'id': scorer['player']['id'],   
             'name': scorer['player']['name'],
-            'team': scorer['team']['name'],
+            'team': scorer['team']['shortName'],
             'goals': scorer['goals'],
             'nationality': scorer['player']['nationality'],
             'position': scorer['player']['position']
@@ -417,7 +417,7 @@ def top_scorers_PD(request):
             top_scorers.append({
                 'id': scorer['player']['id'],
                 'name' : scorer['player']['name'],
-                'team' : scorer['team']['name'],
+                'team' : scorer['team']['shortName'],
                 'goals' : scorer['goals'],
                 'nationality': scorer['player']['nationality'],
                 'position' :scorer['player']['position']
@@ -439,7 +439,7 @@ def top_assists_FL(request):
             top_assists.append({
                 'id': assister['player']['id'],
                 'name': assister['player']['name'],
-                'team': assister['team']['name'],
+                'team': assister['team']['shortName'],
                 'assists': assister['assists'],
                 'nationality': assister['player']['nationality'],
                 'position' : assister['player']['position']
@@ -657,18 +657,70 @@ def get_head_2_head(request, match_id):
     else:
         return Response({'Error' : 'Unable to fetch head2head data'})
     
+@cache_page(604800)
 @api_view(['GET'])
 def get_all_leagues(request):
-    headers = {'X-Auth-Token' : '58d5d5351e7444a2815fcbb0b0a058b9'}
-    url = 'https://api.football-data.org/v4/competitions/'    
+    headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
+    url = 'https://api.football-data.org/v4/competitions/'
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
         league_data = response.json()
-        return Response(league_data)
+
+        desired_leagues = [
+            'Premier League',
+            'UEFA Champions League',
+            'Primera Division',
+            'Ligue 1',
+            'Bundesliga',
+            'Serie A'
+        ]
+        
+        filtered_league_data = [league for league in league_data['competitions'] if league['name'] in desired_leagues]
+
+        return Response({'competitions': filtered_league_data})
     else:
-        return Response({'error' : 'Unable to fetch data'})
+        return Response({'error': 'Unable to fetch data'})
     
+@cache_page(604800)
+@api_view(['GET'])
+def get_all_teams(request):
+    headers = {'X-Auth-Token': '58d5d5351e7444a2815fcbb0b0a058b9'}
+
+    desired_leagues = [
+        'Premier League',
+        'UEFA Champions League',
+        'Primera Division',
+        'Ligue 1',
+        'Bundesliga',
+        'Serie A'
+    ]
+    leagues_url = 'https://api.football-data.org/v4/competitions'
+    leagues_response = requests.get(leagues_url, headers=headers)
+    leagues_data = leagues_response.json()
+    desired_league_ids = [league['id'] for league in leagues_data['competitions'] if league['name'] in desired_leagues]
+
+    filtered_teams_data = []
+    unique_team_ids = set()
+
+    for league_id in desired_league_ids:
+        url = f'https://api.football-data.org/v4/competitions/{league_id}/teams'
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            league_teams_data = response.json()
+            for team in league_teams_data['teams']:
+                if team['id'] not in unique_team_ids:
+                    unique_team_ids.add(team['id'])
+                    team_data = {
+                        'id': team['id'],
+                        'name': team['name'],
+                        'crest': team['crest'],
+                    }
+                    filtered_teams_data.append(team_data)
+        else:
+            return Response({'Error': f'Unable to fetch teams for league ID {league_id}'})
+
+    return Response(filtered_teams_data)
 
 @api_view(['GET'])
 def today_matches(request):

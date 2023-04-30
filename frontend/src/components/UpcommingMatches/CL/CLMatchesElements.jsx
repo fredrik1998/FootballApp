@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 80%;
-  margin: 0 auto;
-`;
+display: flex;
+justify-content: space-evenly;
+flex-direction: column;
+width: 80%;
+gap: 20px;
+`
 
 export const StyledDiv = styled.div`
  width: 100%;
- margin: 1rem auto;
 `;
 
 export const StyledTable = styled.table`

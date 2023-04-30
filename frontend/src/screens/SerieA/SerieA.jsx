@@ -68,7 +68,6 @@ const SerieA = () => {
 >
   <Tab label='Table' value='table'></Tab>
   <Tab label='Top scorers' value='topscorers'></Tab>
-  <Tab label='Top assists' value='topassists'></Tab>
   <Tab label='Upcomming Matches' value='upcommingmatches'></Tab>
   <Tab label='Latest Matches' value='latestmatches'></Tab>
 </Tabs>
@@ -119,7 +118,6 @@ const SerieA = () => {
 </>
         )}
      {selectedView === 'topscorers' && <Topscorers/>}
-     {selectedView === 'topassists' && <SerieATopAssists/>}
      {selectedView === 'upcommingmatches' && <SerieAMatches/>}
      {selectedView === 'latestmatches' && <SerieALatestMatches/>}  
     </StyedWrapper>

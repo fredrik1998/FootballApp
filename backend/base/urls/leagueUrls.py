@@ -6,7 +6,7 @@ urlpatterns = [
     path('leagues/PL/', views.league_PL, name='PL'),
     path('leagues/PL/nextmatches/', views.next_matchday, name='PL-next-matches'),
     path('leagues/CL/', views.league_CL, name='CL'),
-    path('leagues/topscorer/', views.top_scores, name='league-topscorer'),
+    path('leagues/topscorer/', views.top_scores_PL, name='league-topscorer'),
     path('leagues/CL/topscorer/', views.top_scores_CL, name='CL-topscorer'),
     path('leagues/CL/upcommingmatches/', views.league_CL_upcoming_matches, name='CL-upcomming-matches'),
     path('leageus/CL/topassits/', views.top_assists_CL, name='CL-topassists'),
@@ -41,5 +41,6 @@ urlpatterns = [
     path('matches/todaysmatches/', views.today_matches, name='today-matches'),
     path('team/upcomingmatches/<int:team_id>/', views.get_team_upcoming_matches, name='team-upcomingmatches'),
     path('team/latestmatches/<int:team_id>/', views.get_team_latest_matches, name='team-latestmatches'),
+    path('teams/', views.get_all_teams, name='get-all-teams'),
     path('match/<int:match_id>/head2head/', views.get_head_2_head, name='match-head2head')
 ]

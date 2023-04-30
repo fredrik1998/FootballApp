@@ -19,7 +19,7 @@ const Ligue1TopScorers = () => {
 
     const getTeamLogo = (teamName) => {
         for(const team of Ligue1){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.crest;
             }
         }
@@ -28,7 +28,7 @@ const Ligue1TopScorers = () => {
 
     const getTeamId = (teamName) => {
         for(const team of Ligue1){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.id;
             }
         }

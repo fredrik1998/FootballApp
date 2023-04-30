@@ -11,7 +11,7 @@ margin-top: 2rem;
 overflow-x: hidden;
 `
 export const StyledTable = styled.table`
-width: 80%;
+width: 90%;
 th, td {
 text-align: left;
 padding-left: 8px;

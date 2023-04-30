@@ -63,7 +63,6 @@ const Bundesliga = () => {
                 >
                 <Tab label="Table" value='table'></Tab>
                 <Tab label="Top scorers" value='topscorers'></Tab>
-                <Tab label='Top assists' value='topassists'></Tab>
                 <Tab label='Upcomming Matches' value='upcommingmatches'></Tab>
                 <Tab label="Latest Matches" value='latestmatches'></Tab>
                 </Tabs>
@@ -115,7 +114,6 @@ const Bundesliga = () => {
               </>
             )}
             {selectedView === 'topscorers' && <BundesligaTopScorer/>}
-            {selectedView === 'topassists' && <BundesligaTopAssists/>}
             {selectedView === 'upcommingmatches' && <BundesligaUpcommingMatches/>}
             {selectedView === 'latestmatches' && <BundesligaLatestMatches/>}
           </StyledWrapper>

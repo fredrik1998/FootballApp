@@ -18,7 +18,7 @@ const LaLigaTopScorers = () => {
 
   const getTeamLogo = (teamName) => {
     for(const team of LaLiga){
-        if(team.team.name === teamName){
+        if(team.team.shortName === teamName){
             return team.team.crest;
         }
     }
@@ -27,7 +27,7 @@ const LaLigaTopScorers = () => {
 
   const getTeamId = (teamName) => {
     for(const team of LaLiga){
-        if(team.team.name === teamName){
+        if(team.team.shortName === teamName){
             return team.team.id;
         }
     }

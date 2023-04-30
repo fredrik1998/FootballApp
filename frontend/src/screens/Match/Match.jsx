@@ -24,9 +24,11 @@ import {
   Head2HeadText,
   StyledTable,
   TeamLink,
-  StyledDiv
 } from './MatchElements';
 import { Stadium, Sports, CalendarToday } from '@mui/icons-material'
+import TeamForm from '../../components/TeamForm/TeamForm';
+import { fetchTeamSquad } from '../../slice/TeamSquadSlice';
+import { fetchTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice';
 
 const Match = () => {
   const dispatch = useDispatch();
@@ -34,6 +36,10 @@ const Match = () => {
   const MatchStatus = useSelector((state) => state.Match.status);
   const Head2Head = useSelector((state) => state.Head2Head.data);
   const Head2HeadStatus = useSelector((state) => state.Head2Head.status);
+  const TeamMatches = useSelector((state) => state.TeamLatestMatches.data);
+  const TeamMatchesStatus = useSelector((state) => state.TeamLatestMatches.status);
+  const TeamSquad = useSelector((state) => state.TeamSquad.data);
+  const TeamSquadStatus = useSelector((state) => state.TeamSquad.status);
   const prevMatchId = useRef(null);
   const { match_id } = useParams();
   const navigate = useNavigate();
@@ -42,7 +48,7 @@ const Match = () => {
     if (MatchStatus === 'idle' && Head2HeadStatus === 'idle' || match_id !== prevMatchId.current) {
       prevMatchId.current = match_id;
       dispatch(fetchMatchData(match_id));
-      dispatch(fetchHead2Head(match_id))
+      dispatch(fetchHead2Head(match_id));
     }
   }, [dispatch, MatchStatus, Head2HeadStatus, match_id]);
 
@@ -58,6 +64,8 @@ const Match = () => {
 
   const formatMatchStage = (stage) => {
     switch (stage) {
+      case 'REGULAR_SEASON':
+        return '';
       case 'LAST_16':
         return 'Last 16'  
       case 'QUARTER_FINALS':
@@ -92,6 +100,7 @@ const Match = () => {
               ) : (
                 null
               )}
+              <span> {formatMatchStage(Match.stage)}</span>
             </StyledH1>
             </MatchInfo>
             <MatchDetails>

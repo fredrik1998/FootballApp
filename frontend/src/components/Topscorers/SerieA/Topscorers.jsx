@@ -19,7 +19,7 @@ const Topscorers = () => {
 
     const getTeamId = (teamName) => {
         for(const team of SerieA){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.id
             }
         }
@@ -28,7 +28,7 @@ const Topscorers = () => {
 
     const getTeamLogo = (teamName) => {
         for(const team of SerieA){
-            if(team.team.name === teamName){
+            if(team.team.shortName === teamName){
                 return team.team.crest
             }
         }
