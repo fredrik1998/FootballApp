@@ -26,9 +26,6 @@ import {
   TeamLink,
 } from './MatchElements';
 import { Stadium, Sports, CalendarToday } from '@mui/icons-material'
-import TeamForm from '../../components/TeamForm/TeamForm';
-import { fetchTeamSquad } from '../../slice/TeamSquadSlice';
-import { fetchTeamLatestMatches } from '../../slice/TeamLatestMatchesSlice';
 
 const Match = () => {
   const dispatch = useDispatch();
@@ -36,10 +33,6 @@ const Match = () => {
   const MatchStatus = useSelector((state) => state.Match.status);
   const Head2Head = useSelector((state) => state.Head2Head.data);
   const Head2HeadStatus = useSelector((state) => state.Head2Head.status);
-  const TeamMatches = useSelector((state) => state.TeamLatestMatches.data);
-  const TeamMatchesStatus = useSelector((state) => state.TeamLatestMatches.status);
-  const TeamSquad = useSelector((state) => state.TeamSquad.data);
-  const TeamSquadStatus = useSelector((state) => state.TeamSquad.status);
   const prevMatchId = useRef(null);
   const { match_id } = useParams();
   const navigate = useNavigate();

@@ -27,6 +27,7 @@ th{
 }
 td:nth-child(3){
     display: flex;
+    flex-direction: column;
     gap: 5px;
 }
 `
@@ -38,9 +39,11 @@ export const StyledSquadContainer = styled.div`
 `;
 
 export const StyledH1 = styled.h1`
+display: flex;
+align-self: center;
+justify-content: center;
 margin-top: 40px;
 margin-bottom: 0px;
-
 `
 export const StyledText = styled.p`
 color: #ccc;
@@ -48,6 +51,7 @@ color: #ccc;
 export const StyledLogo = styled.img`
 display: flex;
 align-self: flex-start;
+justify-content: flex-start;
 padding-left: 2rem;
 width: 150px;
 height: 150px;
@@ -66,4 +70,35 @@ export const StyledLink = styled(Link)`
 text-decoration: none;
 cursor: pointer;
 color: #fafafa;
+`
+export const TeamInfoDiv = styled.div`
+display: flex;
+align-items: center;
+gap: calc(2vw + 20px);
+flex-direction: row;
+@media (min-width: 768px) {
+gap: calc(3vw + 40px);
+}
+@media (min-width: 1200px) {
+gap: calc(4vw + 60px);
+}
+`
+export const TeamCompetitionsDiv = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+margin-left: 15px;
+gap: calc(2vw + 20px);
+@media (min-width: 768px) {
+gap: calc(3vw + 40px);
+}
+@media (min-width: 1200px) {
+gap: calc(4vw + 60px);
+}
+`
+export const TeamHeadingDiv = styled.div`
+display: flex;
+margin-top: 40px;
+width: 100%;
 `

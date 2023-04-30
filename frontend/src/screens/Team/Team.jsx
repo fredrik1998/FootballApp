@@ -13,6 +13,9 @@ import {
   StyledDiv,
   StyledCountryLogo,
   StyledText,
+  TeamInfoDiv,
+  TeamCompetitionsDiv,
+  TeamHeadingDiv
 } from './TeamElements';
 import Loader from '../../components/Loader/Loader';
 import { useParams } from 'react-router-dom';
@@ -21,7 +24,7 @@ import { Tab, Tabs } from '@mui/material';
 import TeamUpcomingMatches from '../../components/TeamUpcomingMatches/TeamUpcomingMatches';
 import TeamLatestMatches from '../../components/TeamLatestMatches/TeamLatestMatches';
 import TeamForm from '../../components/TeamForm/TeamForm';
-
+import { Stadium, History } from '@mui/icons-material'
 const Team = () => {
   const dispatch = useDispatch();
   const TeamSquad = useSelector((state) => state.TeamSquad.data);
@@ -59,7 +62,7 @@ const Team = () => {
   }, [TeamSquad.squad]);
 
   useEffect(() => {
-    setSelectedView('squad')
+    setSelectedView('overview')
   }, [team_id])
 
   useEffect(() => {
@@ -161,13 +164,17 @@ const Team = () => {
             value={selectedView}
             onChange={(event, newValue) => setSelectedView(newValue)}
             >
-            <Tab label='squad' value='squad'></Tab>
+            <Tab label='Overview' value='overview'></Tab>
             <Tab label='Upcoming Matches' value='upcomingmatches'></Tab>
             <Tab label='Latest Matches' value='latestmatches'></Tab>
             </Tabs>
             {selectedView === 'squad' && (
-              <> 
+              <>
+              <TeamHeadingDiv>
+              <StyledLogo src={TeamSquad.crest} ></StyledLogo>
               <StyledH1>{TeamSquad.name}</StyledH1>
+              </TeamHeadingDiv>
+              <TeamInfoDiv>
               <StyledText>
               {TeamSquad.area && (
               <>
@@ -176,8 +183,15 @@ const Team = () => {
               </>
               )}
               </StyledText>
-               <StyledLogo src={TeamSquad.crest} ></StyledLogo>
-               <TeamForm form={formResults}></TeamForm>
+              <StyledText><Stadium/>{TeamSquad.venue}</StyledText>
+              <StyledText><History/>{TeamSquad.founded}</StyledText>
+              </TeamInfoDiv>
+              <TeamCompetitionsDiv>
+                {TeamSquad.runningCompetitions && ( TeamSquad.runningCompetitions.map((competition) => (
+                  <StyledText><img width={30} src={competition.emblem}></img>{competition.name}</StyledText>
+                )))}
+                </TeamCompetitionsDiv>
+              <TeamForm form={formResults}></TeamForm>
                {Object.keys(squadByPosition).map((position) => (
                  <StyledDiv key={position}>
                    <h3>{position}</h3>

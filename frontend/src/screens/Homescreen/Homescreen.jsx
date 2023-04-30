@@ -76,7 +76,7 @@ const Homescreen = () => {
                 <Loader />
               ) : (
                 <>
-                <h1>Todays Matches:</h1>
+                <h1>Todays Matches</h1>
                   {Object.keys(matchesByCompetition).map((competitionName) => {
                     const competition = matchesByCompetition[competitionName];
                     return (

@@ -43,6 +43,10 @@ export const StyledTable = styled.table`
 
   th {
     background-color: #f2f2f2;
+    @media screen and (max-width: 768px){
+      background: none;
+      
+    }
   }
 
   td:nth-child(1),
