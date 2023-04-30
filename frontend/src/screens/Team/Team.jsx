@@ -62,7 +62,7 @@ const Team = () => {
   }, [TeamSquad.squad]);
 
   useEffect(() => {
-    setSelectedView('overview')
+    setSelectedView('squad')
   }, [team_id])
 
   useEffect(() => {
@@ -164,7 +164,7 @@ const Team = () => {
             value={selectedView}
             onChange={(event, newValue) => setSelectedView(newValue)}
             >
-            <Tab label='Overview' value='overview'></Tab>
+            <Tab label='Overview' value='squad'></Tab>
             <Tab label='Upcoming Matches' value='upcomingmatches'></Tab>
             <Tab label='Latest Matches' value='latestmatches'></Tab>
             </Tabs>
