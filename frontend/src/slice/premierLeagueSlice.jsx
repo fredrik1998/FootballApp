@@ -12,7 +12,7 @@ export const fetchPremierLeague = createAsyncThunk(
 export const fetchTopScorerPL = createAsyncThunk(
   'topscorerPL/fetchTopScorerPL',
   async () => {
-      const response = await axios.get('/api/leagues/topscorer/')
+      const response = await axios.get('/api/leagues/PL/topscorer/')
       return response.data
   }
 )

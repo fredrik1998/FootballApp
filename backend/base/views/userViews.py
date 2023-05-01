@@ -20,7 +20,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return data
 
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer 
 
@@ -40,7 +39,6 @@ def registerUser(request):
     except:
         message = {'detail': 'The email is already in use'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    
     
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

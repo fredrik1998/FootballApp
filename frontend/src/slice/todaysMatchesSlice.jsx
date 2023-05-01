@@ -4,7 +4,7 @@ import axios from 'axios'
 export const fetchTodaysMatches = createAsyncThunk(
     'fetchTodaysMatches/TodaysMatches',
     async () => {
-        const response = await axios.get('/api/matches/todaysmatches/')
+        const response = await axios.get('/api/match/todaysmatches/')
         return response.data;
     }
 )
