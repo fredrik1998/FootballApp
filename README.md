@@ -1,7 +1,7 @@
 # FootballApp
 
 [Watch it live here:](https://footballapp-production.up.railway.app/)
-(There is limit of 10 API requests/minute)
+(There is limit of 10 API req)
 ## Project Description
 Football Dashboard is a comprehensive football statistics and information platform that provides users with up-to-date information on various football leagues,
 teams, players, and matches. With its sleek design and user-friendly interface, this app is perfect for football enthusiasts looking for a one-stop solution to 
