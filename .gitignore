@@ -1,2 +1,4 @@
 myenv
 helper.txt
+.gitignore
+.env
