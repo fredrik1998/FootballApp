@@ -1,7 +1,7 @@
 # FootballApp
 
 [Watch it live here:](https://footballapp-production.up.railway.app/)
-
+(There is limit of 12 API req)
 ## Project Description
 Football Dashboard is a comprehensive football statistics and information platform that provides users with up-to-date information on various football leagues,
 teams, players, and matches. With its sleek design and user-friendly interface, this app is perfect for football enthusiasts looking for a one-stop solution to 
@@ -24,6 +24,9 @@ follow their favorite teams and players.
 4. Run the Django server using the python manage.py runserver command.
 5. Navigate to the frontend folder, and install the required dependencies from the package.json file.
 6. Run the frontend development server using the npm run dev command.
+
+## API Rate Limit
+Please note that the app utilizes football-data.org API to fetch data, which are subject to rate limits. The current limit is set to 10 requests per minute per user. So be mindful of that.
 
 ## Author
 Fredrik Andrén
