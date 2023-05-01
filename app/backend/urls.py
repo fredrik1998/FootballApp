@@ -17,9 +17,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='index.html')),
+    path('login', TemplateView.as_view(template_name='index.html')),
+    path('register', TemplateView.as_view(template_name='index.html')), 
+    path('PL', TemplateView.as_view(template_name='index.html')), 
+    path('CL', TemplateView.as_view(template_name='index.html')), 
+    path('team/<int:team_id>', TemplateView.as_view(template_name='index.html')),
+    path('SA', TemplateView.as_view(template_name='index.html')), 
+    path('BL1', TemplateView.as_view(template_name='index.html')),
+    path('FL1', TemplateView.as_view(template_name='index.html')),
+    path('PD', TemplateView.as_view(template_name='index.html')),
+    path('player/<int:player_id>', TemplateView.as_view(template_name='index.html')),
+    path('match/<int:match_id>', TemplateView.as_view(template_name='index.html')),
+    path('api/', include('base.urls.generalUrls')),      
     path('api/users/', include('base.urls.userUrls')),
     path('api/leagues/PL/', include('base.urls.PLUrls')),
     path('api/leagues/BL/', include('base.urls.BLUrls')),
