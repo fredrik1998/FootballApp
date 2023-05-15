@@ -137,7 +137,11 @@ font-size: 24px;
 }
 `
 export const StyledDiv = styled.div`
- width: 100%;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+width: 100%;
 margin: 1rem auto;
 `;
 

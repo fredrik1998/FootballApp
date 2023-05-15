@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const StyledNav = styled.nav`
   display: none;
-
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;

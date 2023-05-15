@@ -24,6 +24,7 @@ import {
   Head2HeadText,
   StyledTable,
   TeamLink,
+  StyledDiv,
 } from './MatchElements';
 import { Stadium, Sports, CalendarToday } from '@mui/icons-material'
 
@@ -45,14 +46,11 @@ const Match = () => {
     }
   }, [dispatch, MatchStatus, Head2HeadStatus, match_id]);
 
-  if (MatchStatus === 'loading' || Head2HeadStatus === 'loading') {
-    return <Loader />;
-  }
 
   const formatDate = () => {
     const date = new Date(Match.utcDate);
     const formattedDate = date.toLocaleDateString('en-GB', {day: '2-digit', month: 'long', year: 'numeric'})
-    return formattedDate
+    return formattedDate;
   }
 
   const formatMatchStage = (stage) => {
@@ -71,6 +69,30 @@ const Match = () => {
         return stage;
     }
   };
+
+  const matchesByDate = useMemo(() => {
+    const matches = {};
+    if(Head2Head && Array.isArray(Head2Head.matches)){
+      for(const match of Head2Head.matches){
+        const date = new Date(match.utcDate);
+        const formattedDate = date.toLocaleDateString('en-GB', {
+          weekday: 'long',
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        });
+        if(!matches[formattedDate]){
+          matches[formattedDate] = [];
+        }
+        matches[formattedDate].push(match);
+      }
+    }
+    return matches;
+  }, [Head2Head])
+
+  if (MatchStatus === 'loading' || Head2HeadStatus === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -130,7 +152,10 @@ const Match = () => {
          </LossBadge>
          <TeamLogo src={Match.awayTeam.crest}></TeamLogo>
          </Head2HeadCard>
-         <StyledTable>
+         {Object.keys(matchesByDate).map((date) => (
+          <StyledDiv key={date}>
+            <h3>{date}</h3>
+            <StyledTable>
           <thead>
             <tr>
               <th></th>
@@ -141,7 +166,7 @@ const Match = () => {
             </tr>
           </thead>
           <tbody>
-            {Head2Head.matches.map((match) => (
+            {matchesByDate[date].map((match) => (
               <tr key={match.id} onClick={(e) => {
                 if(e.target.tagName.toLowerCase() === 'a'){
                   return;
@@ -163,6 +188,8 @@ const Match = () => {
             ))}
           </tbody>
          </StyledTable>
+          </StyledDiv>
+         ))}
         </StyledWrapper>
       )}
     </>

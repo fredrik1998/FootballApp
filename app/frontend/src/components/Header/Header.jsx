@@ -4,7 +4,7 @@ import {
   StyledHeader,
   StyledLink,
   StyledTitle,
-  StyledInput
+  StyledLogo
 } from './HeaderElements';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,7 +15,7 @@ import icon from '../../images/footballicon.png'
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 
-const CustomInputBase = styled(InputBase)(({ theme }) => ({
+export const CustomInputBase = styled(InputBase)(({ theme }) => ({
   backgroundColor: '#f7f7f7',
   borderRadius: 18,
   border: '1px solid #e0e0e0',
@@ -64,7 +64,7 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
 
   const fetchData = async () => {
     try {
-      const [leagueResponse, teamResponse] = await Promise.all([
+      const [leagueResponse, teamResponse, playerResponse] = await Promise.all([
         axios.get('/api/leagues/'),
         axios.get('/api/teams/'),
       ]);
@@ -93,7 +93,7 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
         const teamResults = teams.filter(team =>
           team.name && team.name.toLowerCase().includes(query.toLowerCase())
         );
-  
+
         setSearchResults([...leagueResults, ...teamResults]);
       } else {
         console.error("Leagues or teams data is not an array:", leagues, teams);
@@ -139,7 +139,7 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
       <div key={index} style={searchResultItemStyle}>
         {result.area ? (
           <>
-            <img width={30} src={result.area.flag}></img>
+            <StyledLogo width={30} src={result.area.flag}></StyledLogo>
             <StyledLink
               to={`/${result.code}`}
               onClick={() => setSearchResults([])}
@@ -149,7 +149,7 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
           </>
         ) : (
           <>
-            <img width={30} src={result.crest}></img>
+            <StyledLogo width={30} src={result.crest}></StyledLogo>
             <StyledLink
               to={`/team/${result.id}`}
               onClick={() => setSearchResults([])}

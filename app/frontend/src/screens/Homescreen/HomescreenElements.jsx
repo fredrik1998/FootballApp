@@ -8,20 +8,19 @@ export const StyledWrapper = styled.div`
   margin: 0 auto;
 `;
 export const ContentWrapper = styled.main`
-display: flex;
-`
+  display: flex;
+`;
 export const StyledDiv = styled.div`
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-width: 100%;
-margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 1rem auto;
 `;
 
 export const StyledTable = styled.table`
   width: 90%;
   border-collapse: collapse;
-
   tr {
   position: relative;
   cursor: pointer;
@@ -95,4 +94,11 @@ export const StyledLink = styled(Link)`
 text-decoration: none;
 cursor: pointer;
 color: #fafafa;
+`
+export const AlertDiv = styled.div`
+display: flex;
+width: 100%;
+flex-direction: column;
+margin-top: 10px;
+max-width: 350px;
 `

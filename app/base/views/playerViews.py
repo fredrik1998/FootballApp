@@ -16,3 +16,4 @@ def get_player(request, player_id):
         return Response(player_data)
     else:
         return Response({'Error' : 'Unable to fetch data'})
+    

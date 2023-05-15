@@ -5,7 +5,7 @@ export const fetchSerieA = createAsyncThunk(
     'SerieA/fetchSerieA', 
     async() => {
         const response = await axios.get('/api/leagues/SA/')
-        return response.data
+        return response.data;
     }
 )
 
@@ -13,7 +13,7 @@ export const fetchSerieATopscorers = createAsyncThunk(
     'SerieATopscorers/fetchSerieATopscorers',
     async () => {
         const response = await axios.get('/api/leagues/SA/topscorer/')
-        return response.data
+        return response.data;
     }
 )
 
@@ -21,7 +21,7 @@ export const fetchSerieATopAssists = createAsyncThunk(
     'SerieATopAssists/fetchSerieATopAssists',
     async () => {
         const response = await axios.get('/api/leagues/SA/topassists/')
-        return response.data
+        return response.data;
     }
 )
 
@@ -29,7 +29,7 @@ export const fetchSerieAUpcommingMatches = createAsyncThunk(
     'SerieAUpcommingMatches/fetchSerieAUpcommingMatches',
     async () => {
         const response = await axios.get('/api/leagues/SA/upcommingmatches/')
-        return response.data
+        return response.data;
     }
 )
 
@@ -37,7 +37,7 @@ export const fetchSerieALatestMatches = createAsyncThunk(
     'SerieALatestMatches/fetchSerieALatestMatches',
     async () => {
         const response = await axios.get('/api/leagues/SA/latestmatches/')
-        return response.data
+        return response.data;
     }
 )
 
