@@ -5,22 +5,22 @@ export const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: '#00FFFF',
-          color: '#fafafa' 
+          backgroundColor: "#00FFFF",
+          color: "#fafafa",
         },
       },
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          color: '#7e7a7a',
-          fontWeight: '700',
-          '&.Mui-selected': {
-            color: '#FFFFFF', 
+          color: "#7e7a7a",
+          fontWeight: "700",
+          "&.Mui-selected": {
+            color: "#FFFFFF",
           },
           "@media (max-width: 768px)": {
             fontSize: "14px",
-            fontWeight: '400',
+            fontWeight: "400",
             maxWidth: "10px",
           },
         },
@@ -29,13 +29,13 @@ export const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          color: '#fafafa',
-          border: 'none',
-          width: '80vh',
+          color: "#fafafa",
+          border: "none",
+          width: "80vh",
         },
         head: {
-          fontWeight: '700',
-          fontSize: '18px',
+          fontWeight: "700",
+          fontSize: "18px",
         },
       },
     },

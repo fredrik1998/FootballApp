@@ -1,7 +1,7 @@
-import React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import { motion } from 'framer-motion';
-import GlobalStyle from '../../GlobalStyles';
+import React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { motion } from "framer-motion";
+import GlobalStyle from "../../GlobalStyles";
 
 function Loader() {
   const loaderVariants = {
@@ -14,23 +14,31 @@ function Loader() {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     },
   };
 
   return (
     <>
-    <GlobalStyle/>
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', width: '100vw' }}>
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={loaderVariants}
+      <GlobalStyle />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+          width: "100vw",
+        }}
       >
-        <CircularProgress style={{width:'300px', height: '300px'}} />
-      </motion.div>
-    </div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={loaderVariants}
+        >
+          <CircularProgress style={{ width: "300px", height: "300px" }} />
+        </motion.div>
+      </div>
     </>
   );
 }

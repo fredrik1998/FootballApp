@@ -44,32 +44,30 @@ export const StyledNav = styled.nav`
       transform: translateX(0%);
     }
   }
-
 `;
 
 export const StyledLink = styled(Link)`
-text-decoration: none;
-font-size: 20px;
-color: #fafafa;
-`
+  text-decoration: none;
+  font-size: 20px;
+  color: #fafafa;
+`;
 
 export const StyledImage = styled.img`
-display: flex;
-align-items: flex-start;
-flex-direction: column;
-width: 30px;
-height: 30px;
-`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 30px;
+  height: 30px;
+`;
 export const StyledSidebar = styled.div`
-display: flex;
-justify-content: flex-start;
-align-items: center;
-width: 300px;
-background-color: #0F1B2D;
-position: absolute;
-z-index: 1;
-`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 300px;
+  background-color: #0f1b2d;
+  position: absolute;
+  z-index: 1;
+`;
 export const StyledButton = styled.button`
-background: none;
-
-`
+  background: none;
+`;

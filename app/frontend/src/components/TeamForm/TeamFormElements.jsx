@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const FormBoxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 20px;
@@ -13,10 +13,10 @@ export const FormBoxContainer = styled.div`
 `;
 
 export const FormBox = styled.div`
-padding: 6px 12px;
-border-radius: 4px;
-font-weight: bold;
-color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
 `;
 
 export const WinBox = styled(FormBox)`
@@ -35,19 +35,19 @@ export const DrawBox = styled(FormBox)`
 `;
 
 export const StyledH1 = styled.h1`
-font-size: 24px;
-padding-bottom: 20px;
-margin-top: 20px;
-`
+  font-size: 24px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+`;
 export const AwayTeamLogo = styled.img`
-width: 30px;
-height: 30px;
-margin-top: 10px;
-`
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+`;
 export const StyledLink = styled(Link)`
-text-decoration: none;
-&:hover{
-background-color: #121212;
-opacity: 50%;
-}
-`
+  text-decoration: none;
+  &:hover {
+    background-color: #121212;
+    opacity: 50%;
+  }
+`;

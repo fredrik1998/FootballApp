@@ -1,19 +1,28 @@
-import React, { useEffect} from 'react';
-import { StyledWrapper, StyledTable, StyledDiv, StyledLink } from './PLMatchesElements';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchPLUpcommingMatches } from '../../../slice/premierLeagueSlice';
-import Loader from '../../Loader/Loader';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import {
+  StyledWrapper,
+  StyledTable,
+  StyledDiv,
+  StyledLink,
+} from "./PLMatchesElements";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchPLUpcommingMatches } from "../../../slice/premierLeagueSlice";
+import Loader from "../../Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const PLMatches = () => {
   const dispatch = useDispatch();
-  const PLUpcommingMatches = useSelector((state) => state.premierLeague.upcomingMatches);
-  const PLUpcommingMatchesStatus = useSelector((state) => state.premierLeague.upcomingMatchesStatus);
+  const PLUpcommingMatches = useSelector(
+    (state) => state.premierLeague.upcomingMatches
+  );
+  const PLUpcommingMatchesStatus = useSelector(
+    (state) => state.premierLeague.upcomingMatchesStatus
+  );
   const premierLeague = useSelector((state) => state.premierLeague.table);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    if (PLUpcommingMatchesStatus === 'idle') {
+    if (PLUpcommingMatchesStatus === "idle") {
       dispatch(fetchPLUpcommingMatches());
     }
   }, [PLUpcommingMatchesStatus, dispatch]);
@@ -24,31 +33,42 @@ const PLMatches = () => {
         return team.team.crest;
       }
     }
-    return '';
+    return "";
   };
 
   const getTeamId = (teamName) => {
-    for(const team of premierLeague){
-      if(team.team.name === teamName){
-        return team.team.id
+    for (const team of premierLeague) {
+      if (team.team.name === teamName) {
+        return team.team.id;
       }
     }
-    return ''
-  }
+    return "";
+  };
+
+  const formatTime = (timeString) => {
+    const date = new Date(timeString);
+    const options = { hour: "2-digit", minute: "2-digit" };
+    return date.toLocaleTimeString(undefined, options);
+  };
 
   const matchesByDate = {};
-for (const match of PLUpcommingMatches) {
-  const date = new Date(match.kickoff_time);
-  const formattedDate = date.toLocaleDateString('en-GB', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
-  if (!matchesByDate[formattedDate]) {
-    matchesByDate[formattedDate] = [];
+  for (const match of PLUpcommingMatches) {
+    const date = new Date(match.kickoff_time);
+    const formattedDate = date.toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+    if (!matchesByDate[formattedDate]) {
+      matchesByDate[formattedDate] = [];
+    }
+    matchesByDate[formattedDate].push(match);
   }
-  matchesByDate[formattedDate].push(match);
-}
 
   return (
     <>
-      {PLUpcommingMatchesStatus === 'loading' ? (
+      {PLUpcommingMatchesStatus === "loading" ? (
         <Loader />
       ) : (
         <StyledWrapper>
@@ -59,29 +79,52 @@ for (const match of PLUpcommingMatches) {
                 <thead>
                   <tr>
                     <th>Hometeam</th>
+                    <th>Time</th>
                     <th>Awayteam</th>
-    
                   </tr>
                 </thead>
                 <tbody>
                   {matchesByDate[date].map((match, index) => {
                     return (
-                      <tr key={index} onClick={(e) => {
-                        if(e.target.tagName.toLowerCase() === 'a'){
-                          return;
-                        }
-                        navigate(`/match/${match.id}`)
-                      }}>
-  <td>
-    <img src={getTeamLogo(match.home_team)} width={30} height={30} alt={match.home_team} />
-    <StyledLink to={`/team/${getTeamId(match.home_team)}`}>{match.home_team}</StyledLink>
-  </td>
-  <td>
-    <img src={getTeamLogo(match.away_team)} width={30} height={30} alt={match.away_team} />
-    <StyledLink to={`/team/${getTeamId(match.away_team)}`}>{match.away_team}</StyledLink>
-  </td>
-</tr>
-
+                      <tr
+                        key={index}
+                        onClick={(e) => {
+                          if (e.target.tagName.toLowerCase() === "a") {
+                            return;
+                          }
+                          navigate(`/match/${match.id}`);
+                        }}
+                      >
+                        <td className="homeTeam">
+                          <img
+                            src={getTeamLogo(match.home_team)}
+                            width={30}
+                            height={30}
+                            alt={match.home_team}
+                          />
+                          <StyledLink
+                            to={`/team/${getTeamId(match.home_team)}`}
+                          >
+                            {match.home_team}
+                          </StyledLink>
+                        </td>
+                        <td className="time">
+                          {formatTime(match.kickoff_time)}
+                        </td>
+                        <td className="awayTeam">
+                          <img
+                            src={getTeamLogo(match.away_team)}
+                            width={30}
+                            height={30}
+                            alt={match.away_team}
+                          />
+                          <StyledLink
+                            to={`/team/${getTeamId(match.away_team)}`}
+                          >
+                            {match.away_team}
+                          </StyledLink>
+                        </td>
+                      </tr>
                     );
                   })}
                 </tbody>

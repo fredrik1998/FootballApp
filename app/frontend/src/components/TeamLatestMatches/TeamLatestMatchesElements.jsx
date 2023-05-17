@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledWrapper = styled.div`
-display: flex;
-justify-content: space-evenly;
-flex-direction: column;
-width: 80%;
-`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 80%;
+`;
 export const StyledDiv = styled.div`
-width: 100%;
-margin: 1rem auto;
-`
+  width: 100%;
+  margin: 1rem auto;
+`;
 export const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -46,9 +46,8 @@ export const StyledTable = styled.table`
   }
 `;
 
-
 export const StyledLink = styled(Link)`
-text-decoration: none;
-cursor: pointer;
-color: #fafafa;
-`
+  text-decoration: none;
+  cursor: pointer;
+  color: #fafafa;
+`;

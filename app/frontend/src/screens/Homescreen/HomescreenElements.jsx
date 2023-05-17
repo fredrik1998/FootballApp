@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -22,8 +22,8 @@ export const StyledTable = styled.table`
   width: 90%;
   border-collapse: collapse;
   tr {
-  position: relative;
-  cursor: pointer;
+    position: relative;
+    cursor: pointer;
   }
   tr:hover {
     box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.3);
@@ -42,9 +42,8 @@ export const StyledTable = styled.table`
 
   th {
     background-color: #f2f2f2;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       background: none;
-      
     }
   }
 
@@ -53,7 +52,7 @@ export const StyledTable = styled.table`
     width: 35%;
   }
 
-  td:nth-child(2){
+  td:nth-child(2) {
     position: relative;
     left: -3rem;
     font-size: 0;
@@ -69,7 +68,7 @@ export const StyledTable = styled.table`
     color: #fff;
   }
 
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     td:nth-child(2)::before {
       content: "";
     }
@@ -77,28 +76,28 @@ export const StyledTable = styled.table`
 
   td:nth-child(3),
   td:nth-child(5) {
-   position: relative;
-   left: 6rem;
-   width: 5%;
-   @media screen and (max-width: 950px){
-    left: 0;
-   }
-}
-.score-container {
-  display: flex;
-  gap: 20px;
-}
+    position: relative;
+    left: 6rem;
+    width: 5%;
+    @media screen and (max-width: 950px) {
+      left: 0;
+    }
+  }
+  .score-container {
+    display: flex;
+    gap: 20px;
+  }
 `;
 
 export const StyledLink = styled(Link)`
-text-decoration: none;
-cursor: pointer;
-color: #fafafa;
-`
+  text-decoration: none;
+  cursor: pointer;
+  color: #fafafa;
+`;
 export const AlertDiv = styled.div`
-display: flex;
-width: 100%;
-flex-direction: column;
-margin-top: 10px;
-max-width: 350px;
-`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 10px;
+  max-width: 350px;
+`;
