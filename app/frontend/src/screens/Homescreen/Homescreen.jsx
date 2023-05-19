@@ -99,7 +99,7 @@ const Homescreen = () => {
             .includes(query.toLowerCase());
         });
         const countryResults = TodaysMatches.matches.filter((country) => {
-          country.area.name.toLowerCase().includes(query.toLowerCase());
+          return country.area.name.toLowerCase().includes(query.toLowerCase());
         });
         const homeTeamResults = TodaysMatches.matches.filter((team) => {
           return team.homeTeam.name.toLowerCase().includes(query.toLowerCase());
@@ -116,7 +116,7 @@ const Homescreen = () => {
           ]),
         ];
         setSearchResults(uniqueResults);
-        setNoResults(uniqueResults.length === 0); // Here we set noResults to true if uniqueResults is empty
+        setNoResults(uniqueResults.length === 0);
       } else {
         console.error("TodaysMatches is not an array");
       }
@@ -145,7 +145,7 @@ const Homescreen = () => {
             <>
               <h1>Todays Matches</h1>
               <CustomInputBase
-                style={{ maxWidth: "350px" }}
+                style={{ padding: "0px" }}
                 type="text"
                 placeholder="Country, League or Team"
                 value={searchQuery}

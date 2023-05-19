@@ -43,3 +43,13 @@ export const StyledLogo = styled.img`
   width: 30px;
   margin-top: 5px;
 `;
+export const StyledH3 = styled.h3`
+  font-size: 24px;
+  margin-left: 10px;
+  color: #000;
+`;
+export const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+`;

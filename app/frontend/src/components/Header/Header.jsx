@@ -5,19 +5,26 @@ import {
   StyledLink,
   StyledTitle,
   StyledLogo,
+  StyledH3,
+  StyledDiv,
 } from "./HeaderElements";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
-import { Paper } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import icon from "../../images/footballicon.png";
 import IconButton from "@mui/material/IconButton";
+import { ClickAwayListener } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Modal from "@mui/material/Modal";
 
 export const CustomInputBase = styled(InputBase)(({ theme }) => ({
   backgroundColor: "#f7f7f7",
+  width: "100%",
+  maxWidth: "365px",
   borderRadius: 18,
+  padding: "5px",
   border: "1px solid #e0e0e0",
   marginTop: "20px",
   fontSize: "1rem",
@@ -35,10 +42,11 @@ export const CustomInputBase = styled(InputBase)(({ theme }) => ({
 
 const Header = ({ toggleSidebar, isMobile, isOpen }) => {
   const searchResultsBoxStyle = {
-    position: "absolute",
-    top: "100%",
-    left: 0,
-    right: 0,
+    display: "flex",
+    width: "100%",
+    maxWidth: "365px",
+    justifyContent: "center",
+    flexDirection: "column",
     backgroundColor: "white",
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
     borderRadius: "4px",
@@ -57,6 +65,7 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
   const [teams, setTeams] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -85,22 +94,45 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
       setSearchResults([]);
     } else {
       if (Array.isArray(leagues) && Array.isArray(teams)) {
-        const leagueResults = leagues.filter(
-          (league) =>
-            league.name &&
-            league.name.toLowerCase().includes(query.toLowerCase())
-        );
+        const leagueResults = leagues
+          .filter(
+            (league) =>
+              league.name &&
+              league.name.toLowerCase().includes(query.toLowerCase())
+          )
+          .sort((a, b) => a.name.localeCompare(b.name));
 
-        const teamResults = teams.filter(
-          (team) =>
-            team.name && team.name.toLowerCase().includes(query.toLowerCase())
-        );
+        const teamResults = teams
+          .filter(
+            (team) =>
+              team.name && team.name.toLowerCase().includes(query.toLowerCase())
+          )
+          .sort((a, b) => a.name.localeCompare(b.name));
 
-        setSearchResults([...leagueResults, ...teamResults]);
+        setSearchResults([
+          {
+            type: "League",
+            results: leagueResults,
+          },
+          {
+            type: "Team",
+            results: teamResults,
+          },
+        ]);
       } else {
         console.error("Leagues or teams data is not an array:", leagues, teams);
       }
     }
+  };
+
+  const handleClickAway = () => {
+    setIsFocused(false);
+    setSearchQuery("");
+    setSearchResults([]);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
   };
 
   return (
@@ -108,6 +140,95 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
       <StyledTitle to="/">
         <img width={30} src={icon}></img>FootyFrenzy
       </StyledTitle>
+
+      <div style={{ position: "relative" }}>
+        <IconButton
+          type="button"
+          sx={{ marginTop: "15px", color: "#fff" }}
+          aria-label="search"
+          onClick={handleFocus}
+        >
+          <SearchIcon />
+        </IconButton>
+        <Modal
+          open={isFocused}
+          disableScrollLock
+          onClose={handleClickAway}
+          aria-labelledby="search-modal"
+          aria-describedby="search-modal-description"
+        >
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <CustomInputBase
+              type="text"
+              placeholder="League, Team"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              autoFocus
+              startAdornment={
+                <IconButton
+                  type="button"
+                  sx={{ p: "10px" }}
+                  aria-label="search"
+                >
+                  <SearchIcon />
+                </IconButton>
+              }
+            />
+
+            {searchResults.length > 0 && (
+              <div style={searchResultsBoxStyle}>
+                {searchResults.map(
+                  (group, index) =>
+                    group.results.length > 0 && (
+                      <div key={index}>
+                        <StyledH3>{group.type}</StyledH3>
+                        {group.results.map((result, index) => (
+                          <div key={index} style={searchResultItemStyle}>
+                            {result.area ? (
+                              <StyledDiv>
+                                <StyledLogo
+                                  width={30}
+                                  src={result.area.flag}
+                                ></StyledLogo>
+                                <StyledLink
+                                  to={`/${result.code}`}
+                                  onClick={() => setSearchResults([])}
+                                >
+                                  {result.name}
+                                </StyledLink>
+                              </StyledDiv>
+                            ) : (
+                              <StyledDiv>
+                                <StyledLogo
+                                  width={30}
+                                  src={result.crest}
+                                ></StyledLogo>
+                                <StyledLink
+                                  to={`/team/${result.id}`}
+                                  onClick={() => setSearchResults([])}
+                                >
+                                  {result.name}
+                                </StyledLink>
+                              </StyledDiv>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )
+                )}
+              </div>
+            )}
+          </Box>
+        </Modal>
+      </div>
       {isMobile &&
         (isOpen ? (
           <CloseIcon
@@ -122,48 +243,6 @@ const Header = ({ toggleSidebar, isMobile, isOpen }) => {
             style={{ color: "#fff", fontSize: "2.5rem", marginTop: "20px" }}
           />
         ))}
-      <div style={{ position: "relative" }}>
-        <CustomInputBase
-          type="text"
-          placeholder="League, Team"
-          value={searchQuery}
-          onChange={handleSearchInputChange}
-          startAdornment={
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          }
-        />
-        {searchResults.length > 0 && (
-          <Paper style={searchResultsBoxStyle}>
-            {searchResults.map((result, index) => (
-              <div key={index} style={searchResultItemStyle}>
-                {result.area ? (
-                  <>
-                    <StyledLogo width={30} src={result.area.flag}></StyledLogo>
-                    <StyledLink
-                      to={`/${result.code}`}
-                      onClick={() => setSearchResults([])}
-                    >
-                      {result.name}
-                    </StyledLink>
-                  </>
-                ) : (
-                  <>
-                    <StyledLogo width={30} src={result.crest}></StyledLogo>
-                    <StyledLink
-                      to={`/team/${result.id}`}
-                      onClick={() => setSearchResults([])}
-                    >
-                      {result.name}
-                    </StyledLink>
-                  </>
-                )}
-              </div>
-            ))}
-          </Paper>
-        )}
-      </div>
     </StyledHeader>
   );
 };
