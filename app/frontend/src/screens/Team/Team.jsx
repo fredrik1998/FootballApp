@@ -17,7 +17,6 @@ import {
   StyledCountryLogo,
   StyledText,
   TeamInfoDiv,
-  TeamCompetitionsDiv,
   TeamHeadingDiv,
 } from "./TeamElements";
 import Loader from "../../components/Loader/Loader";
@@ -35,9 +34,7 @@ const Team = () => {
   const TeamSquadStatus = useSelector((state) => state.TeamSquad.status);
   const TeamSquadError = useSelector((state) => state.TeamSquad.error);
   const TeamMatches = useSelector((state) => state.TeamLatestMatches.data);
-  const TeamMatchesStatus = useSelector(
-    (state) => state.TeamLatestMatches.status
-  );
+  const TeamMatchesStatus = useSelector((state) => state.TeamLatestMatches.status);
   const prevTeamId = useRef(null);
   const { team_id } = useParams();
   const [flags, setFlags] = useState({});
@@ -205,15 +202,6 @@ const Team = () => {
                     {TeamSquad.founded}
                   </StyledText>
                 </TeamInfoDiv>
-                <TeamCompetitionsDiv>
-                  {TeamSquad.runningCompetitions &&
-                    TeamSquad.runningCompetitions.map((competition) => (
-                      <StyledText>
-                        <img width={30} src={competition.emblem}></img>
-                        {competition.name}
-                      </StyledText>
-                    ))}
-                </TeamCompetitionsDiv>
                 <TeamForm form={formResults}></TeamForm>
                 {Object.keys(squadByPosition).map((position) => (
                   <StyledDiv key={position}>

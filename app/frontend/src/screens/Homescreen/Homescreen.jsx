@@ -22,9 +22,7 @@ import { Alert } from "@mui/material";
 const Homescreen = () => {
   const dispatch = useDispatch();
   const TodaysMatches = useSelector((state) => state.TodaysMatches.data);
-  const TodaysMatchesStatus = useSelector(
-    (state) => state.TodaysMatches.status
-  );
+  const TodaysMatchesStatus = useSelector((state) => state.TodaysMatches.status);
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [searchQuery, setSearchQuery] = useState("");
@@ -94,9 +92,7 @@ const Homescreen = () => {
     } else {
       if (Array.isArray(TodaysMatches.matches)) {
         const results = TodaysMatches.matches.filter((match) => {
-          return match.competition.name
-            .toLowerCase()
-            .includes(query.toLowerCase());
+          return match.competition.name.toLowerCase().includes(query.toLowerCase());
         });
         const countryResults = TodaysMatches.matches.filter((country) => {
           return country.area.name.toLowerCase().includes(query.toLowerCase());

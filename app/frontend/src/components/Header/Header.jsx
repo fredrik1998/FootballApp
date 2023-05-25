@@ -16,7 +16,7 @@ import InputBase from "@mui/material/InputBase";
 import icon from "../../images/footballicon.png";
 import IconButton from "@mui/material/IconButton";
 import { ClickAwayListener } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled, keyframes } from "@mui/material/styles";
 import Modal from "@mui/material/Modal";
 
 export const CustomInputBase = styled(InputBase)(({ theme }) => ({
@@ -29,6 +29,7 @@ export const CustomInputBase = styled(InputBase)(({ theme }) => ({
   marginTop: "20px",
   fontSize: "1rem",
   color: "#333",
+ 
   "&:hover": {
     backgroundColor: "#fff",
     borderColor: "#ccc",
@@ -39,6 +40,7 @@ export const CustomInputBase = styled(InputBase)(({ theme }) => ({
     boxShadow: `0 0 0 2px ${theme.palette.primary.light}`,
   },
 }));
+
 
 const Header = ({ toggleSidebar, isMobile, isOpen }) => {
   const searchResultsBoxStyle = {

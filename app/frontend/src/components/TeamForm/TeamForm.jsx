@@ -1,3 +1,4 @@
+import { Style } from "@mui/icons-material";
 import {
   FormBoxContainer,
   WinBox,
@@ -11,7 +12,6 @@ import {
 const TeamForm = ({ form }) => {
   return (
     <>
-      <StyledH1>Current Form</StyledH1>
       <FormBoxContainer>
         {form.map((matchResult, index) => {
           if (matchResult.result === "W") {

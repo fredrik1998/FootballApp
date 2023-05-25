@@ -20,14 +20,16 @@ const TeamUpcomingMatches = () => {
   );
   const TeamSquad = useSelector((state) => state.TeamSquad.data);
   const { team_id } = useParams();
+  const prevTeamId = useRef(null);
   console.log("TeamSquad:", TeamSquad);
 
   useEffect(() => {
-    if (TeamUpcomingMatchesStatus === "idle") {
+    if (prevTeamId.current !== team_id || TeamUpcomingMatchesStatus === "idle") {
       dispatch(fetchTeamUpcomingMatches(team_id));
+      prevTeamId.current = team_id;
     }
   }, [TeamUpcomingMatchesStatus, dispatch, team_id]);
-
+  
   const matchesByDate = useMemo(() => {
     const matches = {};
     for (const match of TeamUpcomingMatches) {

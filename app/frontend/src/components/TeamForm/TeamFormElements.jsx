@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const FormBoxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: calc(1vw + 5px);
+  margin-top: 4em;
   @media screen and (max-width: 767px) {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -37,7 +38,6 @@ export const DrawBox = styled(FormBox)`
 export const StyledH1 = styled.h1`
   font-size: 24px;
   padding-bottom: 20px;
-  margin-top: 20px;
 `;
 export const AwayTeamLogo = styled.img`
   width: 30px;
